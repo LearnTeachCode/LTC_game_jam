@@ -100,4 +100,6 @@
 <a href="https://github.com/michellelynne">
     <img width="100" height="100" src="https://avatars3.githubusercontent.com/u/10392961?s=400&v=4">
 </a>
-
+<a href="https://Jamciyt.com">
+    <img width="100" height="100" src="http://jamcity-corp.akamaized.net/wp-content/uploads/open_graph.jpg">
+</a>
