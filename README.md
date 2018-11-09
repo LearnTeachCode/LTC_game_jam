@@ -64,7 +64,7 @@
 
 ## Asset Pipeline
 - All art asset files are on the google drive file below
-    - https://drive.google.com/drive/folders/1p0RsQiJOHi4n0iVi67VQFI_4eDF6A0G6?usp=sharing
+    - https://drive.google.com/drive/folders/14htah54mZ9I7DzuSbJ5YiV4XqgifvieF?usp=sharing
 - Any assets that are planned to be used in the game go inside the `assetDump` directory
 - All graphical assets must be [texture packed](https://www.codeandweb.com/texturepacker) into a sprite sheet and referenced via json atlas
 
