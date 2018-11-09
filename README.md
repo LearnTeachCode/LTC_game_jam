@@ -6,7 +6,12 @@
     https://github.com/michellelynne/LTC_game_jam
 </h4>
 
-<h1> Link To Our Slack </h1>
+<h1> Our Slack </h1>
+<h4>
+    https://learnteachcode.org/slack
+</h4>
+
+<h1> Phaser JS! </h1>
 <h4>
     https://learnteachcode.org/slack
 </h4>
