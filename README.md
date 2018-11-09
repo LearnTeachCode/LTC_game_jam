@@ -8,7 +8,7 @@
 
 <h1> Our Slack </h1>
 <h4>
-    https://learnteachcode.org/slack
+    https://learnteachcode.slack.com/
 </h4>
 
 <h1> Phaser JS! </h1>
