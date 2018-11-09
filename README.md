@@ -13,7 +13,7 @@
 
 <h1> Phaser JS! </h1>
 <h4>
-    https://learnteachcode.org/slack
+    <a>https://phaser.io</a>
 </h4>
 
 ## How to install the game
