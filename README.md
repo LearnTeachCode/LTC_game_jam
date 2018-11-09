@@ -1,10 +1,10 @@
 <div align="center"><img src="https://user-images.githubusercontent.com/121322/47754742-28d44480-dc59-11e8-9071-5b45e89edde4.png"></div>
 
 
-<h2> Link To The Repository </h2>
-<h1>
+<h1> Link To The Repository </h1>
+<h4>
     https://github.com/michellelynne/LTC_game_jam
-</h1>
+</h4>
 
 ## How to install the game
 - Install git
