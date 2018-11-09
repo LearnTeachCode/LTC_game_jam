@@ -27,7 +27,7 @@
 ## Latest stable build of the game that's playable:
 <h4>
     <a align="center" href="https://e-a-n.github.io/magiflight/"> 
-            https://e-a-n.github.io/magiflight/
+            https://websitename.io
     </a>
 </h4>
 
@@ -72,25 +72,7 @@
 ## Config Information
   - ***settings.js***
     - `stage` contains default width and height parameters of game
-    - `difficulty` attributes are easy/medium/hard and effect game attributes differently
-      - `esm` stands for **Enemy Speed Modifier** which adjusts enemy speeds based on difficulty choice
-      - `ecdm` stands for **Enemy Count Down Modifier*** which adjusts how often an enemy appears based on difficulty choice
-    - `player` contains information for attributes concerning different characters the player will be using
-      - `sprKey` The sprite key for loading texture
-      - `startX` and `startY` are the coordinates the character will be starting in the game
-      - `horSpd` The horizontal speed of the character (to be added to body.velocity.x, this defaults to 0)
-      - `vertSpd` The vertical speed fo the character (to be added to body.velocity.y)
-      - `gravity` The speed at which the character will increasingly fall
-    - `enemies` contains information for attributes concerning sprites the player will interacting with
-      - types: `bats, ...`
-      - `key` The sprite key for loading texture,
-      - `amount` The amound of enemies to deploy
-      - `frame` The frame basis to use for animation frame counters
-      - `fNum` The number of frames to be used in an animation from starting frame to finish frame
-      - `animeKey` The sprite key for referencing animation???
-      - `vx` The vertical speed of the character (to be added to ```children[n].body.velocity.x```)
-      - `vy` The vertical speed of the character (to be added to ```children[n].body.velocity.y```)
-      - `intervals` The frequency in which enemies will be appearing
+    
 
 ## Hosts
 
@@ -100,6 +82,6 @@
 <a href="https://github.com/michellelynne">
     <img width="100" height="100" src="https://avatars3.githubusercontent.com/u/10392961?s=400&v=4">
 </a>
-<a href="https://Jamciyt.com">
+<a href="https://Jamcity.com">
     <img width="100" height="100" src="http://jamcity-corp.akamaized.net/wp-content/uploads/open_graph.jpg">
 </a>
