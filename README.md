@@ -26,9 +26,9 @@
 
 ## Latest stable build of the game that's playable:
 <h4>
-    <a align="center" href="https://e-a-n.github.io/magiflight/"> 
+    
             https://websitename.io
-    </a>
+
 </h4>
 
 
@@ -79,7 +79,7 @@
 <a href="https://github.com/E-A-N">
     <img width="100" height="100" src="https://avatars1.githubusercontent.com/u/17329104?s=460&v=4">
 </a>
-<a href="https://github.com/michellelynne">
+<a href="http://www.michellebrenner.com/">
     <img width="100" height="100" src="https://avatars3.githubusercontent.com/u/10392961?s=400&v=4">
 </a>
 <a href="https://Jamcity.com">
