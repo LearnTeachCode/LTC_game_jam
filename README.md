@@ -1,4 +1,4 @@
-<div align="center"><img src="https://github.com/E-A-N/protoRunner/blob/master/assetDump/images/sprites/MagiFlightLogo.png"></div>
+<div align="center"><img src="https://user-images.githubusercontent.com/121322/47754742-28d44480-dc59-11e8-9071-5b45e89edde4.png"></div>
 
 ## How to install the game
 - Install git
