@@ -6,6 +6,11 @@
     https://github.com/michellelynne/LTC_game_jam
 </h4>
 
+<h1> Link To Our Slack </h1>
+<h4>
+    https://learnteachcode.org/slack
+</h4>
+
 ## How to install the game
 - Install git
     - Here's an installion guide for [git](https://www.atlassian.com/git/tutorials/install-git)
