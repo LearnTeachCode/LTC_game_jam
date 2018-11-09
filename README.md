@@ -1,5 +1,9 @@
 <div align="center"><img src="https://user-images.githubusercontent.com/121322/47754742-28d44480-dc59-11e8-9071-5b45e89edde4.png"></div>
 
+<h2>
+    https://github.com/michellelynne/LTC_game_jam
+</h2>
+
 ## How to install the game
 - Install git
     - Here's an installion guide for [git](https://www.atlassian.com/git/tutorials/install-git)
@@ -82,6 +86,6 @@
 <a href="http://www.michellebrenner.com/">
     <img width="100" height="100" src="https://avatars3.githubusercontent.com/u/10392961?s=400&v=4">
 </a>
-<a href="https://Jamcity.com">
+<a href="https://jamcity.com">
     <img width="100" height="100" src="http://jamcity-corp.akamaized.net/wp-content/uploads/open_graph.jpg">
 </a>
