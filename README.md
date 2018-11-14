@@ -104,9 +104,9 @@
     <img width="100" height="100" src="http://jamcity-corp.akamaized.net/wp-content/uploads/open_graph.jpg">
 </a>
 
-## Current Project Roles
+# Current Project Roles
 
-## Boot Logic
+### Boot Logic
    * Ean
    * Boot Logic Dictates how we start the game and the context in which we start the game.
 
@@ -120,6 +120,7 @@
    * Kiron
    * Game Start Logic determines how we start the game (a main menu for example) and should ideally only happen once
    
+   
 ### Game Loop
    * Aurthur, JS, E
    * Game Loop is where movement, physics, game play logic, etc is implemented
@@ -129,3 +130,7 @@
    * Michael, Jydon
    * This logic occurs when the game loop has ended
 
+
+### Finite State Machine
+   * Julie, Roman
+   * FSMs control the transitions, initation, and referencing of various game states.
