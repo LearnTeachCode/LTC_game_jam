@@ -107,7 +107,9 @@
 # Current Project Roles
 
 ### Boot Logic
-   * Ean
+   * Ean <a href="https://github.com/E-A-N">
+    <img width="25" height="25" src="https://avatars1.githubusercontent.com/u/17329104?s=460&v=4">
+</a>
    * Boot Logic Dictates how we start the game and the context in which we start the game.
 
 
