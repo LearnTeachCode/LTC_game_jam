@@ -8,7 +8,9 @@
 
 <h1> Our Slack </h1>
 <h4>
-    https://learnteachcode.slack.com/
+    http://learnteachcode.slack.com/
+    (https is not currently working)
+    #game-dev channel
 </h4>
 
 <h1> Phaser JS! </h1>
