@@ -1,0 +1,22 @@
+{
+  "name": "eansphaserboilerplate",
+  "version": "1.0.0",
+  "description": "A boiler plate for running phaser games",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/E-A-N/eansPhaserBoilerPlate.git"
+  },
+  "author": "Ean Moore",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/E-A-N/eansPhaserBoilerPlate/issues"
+  },
+  "homepage": "https://github.com/E-A-N/eansPhaserBoilerPlate#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
