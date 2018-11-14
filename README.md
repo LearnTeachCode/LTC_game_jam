@@ -106,35 +106,26 @@
 
 ## Current Project Roles
 
-### Boot Logic
-    * Ean
-```
-Boot Logic Dictates how we start the game and the context in which we start the game.
+## Boot Logic
+   * Ean
+   * Boot Logic Dictates how we start the game and the context in which we start the game.
 
-```
+
 ### Loader Logic
-    * Ean
- ```
-Loader Logic is decides how and when we manage the including of resources in the game
+   * Ean
+   * Loader Logic is decides how and when we manage the including of resources in the game
 
-```
+
 ### Game Start Logic
-    * Kiron
- ```
-Game Start Logic determines how we start the game (a main menu for example) and should ideally only happen once
-
-```
+   * Kiron
+   * Game Start Logic determines how we start the game (a main menu for example) and should ideally only happen once
+   
 ### Game Loop
-    * Aurthur
-    * JS
-    * E
-```
-Game Loop is where movement, physics, game play logic, etc is implemented
-```
+   * Aurthur, JS, E
+   * Game Loop is where movement, physics, game play logic, etc is implemented
+
 
 ### Game Over Logic
-    * Michael
-    * Jydon
- ```
-This logic occurs when the game loop has ended
-```
+   * Michael, Jydon
+   * This logic occurs when the game loop has ended
+
