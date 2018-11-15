@@ -7,8 +7,7 @@ var menuState = {
         game.add.plugin(PhaserSuperStorage.StoragePlugin);
         game.add.plugin(PhaserInput.Plugin);
         
-        //game.add.sprite(95, 150, 'boiler-logo');
-        game.add.sprite(95, 150, neutral_map_label);
+        game.add.image(95, 150, 'boiler-logo');
 
     }
 
