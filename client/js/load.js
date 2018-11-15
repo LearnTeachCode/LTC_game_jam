@@ -11,7 +11,9 @@ var loadState = {
         var loadingLabel = game.add.text(80, 150, 'loading...', {font: '30px Courier', fill: '#fff'});
 
         //Load your images, spritesheets, bitmaps...
-        game.load.image('boiler-logo', 'assets/img/boilerplate-logo.png');
+        //game.load.image('boiler-logo', 'assets/img/boilerplate-logo.png');
+
+        game.load.image(neutral_map_label, neutral_map_asset);
 
 
         //Load your sounds, efx, music...

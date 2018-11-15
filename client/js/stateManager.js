@@ -1,6 +1,8 @@
-var w = 640,
-  h = 480;
+var w = 640, h = 480;
 
+var neutral_map_asset = 'assets/img/boilerplate-logo.png';
+var neutral_map_label = 'neutral-map';
+  
 /*
 For Fullscreen put this code:
 var w = window.innerWidth * window.devicePixelRatio,
