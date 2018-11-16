@@ -1,5 +1,6 @@
-var w = 640,
-  h = 480;
+var w = 640, h = 480;
+var userData = {};
+var DEBUG = true;
 
 /*
 For Fullscreen put this code:
@@ -13,3 +14,5 @@ game.state.add('boot', bootState);
 game.state.add('load', loadState);
 game.state.add('menu', menuState);
 game.state.add('end', gameOverState);
+
+game.state.start('boot');
