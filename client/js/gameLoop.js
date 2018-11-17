@@ -1,37 +1,91 @@
 
 // neutral map
-var neutralMapAsset = 'assets/img/boilerplate-logo.png';
+var neutralMapAsset = 'assets/img/sample-neutral-map.png';
 var neutralMapLabel = 'neutral-map';
-var neutralMap;
-var neutralMapSize;
+var neutralMapImage;
+var neutralMaps;
+var neutralMapVelocity = 120;
+var mapsCount = 2;      // number changes pending size of map versus size of screen
 
 // controllers
 var cursors;
 
+/**
+ * getMapSpeed() validates config['mapSpeed']
+ * if valid, then store it in neutralMapVelocity
+ * otherwise, use default speed of 250
+ */
+function getMapSpeed(){
+    if(config['mapSpeed']){
+        if(!isNaN(parseFloat(config['mapSpeed'])))
+            return neutralMapVelocity;
+        else
+            return config['mapSpeed'];
+    }
+    return neutralMapVelocity;
+}
+
+function changeMapSpeed(deltaSpeed){
+    neutralMapVelocity += deltaSpeed;
+}
+
+function createMaps(){
+    neutralMaps = [];
+
+    var tempMap;
+    var currentYPosition = 0;   // identifies the y-positions when stacking maps into list
+
+    for(var i = 0; i < mapsCount; i++){
+        // create map and give it an ID
+        tempMap = game.add.sprite(0, currentYPosition, neutralMapLabel);
+        tempMap.name = neutralMapLabel + '-' + i;
+        game.physics.arcade.enable(tempMap);
+
+        // ensure map fits on screen
+        scaleMapValue = w / tempMap.width;
+        tempMap.scale.setTo(scaleMapValue);
+        
+        neutralMaps.push(tempMap);
+        currentYPosition -= tempMap.height;
+    }
+}
+
+function updateNeutralMapPosition(){
+    // check if map image has gone passed the screen, if so, place map back to other side of screen
+    for (var key in neutralMaps){
+        if(neutralMaps[key].body.y >= neutralMaps[key].height){
+            neutralMaps[key].body.y = 0 - neutralMaps[key].height;
+        }
+        neutralMaps[key].body.velocity.y = neutralMapVelocity;
+    }
+}
+
 var gameLoop = {
     preload: function () {
         // load neutral map
-        game.load.image(neutralMapLabel, neutralMapAsset);
+        neutralMapImage = game.load.image(neutralMapLabel, neutralMapAsset);
     },
 
     create: function () {
-        // create neutral map 
-        neutralMap = game.add.sprite(0, 0, neutralMapLabel);
-        neutralMapSize = neutralMap.width;  // get size of map to locate if left the map
+        neutralMapVelocity = getMapSpeed();
 
-        game.physics.arcade.enable(neutralMap);
+        createMaps();
+        if(DEBUG){
+            for(var key in neutralMaps)
+                console.log("Debug: neutralMap y-position = " + neutralMaps[key].body.y);
+        }
 
         // create user input
         cursors = game.input.keyboard.createCursorKeys();
     },
 
     update: function(){
-        // check if map image has gone passed the screen, if so, place map back to other side of screen
-        if(neutralMap.body.x <= (0 - neutralMapSize)){
-            neutralMap.body.x = w;
-        }
+        updateNeutralMapPosition();
 
-        // map moves in negative direction to illustrate player is moving in positive direction
-        neutralMap.body.velocity.x = -250;
+        if(cursors.right.isDown)
+            changeMapSpeed(50);
+        
+        if(cursors.left.isDown)
+            changeMapSpeed(-50);
     }
 };
