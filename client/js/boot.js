@@ -57,6 +57,36 @@ function getUserData(){
     userData['audiotype'] = getUserAudioType();
 }
 
+// move on to next state
+function startState(stateName, timer){
+    setTimeout(function () {
+        
+        // TODO: determine if writing to player's computer is something to move forward with
+        // ignore for now
+        //var file = fopen('../config/ltc_config.txt')
+
+        //Initial GameSystem (Arcade, P2, Ninja)
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+
+        //Initial Load State
+        game.state.start(stateName);
+    }, timer);
+}
+
+// debug userData
+function debugBootState(timer){
+    if(DEBUG){
+        setTimeout(function(){
+            var gametextDebugger = game.add.text(0, 300, 'hello', {font: '30px Courier', fill: '#fff'});
+            bootString ='';
+            for (var i in userData){
+                bootString += userData[i] +' ';
+            }
+            gametextDebugger.setText(bootString);
+        }, timer);
+    }
+}
+
 var bootState = {
     create: function () {
         var timerDelta = 500;   // how much wait time to increment
@@ -65,42 +95,22 @@ var bootState = {
         var gametextGameTitle = game.add.text(0, 200, gameTitle, {font: '30px Courier', fill: '#fff'});
         var gametextBootString = game.add.text(0, 250, bootString, {font: '30px Courier', fill: '#fff'});
 
-        timer = 500;
+        // animate "booting..." string
+        var timer = 500;
         for(i = 1; i < 5; i++){
             timer += timerDelta;
             bootString += '.';
             displayBootText(gametextBootString, bootString, timer);
         }
 
+        // retrieve device info and store into userData map (might be located in stateManager.js)
         setTimeout(function(){
             getUserData();
         }, timer += timerDelta);
 
-        // debug test
-        if(DEBUG){
-            setTimeout(function(){
-                var gametextDebugger = game.add.text(0, 300, 'hello', {font: '30px Courier', fill: '#fff'});
-                bootString ='';
-                for (var i in userData){
-                    bootString += userData[i] +',';
-                }
-                gametextDebugger.setText(bootString);
-            }, timer += timerDelta);
-        }
+        if(DEBUG)
+            debugBootState(timer += timerDelta);
 
-        // move on to next state
-        setTimeout(function () {
-            
-            // TODO: determine if writing to player's computer is something to move forward with
-            // ignore for now
-            //var file = fopen('../config/ltc_config.txt')
-
-            //Initial GameSystem (Arcade, P2, Ninja)
-            game.physics.startSystem(Phaser.Physics.ARCADE);
-
-            //Initial Load State
-            game.state.start('load');
-        }, timer += timerDelta);
-
+        startState('load', timer += timerDelta);
     }
 };
