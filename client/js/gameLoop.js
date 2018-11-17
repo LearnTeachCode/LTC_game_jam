@@ -7,8 +7,13 @@ var neutralMaps;
 var neutralMapVelocity = 120;
 var mapsCount = 2;      // number changes pending size of map versus size of screen
 
+// player data
+var playerScore = 0;
+var playerScoreText;
+
 // controllers
 var cursors;
+var dCursors;   // developers' cursors
 
 /**
  * getMapSpeed() validates config['mapSpeed']
@@ -58,12 +63,16 @@ function updateNeutralMapPosition(){
         }
         neutralMaps[key].body.velocity.y = neutralMapVelocity;
     }
+
+    // update score and text
+    playerScoreText.setText("SCORE: " + playerScore++);
 }
 
 var gameLoop = {
     preload: function () {
         // load neutral map
         neutralMapImage = game.load.image(neutralMapLabel, neutralMapAsset);
+
     },
 
     create: function () {
@@ -75,17 +84,23 @@ var gameLoop = {
                 console.log("Debug: neutralMap y-position = " + neutralMaps[key].body.y);
         }
 
+        // prepare player
+        playerScoreText = game.add.text(0, 0, 'SCORE:', {font: 'bold 30px Courier', fill: '#fff'});
+
         // create user input
         cursors = game.input.keyboard.createCursorKeys();
+        dCursors = game.input.keyboard
     },
 
     update: function(){
         updateNeutralMapPosition();
 
-        if(cursors.right.isDown)
-            changeMapSpeed(1);
-        
-        if(cursors.left.isDown)
-            changeMapSpeed(-1);
+        // developer buttons, IHAX YUR GAMEZ!!
+        if(DEBUG){
+            if(dCursors.isDown(Phaser.KeyCode.OPEN_BRACKET))
+                changeMapSpeed(-1);
+            if(dCursors.isDown(Phaser.KeyCode.CLOSED_BRACKET))
+                changeMapSpeed(1);
+        }
     }
 };
