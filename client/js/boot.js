@@ -11,7 +11,7 @@ function displayBootText(gameText, newString, timer){
 function getUserDevice(){
     var newDataText = '';
     newDataText = (game.device.windows) ? newDataText + 'windows,': newDataText;
-    newDataText = (game.device.macOS) ? newDataText + 'iOS,': newDataText;
+    newDataText = (game.device.macOS) ? newDataText + 'macOS,': newDataText;
     newDataText = (game.device.linux) ? newDataText + 'linux,': newDataText;
 
     if(newDataText != ''){
