@@ -83,9 +83,9 @@ var gameLoop = {
         updateNeutralMapPosition();
 
         if(cursors.right.isDown)
-            changeMapSpeed(50);
+            changeMapSpeed(1);
         
         if(cursors.left.isDown)
-            changeMapSpeed(-50);
+            changeMapSpeed(-1);
     }
 };
