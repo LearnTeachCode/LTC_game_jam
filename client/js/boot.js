@@ -10,11 +10,8 @@ function displayBootText(gameText, newString, timer){
 // get user device
 function getUserDevice(){
     var newDataText = '';
-    newDataText = (game.device.android) ? newDataText + 'android,': newDataText;
-    newDataText = (game.device.iphone) ? newDataText + 'iphone,': newDataText;
-    newDataText = (game.device.ipad) ? newDataText + 'ipad,': newDataText;
     newDataText = (game.device.windows) ? newDataText + 'windows,': newDataText;
-    newDataText = (game.device.iOS) ? newDataText + 'iOS,': newDataText;
+    newDataText = (game.device.macOS) ? newDataText + 'iOS,': newDataText;
     newDataText = (game.device.linux) ? newDataText + 'linux,': newDataText;
 
     if(newDataText != ''){
@@ -30,6 +27,7 @@ function getUserBrowser(){
     newDataText = (game.device.chrome) ? newDataText + 'chrome,': newDataText;
     newDataText = (game.device.safari) ? newDataText + 'safari,': newDataText;
     newDataText = (game.device.firefox) ? newDataText + 'firefox,': newDataText;
+    newDataText = (game.device.edge) ? newDataText + 'edge,': newDataText;
     if(newDataText != ''){
         // remove last comma in newDataText
         newDataText = newDataText.substring(0, newDataText.length - 1);
