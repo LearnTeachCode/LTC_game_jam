@@ -31,6 +31,7 @@ var ltcColors = (function(){
 
         // addColor swaps color2 with color1 if color1 is not empty, then places newColor to color1
         // gets rid of previous color2 if not empty
+        // Test case for input newColor: Phaser.Color.createColor(r,g,b)
         addColor: function(newColor){
             color2 = (color1 != null) ? color1: color2;
             color1 = newColor;
