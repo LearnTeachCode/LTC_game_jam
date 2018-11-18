@@ -12,7 +12,6 @@ var loadState = {
 
         //Load your images, spritesheets, bitmaps...
         game.load.image('boiler-logo', 'assets/img/boilerplate-logo.png');
-        game.load.image('placeholder', 'assets/img/placeholder.png')
 
         //Load your sounds, efx, music...
         //Example: game.load.audio('rockas', 'assets/snd/rockas.wav');
