@@ -2,12 +2,21 @@ var gameLoop1State = {
     preload: function() {
         game.load.image('placeholder', 'assets/img/placeholder.png');
     },
+
     create: function () {
         player = game.add.sprite(310, 400, 'placeholder');
         player2 = game.add.sprite(100, 100, 'boiler-logo')
         player.anchor.setTo(0.5, 0.5);
         game.physics.enable(player, Phaser.Physics.ARCADE);
+        player.inputEnabled = true;
+//        player.input.enableDrag();
+//        player.input.allowVerticalDrag = false;
     },
+
+    render: function() {
+        game.debug.inputInfo(32, 32);
+        game.debug.spriteInputInfo(player, 300, 32);
+        },
 
     update: function() {
         if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
