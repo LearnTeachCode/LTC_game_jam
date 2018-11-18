@@ -8,6 +8,7 @@ var neutralMapVelocity = 120;
 var mapsCount = 2;      // number changes pending size of map versus size of screen
 
 // player data
+var playerSpeed = 5;
 var playerScore = 0;
 var playerScoreText;
 
@@ -85,6 +86,14 @@ function updateNeutralMapPosition(){
     }
 }
 
+var updatePlayer = function(player, playerSpeed) {
+    if (dCursors.isDown(Phaser.Keyboard.LEFT)) {
+        player.x -= playerSpeed;
+    } else if (dCursors.isDown(Phaser.Keyboard.RIGHT)) {
+        player.x += playerSpeed;
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////// END Neutral Map Handling ////////////////////////
 ///////////////////////////////////////////////////////////////////////////
@@ -95,6 +104,7 @@ var gameLoop = {
     preload: function () {
         // load neutral map
         neutralMapImage = game.load.image(neutralMapLabel, neutralMapAsset);
+        game.load.image('placeholder', 'assets/img/placeholder.png');
     },
 
     create: function () {
@@ -103,14 +113,16 @@ var gameLoop = {
         createMaps();
 
         // setup player
+        player = game.add.sprite(w/2, 2*h/3, 'placeholder');
         playerScoreText = game.add.text(0, 0, 'SCORE:', {font: 'bold 30px Courier', fill: '#fff'});
 
         // create user input
         cursors = game.input.keyboard.createCursorKeys();
-        dCursors = game.input.keyboard
+        dCursors = game.input.keyboard;
     },
 
     update: function(){
         updateNeutralMapPosition();
+        updatePlayer(player, playerSpeed);
     }
 };
