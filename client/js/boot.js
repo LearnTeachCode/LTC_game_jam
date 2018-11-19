@@ -58,6 +58,8 @@ bootState.displayBootText = (gameText, newString, timer) => {
 }
 
 bootState.userData = bootState.setUserData();
+
+// debug userData
 bootState.debugBootState = () => {
     if(DEBUG){
         setTimeout(function(){
@@ -70,6 +72,21 @@ bootState.debugBootState = () => {
             gametextDebugger.setText(bootString);
         }, timer);
     }
+}
+bootState.startState = (stateName, timer) => {
+    //From Ean: is there a reason for using a timer to delay game state?
+    setTimeout(function () {
+            
+        // TODO: determine if writing to player's computer is something to move forward with
+        // ignore for now
+        //var file = fopen('../config/ltc_config.txt')
+
+        //Initial GameSystem (Arcade, P2, Ninja)
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+
+        //Initial Load State
+        game.state.start(stateName);
+    }, timer);
 }
 bootState.create = () => {
     var timerDelta = 500;   // how much wait time to increment
@@ -94,38 +111,5 @@ bootState.create = () => {
     if(DEBUG)
         bootState.debugBootState(timer += timerDelta);
 
-    startState('load', timer += timerDelta);
-}
-
-// move on to next state
-function startState(stateName, timer){
-    //From Ean: is there a reason for using a timer to delay game state?
-    setTimeout(function () {
-        
-        // TODO: determine if writing to player's computer is something to move forward with
-        // ignore for now
-        //var file = fopen('../config/ltc_config.txt')
-
-        //Initial GameSystem (Arcade, P2, Ninja)
-        game.physics.startSystem(Phaser.Physics.ARCADE);
-
-        //Initial Load State
-        game.state.start(stateName);
-    }, timer);
-}
-
-// debug userData
-function debugBootState(timer){
-    if(DEBUG){
-        setTimeout(function(){
-            var gametextDebugger = game.add.text(0, 300, 'hello', {font: '30px Courier', fill: '#fff'});
-            bootString ='';
-            for (var i in userData){
-                bootString += userData[i] +' ';
-            }
-            gametextDebugger.setText(bootString);
-        }, timer);
-    }
-}
-
-
+    bootState.startState('load', timer += timerDelta);
+};
