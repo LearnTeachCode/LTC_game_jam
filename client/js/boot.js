@@ -1,14 +1,52 @@
 const bootState = {};
 bootState.gameTitle = 'LTC_GameJam_Colors-thingy-stuff';
 // Retrieve user data
+bootState.getUserDevice    = () => {
+    let newDataText = '';
+    newDataText = (game.device.android) ? newDataText + 'android,': newDataText;
+    newDataText = (game.device.iphone) ? newDataText + 'iphone,': newDataText;
+    newDataText = (game.device.ipad) ? newDataText + 'ipad,': newDataText;
+    newDataText = (game.device.windows) ? newDataText + 'windows,': newDataText;
+    newDataText = (game.device.iOS) ? newDataText + 'iOS,': newDataText;
+    newDataText = (game.device.linux) ? newDataText + 'linux,': newDataText;
+
+    if(newDataText != ''){
+        // remove last comma in newDataText
+        newDataText = newDataText.substring(0, newDataText.length - 1);
+    }
+    return newDataText;
+}
+bootState.getUserBrowser   = () => {
+    let newDataText = '';
+    newDataText = (game.device.chrome) ? newDataText + 'chrome,': newDataText;
+    newDataText = (game.device.safari) ? newDataText + 'safari,': newDataText;
+    newDataText = (game.device.firefox) ? newDataText + 'firefox,': newDataText;
+    if(newDataText != ''){
+        // remove last comma in newDataText
+        newDataText = newDataText.substring(0, newDataText.length - 1);
+    }
+    return newDataText;
+}
+bootState.getUserAudioType = () =>{
+    let newDataText = '';
+    newDataText = (game.device.mp3) ? newDataText + 'mp3,': newDataText;
+    newDataText = (game.device.wav) ? newDataText + 'wav,': newDataText;
+    newDataText = (game.device.ogg) ? newDataText + 'ogg,': newDataText;
+    if(newDataText != ''){
+        // remove last comma in newDataText
+        newDataText = newDataText.substring(0, newDataText.length - 1);
+    }
+    return newDataText;
+}
+
 /*
-   From Ean: Hong, make sure our functions have an entry/exit point so we can make them testible
+   From Ean: Hong, make sure all of our functions have an entry/exit point so we can make them testible
 */
 bootState.setUserData = () => {
     let data = {};
-    data['device'] = getUserDevice();
-    data['browser'] = getUserBrowser();
-    data['audiotype'] = getUserAudioType();
+    data['device']    = bootState.getUserDevice();
+    data['browser']   = bootState.getUserBrowser();
+    data['audiotype'] = bootState.getUserAudioType();
 
     return data;
 }
@@ -59,53 +97,9 @@ bootState.create = () => {
     startState('load', timer += timerDelta);
 }
 
-// get user device
-function getUserDevice(){
-    var newDataText = '';
-    newDataText = (game.device.android) ? newDataText + 'android,': newDataText;
-    newDataText = (game.device.iphone) ? newDataText + 'iphone,': newDataText;
-    newDataText = (game.device.ipad) ? newDataText + 'ipad,': newDataText;
-    newDataText = (game.device.windows) ? newDataText + 'windows,': newDataText;
-    newDataText = (game.device.iOS) ? newDataText + 'iOS,': newDataText;
-    newDataText = (game.device.linux) ? newDataText + 'linux,': newDataText;
-
-    if(newDataText != ''){
-        // remove last comma in newDataText
-        newDataText = newDataText.substring(0, newDataText.length - 1);
-    }
-    return newDataText;
-}
-
-// get user browser
-function getUserBrowser(){
-    var newDataText = '';
-    newDataText = (game.device.chrome) ? newDataText + 'chrome,': newDataText;
-    newDataText = (game.device.safari) ? newDataText + 'safari,': newDataText;
-    newDataText = (game.device.firefox) ? newDataText + 'firefox,': newDataText;
-    if(newDataText != ''){
-        // remove last comma in newDataText
-        newDataText = newDataText.substring(0, newDataText.length - 1);
-    }
-    return newDataText;
-}
-
-// check supported audio from user device
-function getUserAudioType(){
-    var newDataText = '';
-    newDataText = (game.device.mp3) ? newDataText + 'mp3,': newDataText;
-    newDataText = (game.device.wav) ? newDataText + 'wav,': newDataText;
-    newDataText = (game.device.ogg) ? newDataText + 'ogg,': newDataText;
-    if(newDataText != ''){
-        // remove last comma in newDataText
-        newDataText = newDataText.substring(0, newDataText.length - 1);
-    }
-    return newDataText;
-}
-
-
-
 // move on to next state
 function startState(stateName, timer){
+    //From Ean: is there a reason for using a timer to delay game state?
     setTimeout(function () {
         
         // TODO: determine if writing to player's computer is something to move forward with
