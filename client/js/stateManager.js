@@ -15,4 +15,4 @@ game.state.add('menu', menuState);
 game.state.add('gameLoop1', gameLoop1State);
 game.state.add('end', gameOverState);
 
-game.state.start('boot');
+game.state.start("boot");

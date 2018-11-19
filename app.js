@@ -22,5 +22,5 @@ app.use(function(req, res, next) {
 app.use(express.static(gameRoute));
 
 app.listen(port, noArgs => {
-    console.log(`Server running at: ${gameRoute}`);
+    console.log(`Server running at: ${address}${port}`);
 });
