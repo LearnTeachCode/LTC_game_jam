@@ -1,2 +1,5 @@
 # NPM packages folder.
 node_modules/
+client/js/.vs/ProjectSettings.json
+client/js/.vs/slnx.sqlite
+client/js/.vs/slnx.sqlite-journal
