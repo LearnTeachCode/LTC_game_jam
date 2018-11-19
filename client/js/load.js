@@ -12,6 +12,7 @@ var loadState = {
 
         //Load your images, spritesheets, bitmaps...
         game.load.image('boiler-logo', 'assets/img/boilerplate-logo.png');
+        game.load.image('player', 'assets/img/template-player-face.png');
 
         //game.load.image(neutral_map_label, neutral_map_asset);
 

@@ -86,14 +86,6 @@ function updateNeutralMapPosition(){
     }
 }
 
-var updatePlayer = function(player, playerSpeed) {
-    if (dCursors.isDown(Phaser.Keyboard.LEFT)) {
-        player.sprite.x -= playerSpeed;
-    } else if (dCursors.isDown(Phaser.Keyboard.RIGHT)) {
-        player.sprite.x += playerSpeed;
-    }
-}
-
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////// END Neutral Map Handling ////////////////////////
 ///////////////////////////////////////////////////////////////////////////
@@ -101,10 +93,43 @@ var updatePlayer = function(player, playerSpeed) {
 
 
 var gameLoop = {
+    // game loop member variables ---------
+    player: {
+        sprite: {},
+        playerSpeed : 50
+    },
+
+    playerMovementMethod: {},
+
+    // game loop methods ----------------
+    /**
+     * Extension method to bring delegate function support into javascript
+     * TODO: move this to an extension methods script
+     */
+    createDelegate: function (func, target) {
+        return function() {
+            return func.apply(target, arguments);
+        };
+    },
+
+    mouseMovementStrategy: function (player, playerSpeed) {
+        let cursorDistance = game.input.x - player.x;
+        player.x += (Math.abs(cursorDistance) > playerSpeed) ? playerSpeed * Math.sign(cursorDistance) : cursorDistance;
+    },
+
+    keyboardMovementStrategy: function (player, playerSpeed) {
+        if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+            player.x -= playerSpeed;
+        }
+        if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+            player.x += playerSpeed;
+        }
+    },
+
+    // phaser methods -------------------------
     preload: function () {
         // load neutral map
         neutralMapImage = game.load.image(neutralMapLabel, neutralMapAsset);
-        game.load.image('player', 'assets/img/template-player-face.png');
     },
 
     create: function () {
@@ -113,17 +138,19 @@ var gameLoop = {
         createMaps();
 
         // setup player
-        player = {};
-        player.sprite = game.add.sprite(w/2, 2*h/3, 'player');
-        playerScoreText = game.add.text(0, 0, 'SCORE:', {font: 'bold 30px Courier', fill: '#fff'});
+        this.player.sprite = game.add.sprite(w/2, 3/4*h, 'player');
+        this.player.sprite.anchor.setTo(0.5, 0.5);
+        playerScoreText = game.add.text(0, 0, 'SCORE:', { font: 'bold 30px Courier', fill: '#fff' });
 
         // create user input
-        cursors = game.input.keyboard.createCursorKeys();
-        dCursors = game.input.keyboard;
+        this.playerMovementMethod = this.createDelegate(this.mouseMovementStrategy);
+        //cursors = game.input.keyboard.createCursorKeys();
+        //dCursors = game.input.keyboard;
     },
-
+    
     update: function(){
         updateNeutralMapPosition();
-        updatePlayer(player, playerSpeed);
+        //updatePlayer(player, playerSpeed);
+        this.playerMovementMethod(this.player.sprite, this.player.playerSpeed);
     }
 };

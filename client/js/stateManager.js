@@ -1,5 +1,5 @@
 var w = 640, h = 480;
-var DEBUG = true;
+var DEBUG = false;
 
 /*
 For Fullscreen put this code:
