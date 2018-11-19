@@ -1,4 +1,5 @@
 const bootState = {};
+console.log(game, "is the current game nameSpace")
 bootState.gameTitle = 'LTC_GameJam_Colors-thingy-stuff';
 // Retrieve user data
 bootState.getUserDevice    = () => {
@@ -60,7 +61,7 @@ bootState.displayBootText = (gameText, newString, timer) => {
 bootState.userData = bootState.setUserData();
 
 // debug userData
-bootState.debugBootState = () => {
+bootState.debugBootState = (timer) => {
     if(DEBUG){
         setTimeout(function(){
             var gametextDebugger = game.add.text(0, 300, 'hello', {font: '30px Courier', fill: '#fff'});
@@ -105,7 +106,7 @@ bootState.create = () => {
 
     // retrieve device info and store into userData map (might be located in stateManager.js)
     setTimeout(function(){
-        getUserData();
+        bootState.setUserData();
     }, timer += timerDelta);
 
     if(DEBUG)
