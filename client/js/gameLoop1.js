@@ -9,8 +9,7 @@ var gameLoop1State = {
         player.anchor.setTo(0.5, 0.5);
         game.physics.enable(player, Phaser.Physics.ARCADE);
         player.inputEnabled = true;
-//        player.input.enableDrag();
-//        player.input.allowVerticalDrag = false;
+        player.body.collideWorldBounds=true;
     },
 
     render: function() {
@@ -21,17 +20,18 @@ var gameLoop1State = {
     update: function() {
         if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
         {
-            player2.x -= 8;
-            player.x -= 8;
+            player2.x -= 16;
+            player.x -= 16;
         }
         else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
         {
-            player2.x += 8;
-            player.x += 8;
+            player2.x += 16;
+            player.x += 16;
         }
-        else if (game.input.mousePointer.isDown)
+        else if (game.input.mousePointer.isUp)
         {
-            game.physics.arcade.moveToPointer(player, 400);
+//            moveToXY(displayObject, x, y, speed, maxTime)
+            game.physics.arcade.moveToXY(player, game.input.mousePointer.x, player.y, 300, 50);
             if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
             {
             player.body.velocity.setTo(0, 0);
