@@ -7,7 +7,7 @@
 const neutralMap = {};
 neutralMap.mapLabel = 'neutral-map';
 neutralMap.maps;
-neutralMap.velocity = 120;
+neutralMap.velocity = 250;
 neutralMap.mapsCount = 2;      // number changes pending size of map versus size of screen
 
 
@@ -24,7 +24,12 @@ neutralMap.preload = () => {
  * otherwise, use current value of neutralMap.velocity as default
  */
 neutralMap.getMapSpeed = () => {
-    if(config['mapSpeed'] && isNaN(parseFloat(config['mapSpeed'])))
+    if (DEBUG){
+        if (config['mapSpeed']){
+            console.log("Config mapSpeed: " + config['mapSpeed']);
+        }
+    }
+    if(config['mapSpeed'] && !isNaN(parseFloat(config['mapSpeed'])))
         neutralMap.velocity = config['mapSpeed'];
 }
 

@@ -4,4 +4,5 @@ var config = {
    "y": 150,
    "text": "loading..."
  },
+ "mapSpeed": 120,
 }
