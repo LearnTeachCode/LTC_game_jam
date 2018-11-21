@@ -1,8 +1,7 @@
 
 // player data
-var playerSpeed = 5;
 var playerScore = 0;
-var playerScoreText;
+var playerScoreText = config.player.playerScoreText;
 
 // controllers
 var cursors;
@@ -12,7 +11,7 @@ var gameLoop = {
     // game loop member variables ---------
     player: {
         sprite: {},
-        playerSpeed : 50
+        playerSpeed : config.player.playerSpeed,
     },
 
     playerMovementMethod: {},
@@ -51,12 +50,12 @@ var gameLoop = {
         neutralMap.create();    // setup neutral map sprites
 
         // setup player
-        this.player.sprite = game.add.sprite(w/2, 3/4*h, 'player');
+        this.player.sprite = game.add.sprite(config.screenWidth/2, config.screenHeight*3/4, 'player');
         this.player.sprite.anchor.setTo(0.5, 0.5);
-        playerScoreText = game.add.text(0, 0, 'SCORE:', { font: 'bold 30px Courier', fill: '#fff' });
+        playerScoreText = game.add.text(0, 0, config.player.playerScoreText, { font: config.player.playerScoreFont, fill: config.player.playerScoreColor });
 
         // create user input
-        this.playerMovementMethod = this.createDelegate(this.mouseMovementStrategy);
+        this.playerMovementMethod = this.createDelegate(this.keyboardMovementStrategy);
         //cursors = game.input.keyboard.createCursorKeys();
         dCursors = game.input.keyboard;
     },
@@ -67,7 +66,7 @@ var gameLoop = {
         this.playerMovementMethod(this.player.sprite, this.player.playerSpeed);
 
         // update score and text
-        playerScoreText.setText("SCORE: " + playerScore++);
+        playerScoreText.setText(config.player.playerScoreText + playerScore++);
 
         // developer buttons, IHAX YUR GAMEZ!!
         if(DEBUG){

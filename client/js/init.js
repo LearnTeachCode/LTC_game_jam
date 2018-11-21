@@ -1,4 +1,4 @@
-var w = 640, h = 480;
+var w = config.screenWidth, h = config.screenHeight;
 var DEBUG = true;
 
 /*

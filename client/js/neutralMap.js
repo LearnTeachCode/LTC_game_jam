@@ -7,7 +7,7 @@
 const neutralMap = {};
 neutralMap.mapLabel = 'neutral-map';
 neutralMap.maps;
-neutralMap.velocity = 250;
+neutralMap.velocity = config.mapSpeed;
 neutralMap.mapsCount = 2;      // number changes pending size of map versus size of screen
 
 
