@@ -52,20 +52,19 @@ bootState.setUserData = () => {
     return data;
 }
 /**
+* Sets up a delay by given timer before displaying provided string
 * @param {String} gameText The current display text that the boot state is showing.
 * @param {String} newString The text that will come next in the boot state.
-* @param {String} timer The text that will come next in the boot state.
-
+* @param {Number} timer Sets the delay before displaying the provided string.
+* @return {String}       
 *
 */
 
-
-
-// displayBootText sets up a delay by given timer before displaying provided string
 bootState.displayBootText = (gameText, newString, timer) => {
-    setTimeout(function () {
+    const bootText = setTimeout(function () {
         gameText.setText(newString);
     }, timer);
+    return bootText;
 }
 
 bootState.userData = bootState.setUserData();
