@@ -69,10 +69,16 @@ bootState.displayBootText = (gameText, newString, timer) => {
 
 bootState.userData = bootState.setUserData();
 
+/**
+ * @param {Number} timer delay time for the debugging state
+ * @return {Number}      A positive integer value which identifies the timer created by the call to setTimeout();.
+ * {@link https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout }
+ */
+
 // debug userData
 bootState.debugBootState = (timer) => {
     if(DEBUG){
-        setTimeout(function(){
+        const result = setTimeout(function(){
             var gametextDebugger = game.add.text(0, 300, 'hello', {font: '30px Courier', fill: '#fff'});
             bootString ='';
             let userData = bootState.userData;
@@ -81,6 +87,7 @@ bootState.debugBootState = (timer) => {
             }
             gametextDebugger.setText(bootString);
         }, timer);
+        return result;
     }
 }
 bootState.startState = (stateName, timer) => {
