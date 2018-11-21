@@ -106,6 +106,10 @@
 
 # Current Project Roles
 
+### Init Logic
+   * Ean
+   * Init Logic creates the game itself, and ensures that all dependencies exist.
+
 ### Boot Logic
    * <a href="https://github.com/E-A-N"> <img width="35" height="35" src="https://avatars1.githubusercontent.com/u/17329104?s=460&v=4"> <br> Ean </a>
    * Boot Logic Dictates how we start the game and the context in which we start the game.
