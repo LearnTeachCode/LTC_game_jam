@@ -64,7 +64,7 @@ bootState.userData = bootState.setUserData();
 bootState.debugBootState = (timer) => {
     if(DEBUG){
         setTimeout(function(){
-            var gametextDebugger = game.add.text(0, 300, 'hello', {config.loader.font, config.loader.fill});
+            var gametextDebugger = game.add.text(0, 300, 'hello', {font: config.loader.font, fill: config.loader.fill});
             bootString ='';
             let userData = bootState.userData;
             for (var i in userData){
@@ -92,9 +92,9 @@ bootState.startState = (stateName, timer) => {
 bootState.create = () => {
     var timerDelta = 500;   // how much wait time to increment
     var bootString = 'Booting up';
-    var gametextThankYou = game.add.text(0, 150, 'Thanks for playing', {config.loader.font, config.loader.fill});
-    var gametextGameTitle = game.add.text(0, 200, bootState.gameTitle, {config.loader.font, config.loader.fill});
-    var gametextBootString = game.add.text(0, 250, bootString, {config.loader.font, config.loader.fill});
+    var gametextThankYou = game.add.text(0, 150, 'Thanks for playing', {font: config.loader.font, fill: config.loader.fill});
+    var gametextGameTitle = game.add.text(0, 200, bootState.gameTitle, {font: config.loader.font, fill: config.loader.fill});
+    var gametextBootString = game.add.text(0, 250, bootString, {font: config.loader.font, fill: config.loader.fill});
 
     // animate "booting..." string
     var timer = 500;

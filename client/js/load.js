@@ -8,7 +8,7 @@ var loadState = {
         In this case of loading, only text is placed...
         */
 
-        var loadingLabel = game.add.text(80, 150, 'loading...', {font: '30px Courier', fill: '#fff'});
+        var loadingLabel = game.add.text(80, 150, 'loading...', {font: config.loader.font, fill: config.loader.fill});
 
         //Load your images, spritesheets, bitmaps...
         game.load.image('boiler-logo', 'assets/img/boilerplate-logo.png');
