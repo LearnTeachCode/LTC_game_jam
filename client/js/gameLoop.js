@@ -1,8 +1,7 @@
 
 // player data
-var playerSpeed = 5;
 var playerScore = 0;
-var playerScoreText;
+var playerScoreTextImage;
 
 // controllers
 var cursors;
@@ -12,7 +11,7 @@ var gameLoop = {
     // game loop member variables ---------
     player: {
         sprite: {},
-        playerSpeed : 50
+        playerSpeed : config.player.speed,
     },
 
     playerMovementMethod: {},
@@ -43,17 +42,14 @@ var gameLoop = {
     },
 
     // phaser methods -------------------------
-    preload: function () {
-        neutralMap.preload();   // load neutral map assets
-    },
 
     create: function () {
         neutralMap.create();    // setup neutral map sprites
 
         // setup player
-        this.player.sprite = game.add.sprite(w/2, 3/4*h, 'player');
+        this.player.sprite = game.add.sprite(config.init.screenWidth/2, config.init.screenHeight*3/4, 'player');
         this.player.sprite.anchor.setTo(0.5, 0.5);
-        playerScoreText = game.add.text(0, 0, 'SCORE:', { font: 'bold 30px Courier', fill: '#fff' });
+        playerScoreTextImage = game.add.text(config.init.screenWidth/2, 5, config.player.score.text, { font: config.player.score.font, fill: config.player.score.color });
 
         // create user input
         this.playerMovementMethod = this.createDelegate(this.mouseMovementStrategy);
@@ -67,7 +63,7 @@ var gameLoop = {
         this.playerMovementMethod(this.player.sprite, this.player.playerSpeed);
 
         // update score and text
-        playerScoreText.setText("SCORE: " + playerScore++);
+        playerScoreTextImage.setText(config.player.score.text + playerScore++);
 
         // developer buttons, IHAX YUR GAMEZ!!
         if(DEBUG){

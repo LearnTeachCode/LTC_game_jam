@@ -1,25 +1,32 @@
 var config = {
- load:{
-   x: 80,
-   y: 150,
-   text: 'loading...',
-   font: '30px Courier',
-   fill: '#fff'
- },
+    loader:{
+        x: 80,
+        y: 150,
+        text: 'loading...',
+        font: '30px Courier',
+        fill: '#fff',
+        logo: 'assets/img/boilerplate-logo.png',
+        playerImage: 'assets/img/template-player-face.png',
+        mapImage: 'assets/img/sample-neutral-map.png',
+    },
 
- init:{
-   x:375,
-   y:812
- },
+    init:{
+        screenWidth: 640,
+        screenHeight: 480,
+    },
 
- char:{
-   dimX:60,
-   dimY:70,
-   color:{},
-   speedX:1
- },
- stage:{
-   speedY:1
- }
+    player:{
+        speed: 10,
+        score:{
+            font: 'bold 30px Courier',
+            color: '#fff',
+            text: 'SCORE:',
+        },
+    },
 
+    neutralMap:{
+        velocity: 120,
+        mapsCount: 2,
+        mapLabel: 'neutral-map',
+    },
 }

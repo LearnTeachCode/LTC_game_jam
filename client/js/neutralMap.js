@@ -5,18 +5,9 @@
 
 // neutral map variables
 const neutralMap = {};
-neutralMap.mapLabel = 'neutral-map';
 neutralMap.maps;
-neutralMap.velocity = 250;
-neutralMap.mapsCount = 2;      // number changes pending size of map versus size of screen
-
-
-neutralMap.preload = () => {
-    let mapAsset = 'assets/img/sample-neutral-map.png';
-    // load neutral map
-    game.load.image(neutralMap.mapLabel, mapAsset);
-},
-
+neutralMap.velocity = config.neutralMap.velocity;
+neutralMap.mapsCount = config.neutralMap.mapsCount;      // number changes pending size of map versus size of screen
 
 /**
  * getMapSpeed() validates config['mapSpeed']
@@ -25,12 +16,12 @@ neutralMap.preload = () => {
  */
 neutralMap.getMapSpeed = () => {
     if (DEBUG){
-        if (config['mapSpeed']){
-            console.log("Config mapSpeed: " + config['mapSpeed']);
+        if (config.neutralMap.mapSpeed){
+            console.log("Config mapSpeed: " + config.neutralMap.mapSpeed);
         }
     }
-    if(config['mapSpeed'] && !isNaN(parseFloat(config['mapSpeed'])))
-        neutralMap.velocity = config['mapSpeed'];
+    if(config.neutralMap.mapSpeed && !isNaN(parseFloat(config.neutralMap.mapSpeed)))
+        neutralMap.velocity = config.neutralMap.mapSpeed;
 }
 
 neutralMap.changeMapSpeed = (deltaSpeed) => {
@@ -49,12 +40,12 @@ neutralMap.createMaps = () => {
 
     for(var i = 0; i < neutralMap.mapsCount; i++){
         // create map and give it an ID
-        tempMap = game.add.sprite(0, currentYPosition, neutralMap.mapLabel);
-        tempMap.name = neutralMap.mapLabel + '-' + i;
+        tempMap = game.add.sprite(0, currentYPosition, config.neutralMap.mapLabel);
+        tempMap.name = config.neutralMap.mapLabel + '-' + i;
         game.physics.arcade.enable(tempMap);
 
         // ensure map fits on screen
-        scaleMapValue = w / tempMap.width;
+        scaleMapValue = config.init.screenWidth / tempMap.width;
         tempMap.scale.setTo(scaleMapValue);
         
         // add new map to the stack list and prepare Y position for next map to stack on this one
@@ -74,7 +65,7 @@ neutralMap.updateMap = () => {
         if(neutralMap.maps[key].body.y >= neutralMap.maps[key].height){
             neutralMap.maps[key].body.y = 0 - neutralMap.maps[key].height;
         }
-        neutralMap.maps[key].body.velocity.y = neutralMap.velocity;
+        neutralMap.maps[key].body.velocity.y = config.neutralMap.velocity;
     }
 }
 
