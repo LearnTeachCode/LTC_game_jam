@@ -1,4 +1,4 @@
-var w = 640, h = 480;
+var w = config.init.x, h = config.init.y;
 var DEBUG = true;
 
 /*

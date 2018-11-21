@@ -64,7 +64,7 @@ bootState.userData = bootState.setUserData();
 bootState.debugBootState = (timer) => {
     if(DEBUG){
         setTimeout(function(){
-            var gametextDebugger = game.add.text(0, 300, 'hello', {font: '30px Courier', fill: '#fff'});
+            var gametextDebugger = game.add.text(0, 300, 'hello', {config.loader.font, config.loader.fill});
             bootString ='';
             let userData = bootState.userData;
             for (var i in userData){
@@ -77,7 +77,7 @@ bootState.debugBootState = (timer) => {
 bootState.startState = (stateName, timer) => {
     //From Ean: is there a reason for using a timer to delay game state?
     setTimeout(function () {
-            
+
         // TODO: determine if writing to player's computer is something to move forward with
         // ignore for now
         //var file = fopen('../config/ltc_config.txt')
@@ -92,9 +92,9 @@ bootState.startState = (stateName, timer) => {
 bootState.create = () => {
     var timerDelta = 500;   // how much wait time to increment
     var bootString = 'Booting up';
-    var gametextThankYou = game.add.text(0, 150, 'Thanks for playing', {font: '30px Courier', fill: '#fff'});
-    var gametextGameTitle = game.add.text(0, 200, bootState.gameTitle, {font: '30px Courier', fill: '#fff'});
-    var gametextBootString = game.add.text(0, 250, bootString, {font: '30px Courier', fill: '#fff'});
+    var gametextThankYou = game.add.text(0, 150, 'Thanks for playing', {config.loader.font, config.loader.fill});
+    var gametextGameTitle = game.add.text(0, 200, bootState.gameTitle, {config.loader.font, config.loader.fill});
+    var gametextBootString = game.add.text(0, 250, bootString, {config.loader.font, config.loader.fill});
 
     // animate "booting..." string
     var timer = 500;
