@@ -28,8 +28,12 @@ var gameLoop = {
     },
 
     mouseMovementStrategy: function (player, playerSpeed) {
-        let cursorDistance = game.input.x - player.x;
-        player.x += (Math.abs(cursorDistance) > playerSpeed) ? playerSpeed * Math.sign(cursorDistance) : cursorDistance;
+        let cursorDistanceFromPlayer = game.input.x - player.x;
+        let intendedMoveDirection = Math.sign(cursorDistanceFromPlayer);
+        let playerMovementDelta = cursorDistanceFromPlayer;
+        if (Math.abs(cursorDistanceFromPlayer) > playerSpeed)
+            playerMovementDelta = intendedMoveDirection * playerSpeed;
+        player.x += playerMovementDelta;
     },
 
     keyboardMovementStrategy: function (player, playerSpeed) {
