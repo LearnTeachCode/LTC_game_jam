@@ -2,3 +2,4 @@
 node_modules/
 client/.vs/ProjectSettings.json
 client/.vs/slnx.sqlite
+node_modules/

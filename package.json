@@ -18,5 +18,8 @@
   "homepage": "https://github.com/E-A-N/eansPhaserBoilerPlate#readme",
   "dependencies": {
     "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.5.5"
   }
 }

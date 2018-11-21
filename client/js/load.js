@@ -8,7 +8,7 @@ var loadState = {
         In this case of loading, only text is placed...
         */
 
-        var loadingLabel = game.add.text(80, 150, 'loading...', {font: '30px Courier', fill: '#fff'});
+        var loadingLabel = game.add.text(config.loader.x, config.loader.y, config.loader.text, {font: '30px Courier', fill: '#fff'});
 
         //Load your images, spritesheets, bitmaps...
         game.load.image('boiler-logo', 'assets/img/boilerplate-logo.png');
@@ -26,7 +26,6 @@ var loadState = {
     },
 
     create: function () {
-
         game.stage.setBackgroundColor('#000');
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
         game.state.start('menu');
