@@ -51,6 +51,16 @@ bootState.setUserData = () => {
 
     return data;
 }
+/**
+* @param {String} gameText The current display text that the boot state is showing.
+* @param {String} newString The text that will come next in the boot state.
+* @param {String} timer The text that will come next in the boot state.
+
+*
+*/
+
+
+
 // displayBootText sets up a delay by given timer before displaying provided string
 bootState.displayBootText = (gameText, newString, timer) => {
     setTimeout(function () {
