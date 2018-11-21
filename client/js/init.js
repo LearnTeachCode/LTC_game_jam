@@ -1,4 +1,4 @@
-var w = config.screenWidth, h = config.screenHeight;
+var w = config.init.screenWidth, h = config.init.screenHeight;
 var DEBUG = true;
 
 /*

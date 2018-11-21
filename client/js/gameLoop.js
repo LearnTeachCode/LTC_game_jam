@@ -53,7 +53,7 @@ var gameLoop = {
         // setup player
         this.player.sprite = game.add.sprite(config.init.screenWidth/2, config.init.screenHeight*3/4, 'player');
         this.player.sprite.anchor.setTo(0.5, 0.5);
-        playerScoreTextImage = game.add.text(config.init.screenWidth/2, 5, config.player.score.text, { font: config.player.score.font, fill: config.player.score.color });
+        playerScoreTextImage = game.add.text(0, 5, config.player.score.text, { font: config.player.score.font, fill: config.player.score.color });
 
         // create user input
         this.playerMovementMethod = this.createDelegate(this.mouseMovementStrategy);
