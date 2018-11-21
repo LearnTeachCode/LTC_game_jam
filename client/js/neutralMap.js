@@ -5,14 +5,14 @@
 
 // neutral map variables
 const neutralMap = {};
-neutralMap.mapLabel = 'neutral-map';
+neutralMap.mapLabel = config.neutralMap.mapLabel;
 neutralMap.maps;
-neutralMap.velocity = config.mapSpeed;
-neutralMap.mapsCount = 2;      // number changes pending size of map versus size of screen
+neutralMap.velocity = config.neutralMap.mapSpeed;
+neutralMap.mapsCount = config.neutralMap.mapsCount;      // number changes pending size of map versus size of screen
 
 
 neutralMap.preload = () => {
-    let mapAsset = 'assets/img/sample-neutral-map.png';
+    let mapAsset = config.neutralMap.mapAsset;
     // load neutral map
     game.load.image(neutralMap.mapLabel, mapAsset);
 },
@@ -25,12 +25,12 @@ neutralMap.preload = () => {
  */
 neutralMap.getMapSpeed = () => {
     if (DEBUG){
-        if (config['mapSpeed']){
-            console.log("Config mapSpeed: " + config['mapSpeed']);
+        if (config.neutralMap.mapSpeed){
+            console.log("Config mapSpeed: " + config.neutralMap.mapSpeed);
         }
     }
-    if(config['mapSpeed'] && !isNaN(parseFloat(config['mapSpeed'])))
-        neutralMap.velocity = config['mapSpeed'];
+    if(config.neutralMap.mapSpeed && !isNaN(parseFloat(config.neutralMap.mapSpeed)))
+        neutralMap.velocity = config.neutralMap.mapSpeed;
 }
 
 neutralMap.changeMapSpeed = (deltaSpeed) => {
@@ -54,7 +54,7 @@ neutralMap.createMaps = () => {
         game.physics.arcade.enable(tempMap);
 
         // ensure map fits on screen
-        scaleMapValue = w / tempMap.width;
+        scaleMapValue = config.screenWidth / tempMap.width;
         tempMap.scale.setTo(scaleMapValue);
         
         // add new map to the stack list and prepare Y position for next map to stack on this one

@@ -8,11 +8,16 @@ var config = {
  },
  "screenWidth": 640,
  "screenHeight": 480,
- "mapSpeed": 120,
  "player": {
  	"playerSpeed": 5,
  	"playerScoreText": "SCORE:",
  	"playerScoreFont": 'bold 30px Courier',
  	"playerScoreColor": '#fff',
+ },
+ "neutralMap": {
+ 	"mapAsset": 'assets/img/sample-neutral-map.png',
+ 	"mapSpeed": 120,
+ 	"mapsCount": 2,
+ 	"mapLabel": "neutral-map",
  },
 }
