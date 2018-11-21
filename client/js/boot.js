@@ -56,8 +56,8 @@ bootState.setUserData = () => {
 * @param {String} gameText The current display text that the boot state is showing.
 * @param {String} newString The text that will come next in the boot state.
 * @param {Number} timer Sets the delay before displaying the provided string.
-* @return {String}       
-*
+* @return {Number}      A positive integer value which identifies the timer created by the call to setTimeout();.
+* {@link https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout }
 */
 
 bootState.displayBootText = (gameText, newString, timer) => {
@@ -65,7 +65,7 @@ bootState.displayBootText = (gameText, newString, timer) => {
         gameText.setText(newString);
     }, timer);
     return bootText;
-}
+} 
 
 bootState.userData = bootState.setUserData();
 
