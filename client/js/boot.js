@@ -90,7 +90,7 @@ bootState.startState = (stateName, timer) => {
     }, timer);
 }
 bootState.create = () => {
-    var timerDelta = 500;   // how much wait time to increment
+    var timerDelta = 1;   // how much wait time to increment
     var bootString = 'Booting up';
     var gametextThankYou = game.add.text(0, 150, 'Thanks for playing', {font: '30px Courier', fill: '#fff'});
     var gametextGameTitle = game.add.text(0, 200, bootState.gameTitle, {font: '30px Courier', fill: '#fff'});
