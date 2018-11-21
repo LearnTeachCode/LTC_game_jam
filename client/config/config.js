@@ -1,5 +1,5 @@
 var config = {
- loader:{
+ load:{
    x: 80,
    y: 150,
    text: 'loading...',
@@ -20,5 +20,12 @@ var config = {
  },
  stage:{
    speedY:1
+ },
+ gameLoop:{
+   playerSpeed: 50,
+   playerScore: 0,
+   sprite: {},
+   playerMovementMethod: {}
  }
+
 }
