@@ -17,7 +17,7 @@ var menuState = {
 
     create: function () {
 
-        game.add.plugin(Phaser.Plugin.Debug);
+        //game.add.plugin(Phaser.Plugin.Debug);
         //game.add.plugin(Phaser.Plugin.Inspector);
         game.add.plugin(PhaserSuperStorage.StoragePlugin);
         game.add.plugin(PhaserInput.Plugin);
@@ -26,7 +26,7 @@ var menuState = {
         menuState.sprites.push(mainMenuBackground);
         mainMenuBackground.anchor.setTo(0.5);
         mainMenuBackground.scale.x = mainMenuBackground.scale.y = getScaleValueToEnvelopeRect(mainMenuBackground.width, mainMenuBackground.height, w, h);
-        
+
         let startButton = game.add.button(w / 2, 2 / 3 * h, 'startButton', menuState.startGame, this, 100, 100, 100);
         menuState.sprites.push(startButton);
         startButton.anchor.setTo(0.5)
