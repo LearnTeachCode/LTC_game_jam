@@ -16,12 +16,14 @@ testConfig.testConfigInit = () => {
      */
 
      // test config init values
-    let expected = 640;     // current default value: 640
+    let expected = 640;         // current default value: 640
     let actual = config.init.screenWidth;
-    unitjs.assert.equal(actual, expected, "TestConfigInit failed! Config.init.screenWidth not equal to " + expected);
+    let errorMessage = "TestConfigInit failed! Config.init.screenWidth not equal to ";
+    errorMessage += expected;   // structuring errorMessage before finally calling assert function
+    unitjs.assert.equal(actual, expected, errorMessage);
 
-    // code can be reduced 
-    expected = 480;     // current default value: 480
+    // code can be reduced
+    expected = 480;             // current default value: 480
     unitjs.assert.equal(config.init.screenHeight, expected, "TestConfigInit failed! Config.init.screenHeight not equal to " + expected);
 }
 
