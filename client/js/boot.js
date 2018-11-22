@@ -56,7 +56,7 @@ bootState.setUserData = () => {
     return data;
 }
 
-// displayBootText sets up a delay by given timer before displaying provided string
+// updates the "booting up..." string
 bootState.updateBootText = () => {
     if(bootState.gametextBootString != null){
         bootState.bootString += '.';
