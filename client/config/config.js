@@ -1,4 +1,4 @@
-var config = {
+const config = {
     loader:{
         x: 80,
         y: 150,
@@ -7,12 +7,13 @@ var config = {
         fill: '#fff',
         logo: 'assets/img/boilerplate-logo.png',
         playerImage: 'assets/img/template-player-face.png',
-        mapImage: 'assets/img/sample-neutral-map.png',
+        mapImage: 'assets/img/sample-neutral-map.png'
     },
-
     init:{
         screenWidth: 640,
         screenHeight: 480,
+        phoneWidth: 360,
+        phoneHeight: 740
     },
 
     player:{
@@ -20,13 +21,20 @@ var config = {
         score:{
             font: 'bold 30px Courier',
             color: '#fff',
-            text: 'SCORE:',
-        },
+            text: 'SCORE:'
+        }
     },
 
     neutralMap:{
         velocity: 120,
         mapsCount: 2,
-        mapLabel: 'neutral-map',
-    },
-}
+        mapLabel: 'neutral-map'
+    }
+};
+
+config.default.player = {
+
+    topVelocityX: 10,
+    topVelocityY: 10,
+    spriteSrc: "../spriteLocation.png"
+};
