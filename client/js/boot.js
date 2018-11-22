@@ -1,6 +1,10 @@
 const bootState = {};
 console.log(game, "is the current game nameSpace")
 bootState.gameTitle = 'LTC_GameJam_Colors-thingy-stuff';
+bootState.bootString = 'Booting up';
+bootState.gametextBootString;
+bootState.userData;
+
 // Retrieve user data
 bootState.getUserDevice    = () => {
     let newDataText = '';
@@ -48,69 +52,44 @@ bootState.setUserData = () => {
     data['device']    = bootState.getUserDevice();
     data['browser']   = bootState.getUserBrowser();
     data['audiotype'] = bootState.getUserAudioType();
-
+    bootState.userData = data;
     return data;
 }
-// displayBootText sets up a delay by given timer before displaying provided string
-bootState.displayBootText = (gameText, newString, timer) => {
-    setTimeout(function () {
-        gameText.setText(newString);
-    }, timer);
-}
 
-bootState.userData = bootState.setUserData();
-
-// debug userData
-bootState.debugBootState = (timer) => {
-    if(DEBUG){
-        setTimeout(function(){
-            var gametextDebugger = game.add.text(0, 300, 'hello', {font: '30px Courier', fill: '#fff'});
-            bootString ='';
-            let userData = bootState.userData;
-            for (var i in userData){
-                bootString += userData[i] +' ';
-            }
-            gametextDebugger.setText(bootString);
-        }, timer);
+// updates the "booting up..." string
+bootState.updateBootText = () => {
+    if(bootState.gametextBootString != null){
+        bootState.bootString += '.';
+        bootState.gametextBootString.setText(bootState.bootString);
     }
+    else{
+        bootState.bootString = 'Booting up';
+        bootState.gametextBootString = game.add.text(0, 250, bootState.bootString, {font: '30px Courier', fill: '#fff'});
+    }
+    return bootState.gametextBootString;
 }
-bootState.startState = (stateName, timer) => {
-    //From Ean: is there a reason for using a timer to delay game state?
-    setTimeout(function () {
-            
-        // TODO: determine if writing to player's computer is something to move forward with
-        // ignore for now
-        //var file = fopen('../config/ltc_config.txt')
 
-        //Initial GameSystem (Arcade, P2, Ninja)
-        game.physics.startSystem(Phaser.Physics.ARCADE);
+bootState.startState = () => {
+    //Initial GameSystem (Arcade, P2, Ninja)
+    game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        //Initial Load State
-        game.state.start(stateName);
-    }, timer);
+    //Initial Load State
+    game.state.start('load');
 }
+
 bootState.create = () => {
-    var timerDelta = 500;   // how much wait time to increment
-    var bootString = 'Booting up';
-    var gametextThankYou = game.add.text(0, 150, 'Thanks for playing', {font: '30px Courier', fill: '#fff'});
-    var gametextGameTitle = game.add.text(0, 200, bootState.gameTitle, {font: '30px Courier', fill: '#fff'});
-    var gametextBootString = game.add.text(0, 250, bootString, {font: '30px Courier', fill: '#fff'});
+    game.add.text(0, 150, 'Thanks for playing', {font: '30px Courier', fill: '#fff'});
+    game.add.text(0, 200, bootState.gameTitle, {font: '30px Courier', fill: '#fff'});
+    bootState.updateBootText();
 
     // animate "booting..." string
-    var timer = 500;
-    for(i = 1; i < 5; i++){
-        timer += timerDelta;
-        bootString += '.';
-        bootState.displayBootText(gametextBootString, bootString, timer);
-    }
+    let waitTime = 3;   // how much wait time in seconds
+    let repeatNum = waitTime;
+    game.time.events.repeat(Phaser.Timer.SECOND, repeatNum, bootState.updateBootText, this);
 
     // retrieve device info and store into userData map (might be located in stateManager.js)
-    setTimeout(function(){
-        bootState.setUserData();
-    }, timer += timerDelta);
+    bootState.setUserData();
 
-    if(DEBUG)
-        bootState.debugBootState(timer += timerDelta);
-
-    bootState.startState('load', timer += timerDelta);
-};
+    // run load state after boot string sequence
+    game.time.events.repeat(Phaser.Timer.SECOND*(waitTime + 1), 1, bootState.startState, this);
+}
