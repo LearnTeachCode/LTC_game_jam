@@ -7,12 +7,15 @@ const testConfig = {};
 
 testConfig.testConfigInit = () => {
     /**
-     * Syntax for assert equal is generally: assert.equal(value1, value2, "Some Error Message");
-     * Other test libraries may be different, unitjs library makes unitjs a global variable, thus the syntax is:
-     * unitjs.assert.equal(value1, value2, "Some Error Message");
-     * Typically, we determine what the expected outcome is, then compare it with the actual value from running the process.
-     * Having end point from functions makes creating these tests much easier.
+     * Typical setup for assert equals test:
+     * setup expected:              $ expected = ...
+     * setup actual:                $ actual = ...
+     * (Optional) setup message:    $ errorMessage = "ERROR!!!!!!!!!!!!!!!!!!!!!!"
+     * Run assert equals test:      $ unitjs.assert.equals(expected, actual, errorMessage)
+     * 
      * If test fails, then it will raise an error and stop the rest of the program.
+     * 
+     * Note: Having end point from functions makes creating these tests much easier.
      */
 
      // test config init values
