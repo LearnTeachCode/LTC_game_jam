@@ -75,6 +75,8 @@ var gameLoop = {
                 neutralMap.changeMapSpeed(-1);
             if(dCursors.isDown(Phaser.KeyCode.CLOSED_BRACKET))
                 neutralMap.changeMapSpeed(1);
+            if (dCursors.isDown(Phaser.KeyCode.SPACEBAR))
+                game.state.start('end');
         }
 
     }
