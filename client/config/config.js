@@ -43,9 +43,14 @@ config.default.score = {
     amount: 0,
     bonus1: 1,
     text: 'SCORE:'
-}
+};
 
 config.default.debug = {
     isOn: true, //to avoid coercion
     controls: {}
-}
+};
+
+config.default.gameMap = {
+    normalSpeed: 1,
+    hardSpeed: 2,
+};

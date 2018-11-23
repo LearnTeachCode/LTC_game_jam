@@ -5,14 +5,17 @@ var playerScoreTextImage;
 
 // controllers
 var cursors;
-var dCursors;   // developers' cursors
 
 var gameLoop = {};
 gameLoop.init = (data) => {
     gameLoop.player = data.player || config.default.player;
     gameLoop.score  = data.score  || config.default.score;
     if (data.debug && data.debug.isOn === true){
+        gameLoop.debugMode = data.debug.isOn;
         gameLoop.debug = data.debug;
+    }
+    else {
+        gameLoop.debugMode = false;
     }
 }
 gameLoop = {
@@ -66,7 +69,7 @@ gameLoop = {
         // create user input
         gameLoop.playerMovementMethod = gameLoop.createDelegate(gameLoop.mouseMovementStrategy);
         //cursors = game.input.keyboard.createCursorKeys();
-        dCursors = game.input.keyboard;
+        gameLoop.debug.controls = game.input.keyboard;
     },
     
     update: function(){
@@ -80,10 +83,10 @@ gameLoop = {
         playerScoreTextImage.setText(config.player.score.text + gameLoop.score.amount);
 
         // developer buttons, IHAX YUR GAMEZ!!
-        if(DEBUG){
-            if(dCursors.isDown(Phaser.KeyCode.OPEN_BRACKET))
+        if(gameLoop.debugMode){
+            if(gameLoop.debug.controls.isDown(Phaser.KeyCode.OPEN_BRACKET))
                 neutralMap.changeMapSpeed(-1);
-            if(dCursors.isDown(Phaser.KeyCode.CLOSED_BRACKET))
+            if(gameLoop.debug.controls.isDown(Phaser.KeyCode.CLOSED_BRACKET))
                 neutralMap.changeMapSpeed(1);
         }
 
