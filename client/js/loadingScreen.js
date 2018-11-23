@@ -9,7 +9,9 @@ loadingScreenState.velocity = 120;
 loadingScreenState.cursors;
 loadingScreenState.bgm;
 loadingScreenState.textStyle;
-loadingScreenState.textObject;
+loadingScreenState.startText;
+loadingScreenState.loadText;
+loadingScreenState.loadValue;
 
 /**
  * loadingScreenState.getMapSpeed reads the speed from config and gets the speed of moving parts
@@ -65,13 +67,17 @@ loadingScreenState.endMusic = (waitTime) => {
 /**
  * loadingScreenState.endState shuts down current state before calling state change
  * params: None
- * return: None
+ * return: (boolean) True if loadValue is 100%, false otherwise
  */
 loadingScreenState.endState = () => {
-    let waitTime = 2;   // delay by number of seconds
-    loadingScreenState.endMusic(500*waitTime);  // stop the music
-    game.add.tween(loadingScreenState.textObject).to( { alpha: 0 }, 1000 * waitTime, "Linear", true);
-    game.time.events.repeat(Phaser.Timer.SECOND * waitTime, 1, loadingScreenState.changeState, this);
+    if (loadingScreenState.loadValue >= 100){
+        let waitTime = 2;   // delay by number of seconds
+        loadingScreenState.endMusic(500*waitTime);  // stop the music
+        game.add.tween(loadingScreenState.startText).to( { alpha: 0 }, 1000 * waitTime, "Linear", true);
+        game.time.events.repeat(Phaser.Timer.SECOND * waitTime, 1, loadingScreenState.changeState, this);
+        return true;
+    }
+    return false;
 }
 
 /**
@@ -84,6 +90,36 @@ loadingScreenState.changeState = () => {
 }
 
 /**
+ * loadingScreenState.updateLoadCount
+ * params: None
+ * return: None
+ */
+loadingScreenState.updateLoadText = () => {
+    loadingScreenState.loadValue++;
+    let tempText = "Loading: " + loadingScreenState.loadValue + " %";
+    loadingScreenState.loadText.setText(tempText);
+    if (loadingScreenState.loadValue >= 100)
+        loadingScreenState.setupStartText();
+    return loadingScreenState.loadText;
+}
+
+/**
+ * loadingScreenState.setupStartText prompts user to click
+ * params: None
+ * return: (boolean) return true if startText is created, false otherwise
+ */
+loadingScreenState.setupStartText = () => {
+    // setup screen text
+    loadingScreenState.startText = game.add.text(game.world.centerX, game.world.centerY + 70, "Click to Start", loadingScreenState.style);
+    loadingScreenState.startText.anchor.set(0.5);
+    loadingScreenState.startText.alpha = 0.1;
+    game.add.tween(loadingScreenState.startText).to( { alpha: 1 }, 500, "Linear", true);
+    if (loadingScreenState.startText)
+        return true;
+    return false;
+}    
+
+/**
  * loadingScreenState.create sets up the loading screen state
  * params: None
  * return: None
@@ -94,12 +130,16 @@ loadingScreenState.create = () => {
     loadingScreenState.getMapSpeed();
     loadingScreenState.createMaps();
 
-    // setup screen text
-    loadingScreenState.style = { font: "bold 65px Arial", fill: "#ff0044", align: "center" };
-    loadingScreenState.textObject = game.add.text(game.world.centerX, game.world.centerY, "Click to Start", loadingScreenState.style);
-    loadingScreenState.textObject.anchor.set(0.5);
-    loadingScreenState.textObject.alpha = 0.1;
-    game.add.tween(loadingScreenState.textObject).to( { alpha: 1 }, 2000, "Linear", true);
+    // setup loading text
+    loadingScreenState.style = { font: "65px Arial", fill: "#ff0044", align: "center" };
+    loadingScreenState.loadValue = 0;
+    let tempText = "Loading: " + loadingScreenState.loadValue + " %";
+    loadingScreenState.loadText = game.add.text(game.world.centerX, game.world.centerY, tempText, loadingScreenState.style);
+    loadingScreenState.loadText.anchor.set(0.5);
+
+    // simulate loading assets, if loadValue is 100%, let user click to start game
+    let repeatCount = 100;
+    game.time.events.repeat(Phaser.Timer.SECOND * 3 / repeatCount, repeatCount, loadingScreenState.updateLoadText, this);
 
     // setup music and fade in music
     loadingScreenState.bgm = game.add.audio(config.loadingScreen.bgm.label);
