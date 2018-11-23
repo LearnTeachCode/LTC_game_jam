@@ -7,7 +7,11 @@ var playerScoreTextImage;
 var cursors;
 var dCursors;   // developers' cursors
 
-var gameLoop = {
+var gameLoop = {};
+gameLoop.init = (data) => {
+    gameLoop.player = data.player || config.default.player;
+}
+gameLoop = {
     // game loop member variables ---------
     player: {
         sprite: {},

@@ -20,15 +20,6 @@ const config = {
         phoneWidth: 360,
         phoneHeight: 740
     },
-
-    player:{
-        speed: 10,
-        score:{
-            font: 'bold 30px Courier',
-            color: '#fff',
-            text: 'SCORE:'
-        }
-    },
     gameLoop:{
         
     },
@@ -42,6 +33,8 @@ const config = {
 config.default.player = {
     speed: 10,
     spriteSrc: "../spriteLocation.png",
+    xStartRegion: 0.5,
+    yStartRegion: 0.75
 };
 
 config.default.score = {
