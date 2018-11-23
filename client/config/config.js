@@ -36,5 +36,10 @@ config.default.player = {
 
     topVelocityX: 10,
     topVelocityY: 10,
-    spriteSrc: "../spriteLocation.png"
+    spriteSrc: "../spriteLocation.png",
+    score: {
+        font: 'bold 30px Courier',
+        color: '#fff',
+        text: 'SCORE:'
+    }
 };
