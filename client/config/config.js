@@ -16,7 +16,7 @@ var config = {
     },
 
     player:{
-        speed: 10,
+        speed: 50,
         score:{
             font: 'bold 30px Courier',
             color: '#fff',

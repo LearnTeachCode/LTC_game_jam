@@ -68,7 +68,7 @@ loadingScreenState.endMusic = () => {
  * return: None
  */
 loadingScreenState.changeState = () => {
-    loadingScreenState.bgm.stop();  // stop the music
+    loadingScreenState.endMusic();  // stop the music
     game.state.start('gameLoop');
 }
 
