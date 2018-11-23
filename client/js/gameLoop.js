@@ -92,10 +92,18 @@ gameLoop = {
         gameLoop.score.interface.setText(gameLoop.score.text + gameLoop.score.amount);
 
         if(gameLoop.debugMode){
-            if(gameLoop.debug.controls.isDown(Phaser.KeyCode.OPEN_BRACKET))
+            let upScrollCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.OPEN_BRACKET);
+            let downScrollCheat = gameLoop.debug.controls.isDown(Phaser.KeyCode.CLOSED_BRACKET);
+            let gameOverCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.SPACEBAR);
+            if(upScrollCheat){
                 neutralMap.changeMapSpeed(-gameLoop.difficulty);
-            if(gameLoop.debug.controls.isDown(Phaser.KeyCode.CLOSED_BRACKET))
+            }
+            if(downScrollCheat) {}
                 neutralMap.changeMapSpeed(gameLoop.difficulty);
+            }
+            if(gameOverCheat){
+                game.state.start("end");
+            }
         }
 
     }
