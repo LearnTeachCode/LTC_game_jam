@@ -10,6 +10,10 @@ var dCursors;   // developers' cursors
 var gameLoop = {};
 gameLoop.init = (data) => {
     gameLoop.player = data.player || config.default.player;
+    gameLoop.score  = data.score  || config.default.score;
+    if (data.debug && data.debug.isOn === true){
+        gameLoop.debug = data.debug;
+    }
 }
 gameLoop = {
     // game loop member variables ---------
@@ -55,12 +59,12 @@ gameLoop = {
         neutralMap.create();    // setup neutral map sprites
 
         // setup player
-        this.player.sprite = game.add.sprite(config.init.screenWidth/2, config.init.screenHeight*3/4, 'player');
-        this.player.sprite.anchor.setTo(0.5, 0.5);
+        gameLoop.player.sprite = game.add.sprite(config.init.screenWidth/2, config.init.screenHeight*3/4, 'player');
+        gameLoop.player.sprite.anchor.setTo(0.5, 0.5);
         playerScoreTextImage = game.add.text(0, 5, config.player.score.text, { font: config.player.score.font, fill: config.player.score.color });
 
         // create user input
-        this.playerMovementMethod = this.createDelegate(this.mouseMovementStrategy);
+        gameLoop.playerMovementMethod = gameLoop.createDelegate(gameLoop.mouseMovementStrategy);
         //cursors = game.input.keyboard.createCursorKeys();
         dCursors = game.input.keyboard;
     },
@@ -68,10 +72,12 @@ gameLoop = {
     update: function(){
         neutralMap.updateMap();    // update neutral map states
         //updatePlayer(player, playerSpeed);
-        this.playerMovementMethod(this.player.sprite, this.player.playerSpeed);
+        gameLoop.playerMovementMethod(gameLoop.player.sprite, gameLoop.player.speed);
+
+        gameLoop.score.amount += gameLoop.score.bonus1;
 
         // update score and text
-        playerScoreTextImage.setText(config.player.score.text + playerScore++);
+        playerScoreTextImage.setText(config.player.score.text + gameLoop.score.amount);
 
         // developer buttons, IHAX YUR GAMEZ!!
         if(DEBUG){

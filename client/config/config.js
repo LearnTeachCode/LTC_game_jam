@@ -2,7 +2,7 @@ const config = {
     default: {
         player:{},
         score: {},
-        debug: false
+        debug: {}
     },
     loader:{
         x: 80,
@@ -40,5 +40,12 @@ config.default.player = {
 config.default.score = {
     font: 'bold 30px Courier',
     color: '#fff',
+    amount: 0,
+    bonus1: 1,
     text: 'SCORE:'
+}
+
+config.default.debug = {
+    isOn: true, //to avoid coercion
+    controls: {}
 }
