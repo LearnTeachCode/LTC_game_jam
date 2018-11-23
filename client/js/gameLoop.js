@@ -1,5 +1,5 @@
 //initiliaze gameLoop 1st so it functions as a namespace
-const gameLoop = {};
+let gameLoop = {};
 gameLoop = {
     init: (data) => {
         data = typeof data === "undefined" ? {} : data;
