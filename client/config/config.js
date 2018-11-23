@@ -33,7 +33,7 @@ var config = {
     loadingScreen:{
         bgm: {
             mp3file: 'assets/audio/bodenstaendig_2000_in_rock_4bit.mp3',
-            oggfile: 'assets/audio/bodenstaendig_2000_in_rock_4bit.mp3',
+            oggfile: 'assets/audio/bodenstaendig_2000_in_rock_4bit.ogg',
             label: 'loadingScreen-bgm',
         },
         screenImg: 'assets/img/flame-blackBG.png',

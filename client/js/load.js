@@ -17,9 +17,8 @@ var loadState = {
 
         //Load your sounds, efx, music...
         //Example: game.load.audio('rockas', 'assets/snd/rockas.wav');
-        // game.load.audio(config.loadingScreen.bgm.label, config.loadingScreen.bgm.file);
-        test_audio = game.load.audio(config.loadingScreen.bgm.label, [config.loadingScreen.bgm.mp3file, config.loadingScreen.bgm.oggfile]);
-        //game.load.audio('boden', ['assets/audio/bodenstaendig_2000_in_rock_4bit.mp3', 'assets/audio/bodenstaendig_2000_in_rock_4bit.ogg']);
+        game.load.audio(config.loadingScreen.bgm.label, [config.loadingScreen.bgm.mp3file, config.loadingScreen.bgm.oggfile]);
+
         //Load your data, JSON, Querys...
         //Example: game.load.json('version', 'http://phaser.io/version.json');
 

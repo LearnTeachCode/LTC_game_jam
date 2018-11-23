@@ -57,9 +57,21 @@ loadingScreenState.startMusic = () => {
  * params: None
  * return: (boolean) True if music is not playing, false otherwise
  */
-loadingScreenState.endMusic = () => {
-    loadingScreenState.bgm.stop();
+loadingScreenState.endMusic = (waitTime) => {
+    loadingScreenState.bgm.fadeOut(waitTime);
     return loadingScreenState.bgm.isPlaying;
+}
+
+/**
+ * loadingScreenState.endState shuts down current state before calling state change
+ * params: None
+ * return: None
+ */
+loadingScreenState.endState = () => {
+    let waitTime = 2;   // delay by number of seconds
+    loadingScreenState.endMusic(500*waitTime);  // stop the music
+    game.add.tween(loadingScreenState.textObject).to( { alpha: 0 }, 1000 * waitTime, "Linear", true);
+    game.time.events.repeat(Phaser.Timer.SECOND * waitTime, 1, loadingScreenState.changeState, this);
 }
 
 /**
@@ -68,7 +80,6 @@ loadingScreenState.endMusic = () => {
  * return: None
  */
 loadingScreenState.changeState = () => {
-    loadingScreenState.endMusic();  // stop the music
     game.state.start('gameLoop');
 }
 
@@ -84,7 +95,7 @@ loadingScreenState.create = () => {
     loadingScreenState.createMaps();
 
     // setup screen text
-    loadingScreenState.style = { font: "65px Arial", fill: "#ff0044", align: "center" };
+    loadingScreenState.style = { font: "bold 65px Arial", fill: "#ff0044", align: "center" };
     loadingScreenState.textObject = game.add.text(game.world.centerX, game.world.centerY, "Click to Start", loadingScreenState.style);
     loadingScreenState.textObject.anchor.set(0.5);
     loadingScreenState.textObject.alpha = 0.1;
@@ -95,7 +106,7 @@ loadingScreenState.create = () => {
     loadingScreenState.bgm.onDecoded.add(loadingScreenState.startMusic, this);
 
     // setup user controls
-    game.input.onDown.add(loadingScreenState.changeState, this);
+    game.input.onDown.add(loadingScreenState.endState, this);
 }
 
 /**
