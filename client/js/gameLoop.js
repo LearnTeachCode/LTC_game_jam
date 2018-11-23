@@ -1,15 +1,16 @@
 
-// player data
-var playerScore = 0;
-var playerScoreTextImage;
-
 // controllers
 var cursors;
 
+//initiliaze gameLoop 1st so it functions as a namespace
 var gameLoop = {};
 gameLoop.init = (data) => {
-    gameLoop.player = data.player || config.default.player;
-    gameLoop.score  = data.score  || config.default.score;
+    gameLoop.player  = data.player   || config.default.player;
+    gameLoop.score   = data.score    || config.default.score;
+    gameLoop._width  = data.width    || config.init.screenWidth;
+    gameLoop._height = data.height   || config.init.screenHeight;
+    gameLoop.xStartRegion = data.xStartRegion || config.gameLoop.xStartRegion;
+    gameLoop.yStartRegion = data.yStartRegion || config.gameLoop.yStartRegion;
     if (data.debug && data.debug.isOn === true){
         gameLoop.debugMode = data.debug.isOn;
         gameLoop.debug = data.debug;
@@ -19,11 +20,6 @@ gameLoop.init = (data) => {
     }
 }
 gameLoop = {
-    // game loop member variables ---------
-    player: {
-        sprite: {},
-        playerSpeed : config.player.speed,
-    },
 
     playerMovementMethod: {},
 
@@ -60,11 +56,22 @@ gameLoop = {
 
     create: function () {
         neutralMap.create();    // setup neutral map sprites
-
+        let playerStartData = [
+            gameLoop._width  * gameLoop.xStartRegion,
+            gameLoop._height * gamegameLoop.yStartRegion,
+            gameLoop.player.imageKey
+        ];
         // setup player
-        gameLoop.player.sprite = game.add.sprite(config.init.screenWidth/2, config.init.screenHeight*3/4, 'player');
+        gameLoop.player.sprite = game.add.sprite(...playerStartData);
         gameLoop.player.sprite.anchor.setTo(0.5, 0.5);
-        playerScoreTextImage = game.add.text(0, 5, config.player.score.text, { font: config.player.score.font, fill: config.player.score.color });
+
+        let gameScoreData = [
+            gameLoop.score.x,
+            gameLoop.score.y,
+            gameLoop.score.text,
+            gameLoop.score.style
+        ];
+        gameLoop.score.interface = game.add.text(...gameScoreData);
 
         // create user input
         gameLoop.playerMovementMethod = gameLoop.createDelegate(gameLoop.mouseMovementStrategy);
@@ -80,9 +87,8 @@ gameLoop = {
         gameLoop.score.amount += gameLoop.score.bonus1;
 
         // update score and text
-        playerScoreTextImage.setText(config.player.score.text + gameLoop.score.amount);
+        gameLoop.score.interface.setText(gameLoop.score.text + gameLoop.score.amount);
 
-        // developer buttons, IHAX YUR GAMEZ!!
         if(gameLoop.debugMode){
             if(gameLoop.debug.controls.isDown(Phaser.KeyCode.OPEN_BRACKET))
                 neutralMap.changeMapSpeed(-1);

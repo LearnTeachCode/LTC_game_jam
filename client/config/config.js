@@ -21,7 +21,8 @@ const config = {
         phoneHeight: 740
     },
     gameLoop:{
-        
+        xStartRegion: 0.5,
+        yStartRegion: 0.75
     },
     neutralMap:{
         velocity: 120,
@@ -32,17 +33,21 @@ const config = {
 
 config.default.player = {
     speed: 10,
-    spriteSrc: "../spriteLocation.png",
-    xStartRegion: 0.5,
-    yStartRegion: 0.75
+    imageKey: "player",
+    spriteSrc: "../spriteLocation.png"
 };
 
 config.default.score = {
-    font: 'bold 30px Courier',
-    color: '#fff',
+    style : {
+        font: 'bold 30px Courier',
+        color: '#fff',
+    },    
+    interface: {},
     amount: 0,
     bonus1: 1,
-    text: 'SCORE:'
+    text: 'SCORE:',
+    x: 0,
+    y: 5
 };
 
 config.default.debug = {
@@ -54,3 +59,4 @@ config.default.gameMap = {
     normalSpeed: 1,
     hardSpeed: 2,
 };
+
