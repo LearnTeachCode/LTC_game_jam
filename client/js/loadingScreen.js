@@ -19,8 +19,8 @@ loadingScreenState.loadValue;
  * return: current map speed
  */
 loadingScreenState.getMapSpeed = () => {
-    if(config.loadingScreen.velocity && !isNaN(parseFloat(config.loadingScreen.velocity)))
-        loadingScreenState.velocity = config.loadingScreen.velocity;
+    if(config.loader.velocity && !isNaN(parseFloat(config.loader.velocity)))
+        loadingScreenState.velocity = config.loader.velocity;
     return loadingScreenState.velocity;
 }
 
@@ -149,7 +149,7 @@ loadingScreenState.create = () => {
     game.time.events.repeat(Phaser.Timer.SECOND * 3 / repeatCount, repeatCount, loadingScreenState.updateLoadText, this);
 
     // setup music and fade in music
-    loadingScreenState.bgm = game.add.audio(config.loadingScreen.bgm.label);
+    loadingScreenState.bgm = game.add.audio(config.loader.bgm.label);
     loadingScreenState.bgm.onDecoded.add(loadingScreenState.startMusic, this);
 
     // setup user controls

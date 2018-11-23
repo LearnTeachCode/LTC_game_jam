@@ -1,33 +1,25 @@
-
-// player data
-var playerScore = 0;
-var playerScoreTextImage;
-
-// controllers
-var cursors;
-var dCursors;   // developers' cursors
-
-var gameLoop = {
-    // game loop member variables ---------
-    player: {
-        sprite: {},
-        playerSpeed : config.player.speed,
+//initiliaze gameLoop 1st so it functions as a namespace
+let gameLoop = {};
+gameLoop = {
+    init: (data) => {
+        data = typeof data === "undefined" ? {} : data;
+        gameLoop.player  = data.player   || config.default.player;
+        gameLoop.score   = data.score    || config.default.score;
+        gameLoop.width  = data.width    || config.init.screenWidth;
+        gameLoop.height = data.height   || config.init.screenHeight;
+        gameLoop.xStartRegion = data.xStartRegion || config.gameLoop.xStartRegion;
+        gameLoop.yStartRegion = data.yStartRegion || config.gameLoop.yStartRegion;
+        gameLoop.difficulty   = data.difficulty || 1;
+        gameLoop.controlType  = data.controlType || config.default.controls.mouse;
+        if (data.debug && data.debug.isOn === true){
+            gameLoop.debugMode = data.debug.isOn;
+            gameLoop.debug = data.debug;
+        }
+        else {
+            gameLoop.debugMode = false;
+        }
     },
-
-    playerMovementMethod: {},
-
-    // game loop methods ----------------
-    /**
-     * Extension method to bring delegate function support into javascript
-     * TODO: move this to an extension methods script
-     */
-    createDelegate: function (func, target) {
-        return function() {
-            return func.apply(target, arguments);
-        };
-    },
-
-    mouseMovementStrategy: function (player, playerSpeed) {
+    mouseMovement: (player, playerSpeed) => {
         let cursorDistanceFromPlayer = game.input.x - player.x;
         let intendedMoveDirection = Math.sign(cursorDistanceFromPlayer);
         let playerMovementDelta = cursorDistanceFromPlayer;
@@ -36,7 +28,7 @@ var gameLoop = {
         player.x += playerMovementDelta;
     },
 
-    keyboardMovementStrategy: function (player, playerSpeed) {
+    keyboardMovement: (player, playerSpeed) => {
         if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
             player.x -= playerSpeed;
         }
@@ -45,38 +37,65 @@ var gameLoop = {
         }
     },
 
+    movePlayer : (player, speed, type) => {
+        var mouse = 0;
+        var keyboard = 1;
+
+        if (type === keyboard) {
+            gameLoop.keyboardMovement(player, speed);
+        }
+        else {
+            gameLoop.mouseMovement(player,speed);
+        }
+    },
     // phaser methods -------------------------
 
-    create: function () {
+    create: () => {
         neutralMap.create();    // setup neutral map sprites
-
+        let playerStartData = [
+            gameLoop.width  * gameLoop.xStartRegion,
+            gameLoop.height * gameLoop.yStartRegion,
+            gameLoop.player.imageKey
+        ];
         // setup player
-        this.player.sprite = game.add.sprite(config.init.screenWidth/2, config.init.screenHeight*3/4, 'player');
-        this.player.sprite.anchor.setTo(0.5, 0.5);
-        playerScoreTextImage = game.add.text(0, 5, config.player.score.text, { font: config.player.score.font, fill: config.player.score.color });
+        gameLoop.player.sprite = game.add.sprite(...playerStartData);
+        //1st is x, 2nd is Y!
+        const spriteCenter = [0.5, 0.5];
+        gameLoop.player.sprite.anchor.setTo(...spriteCenter);
 
-        // create user input
-        this.playerMovementMethod = this.createDelegate(this.mouseMovementStrategy);
-        //cursors = game.input.keyboard.createCursorKeys();
-        dCursors = game.input.keyboard;
+        let gameScoreData = [
+            gameLoop.score.x,
+            gameLoop.score.y,
+            gameLoop.score.text,
+            gameLoop.score.style
+        ];
+        gameLoop.score.interface = game.add.text(...gameScoreData);
+        if (gameLoop.debugMode === true) {
+            gameLoop.debug.controls  = game.input.keyboard;
+        }
     },
     
-    update: function(){
-        neutralMap.updateMap();    // update neutral map states
-        //updatePlayer(player, playerSpeed);
-        this.playerMovementMethod(this.player.sprite, this.player.playerSpeed);
+    update: () => {
+        neutralMap.updateMap();    // update neutral map states[]
+        let movementData = [
+            gameLoop.player.sprite,
+            gameLoop.player.speed,
+            gameLoop.controlType
+        ];
+        gameLoop.movePlayer(...movementData);
+        gameLoop.score.amount += gameLoop.score.bonus1;
 
         // update score and text
-        playerScoreTextImage.setText(config.player.score.text + playerScore++);
+        gameLoop.score.interface.setText(gameLoop.score.text + gameLoop.score.amount);
 
-        // developer buttons, IHAX YUR GAMEZ!!
-        if(DEBUG){
-            if(dCursors.isDown(Phaser.KeyCode.OPEN_BRACKET))
-                neutralMap.changeMapSpeed(-1);
-            if(dCursors.isDown(Phaser.KeyCode.CLOSED_BRACKET))
-                neutralMap.changeMapSpeed(1);
-            if (dCursors.isDown(Phaser.KeyCode.SPACEBAR))
-                game.state.start('end');
+        if(gameLoop.debugMode){
+            let upScrollCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.OPEN_BRACKET);
+            let downScrollCheat = gameLoop.debug.controls.isDown(Phaser.KeyCode.CLOSED_BRACKET);
+            let gameOverCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.SPACEBAR);
+
+            upScrollCheat   ? neutralMap.changeMapSpeed(-gameLoop.difficulty) : -1;
+            downScrollCheat ? neutralMap.changeMapSpeed(gameLoop.difficulty)  : -1;
+            gameOverCheat   ? game.state.start("end") : -1;
         }
 
     }

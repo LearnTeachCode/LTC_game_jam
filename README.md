@@ -1,5 +1,10 @@
 <div align="center"><img src="https://user-images.githubusercontent.com/121322/47754742-28d44480-dc59-11e8-9071-5b45e89edde4.png"></div>
 
+<a href="https://e-a-n.github.io/pathLight-staging/">
+    <div align="center">
+        <img src="https://raw.githubusercontent.com/E-A-N/pathLight-staging/master/Title_Image_For_Git.png">
+    </div>
+</a>
 
 <h1> Link To The Repository </h1>
 <h4>
