@@ -1,6 +1,7 @@
 //initiliaze gameLoop 1st so it functions as a namespace
 var gameLoop = {};
 gameLoop.init = (data) => {
+    data = typeof data === "undefined" ? {} : data;
     gameLoop.player  = data.player   || config.default.player;
     gameLoop.score   = data.score    || config.default.score;
     gameLoop._width  = data.width    || config.init.screenWidth;
@@ -17,7 +18,7 @@ gameLoop.init = (data) => {
     }
 }
 gameLoop = {
-
+    init: gameLoop.init, //lol sorry, this is hacky
     mouseMovement: function (player, playerSpeed) {
         let cursorDistanceFromPlayer = game.input.x - player.x;
         let intendedMoveDirection = Math.sign(cursorDistanceFromPlayer);
@@ -42,7 +43,7 @@ gameLoop = {
         neutralMap.create();    // setup neutral map sprites
         let playerStartData = [
             gameLoop._width  * gameLoop.xStartRegion,
-            gameLoop._height * gamegameLoop.yStartRegion,
+            gameLoop._height * gameLoop.yStartRegion,
             gameLoop.player.imageKey
         ];
         // setup player
@@ -58,14 +59,16 @@ gameLoop = {
             gameLoop.score.style
         ];
         gameLoop.score.interface = game.add.text(...gameScoreData);
-        gameLoop.debug.controls  = game.input.keyboard;
+        if (gameLoop.debugMode === true) {
+            gameLoop.debug.controls  = game.input.keyboard;
+        }
     },
     
     update: function(){
         neutralMap.updateMap();    // update neutral map states
         //updatePlayer(player, playerSpeed);
         gameLoop.mouseMovement(gameLoop.player.sprite, gameLoop.player.speed);
-        gameLoop.keybaordMovement(gameLoop.player.sprite, gameLoop.player.speed);
+        gameLoop.keyboardMovement(gameLoop.player.sprite, gameLoop.player.speed);
         gameLoop.score.amount += gameLoop.score.bonus1;
 
         // update score and text
