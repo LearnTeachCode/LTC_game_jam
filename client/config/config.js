@@ -12,7 +12,14 @@ const config = {
         fill: '#fff',
         logo: 'assets/img/boilerplate-logo.png',
         playerImage: 'assets/img/template-player-face.png',
-        mapImage: 'assets/img/sample-neutral-map.png'
+        mapImage: 'assets/img/sample-neutral-map.png',
+        bgm: {
+            mp3file: "assets/audio/bodenstaendig_2000_in_rock_4bit.mp3",
+            oggfile: "assets/audio/bodenstaendig_2000_in_rock_4bit.ogg",
+            label:   "loadingScreen-bgm"
+        },
+        sceenImg: "assets/img/flame-blackBG.png",
+        velocity: 120
     },
     init:{
         screenWidth: 640,
@@ -32,7 +39,7 @@ const config = {
 };
 
 config.default.player = {
-    speed: 10,
+    speed: 50,
     imageKey: "player",
     spriteSrc: "../spriteLocation.png"
 };
