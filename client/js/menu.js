@@ -14,6 +14,9 @@ var menuState = {
         mainMenuBackground.anchor.setTo(0.5);
         mainMenuBackground.scale.x = mainMenuBackground.scale.y = getScaleValueToEnvelopeRect(mainMenuBackground.width, mainMenuBackground.height, w, h);
 
+        let titleText = game.add.text(w / 2, 0.4 * h, 'Path Light', { font: '70px Courier', fill: '#ADD8E6', strokeThickness: 3 });
+        titleText.anchor.setTo(0.5);
+
         let startButton = game.add.button(w / 2, 2 / 3 * h, 'startButton', menuState.startGame, this, 0, 0, 0);
         startButton.anchor.setTo(0.5)
     }
