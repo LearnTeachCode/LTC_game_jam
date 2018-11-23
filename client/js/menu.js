@@ -4,7 +4,7 @@ var menuState = {
 
         game.add.image(95, 150, 'boiler-logo');
 
-        game.state.start('gameLoop');
+        game.state.start('loadingScreen');
     }
 
 };
