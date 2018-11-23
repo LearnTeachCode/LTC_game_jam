@@ -60,3 +60,7 @@ config.default.gameMap = {
     hardSpeed: 2,
 };
 
+config.default.controls = {
+    mouse: 0,
+    keyboard: 1
+}

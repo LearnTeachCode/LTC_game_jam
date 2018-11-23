@@ -1,25 +1,25 @@
 //initiliaze gameLoop 1st so it functions as a namespace
-var gameLoop = {};
-gameLoop.init = (data) => {
-    data = typeof data === "undefined" ? {} : data;
-    gameLoop.player  = data.player   || config.default.player;
-    gameLoop.score   = data.score    || config.default.score;
-    gameLoop._width  = data.width    || config.init.screenWidth;
-    gameLoop._height = data.height   || config.init.screenHeight;
-    gameLoop.xStartRegion = data.xStartRegion || config.gameLoop.xStartRegion;
-    gameLoop.yStartRegion = data.yStartRegion || config.gameLoop.yStartRegion;
-    gameLoop.difficulty   = data.difficulty || 1;
-    if (data.debug && data.debug.isOn === true){
-        gameLoop.debugMode = data.debug.isOn;
-        gameLoop.debug = data.debug;
-    }
-    else {
-        gameLoop.debugMode = false;
-    }
-}
+const gameLoop = {};
 gameLoop = {
-    init: gameLoop.init, //lol sorry, this is hacky
-    mouseMovement: function (player, playerSpeed) {
+    init: (data) => {
+        data = typeof data === "undefined" ? {} : data;
+        gameLoop.player  = data.player   || config.default.player;
+        gameLoop.score   = data.score    || config.default.score;
+        gameLoop.width  = data.width    || config.init.screenWidth;
+        gameLoop.height = data.height   || config.init.screenHeight;
+        gameLoop.xStartRegion = data.xStartRegion || config.gameLoop.xStartRegion;
+        gameLoop.yStartRegion = data.yStartRegion || config.gameLoop.yStartRegion;
+        gameLoop.difficulty   = data.difficulty || 1;
+        gameLoop.controlType  = data.controlType || config.default.controls.mouse;
+        if (data.debug && data.debug.isOn === true){
+            gameLoop.debugMode = data.debug.isOn;
+            gameLoop.debug = data.debug;
+        }
+        else {
+            gameLoop.debugMode = false;
+        }
+    },
+    mouseMovement: (player, playerSpeed) => {
         let cursorDistanceFromPlayer = game.input.x - player.x;
         let intendedMoveDirection = Math.sign(cursorDistanceFromPlayer);
         let playerMovementDelta = cursorDistanceFromPlayer;
@@ -28,7 +28,7 @@ gameLoop = {
         player.x += playerMovementDelta;
     },
 
-    keyboardMovement: function (player, playerSpeed) {
+    keyboardMovement: (player, playerSpeed) => {
         if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
             player.x -= playerSpeed;
         }
@@ -37,13 +37,24 @@ gameLoop = {
         }
     },
 
+    movePlayer : (player, speed, type) => {
+        var mouse = 0;
+        var keyboard = 1;
+
+        if (type === keyboard) {
+            gameLoop.keyboardMovement(player, speed);
+        }
+        else {
+            gameLoop.mouseMovement(player,speed);
+        }
+    },
     // phaser methods -------------------------
 
-    create: function () {
+    create: () => {
         neutralMap.create();    // setup neutral map sprites
         let playerStartData = [
-            gameLoop._width  * gameLoop.xStartRegion,
-            gameLoop._height * gameLoop.yStartRegion,
+            gameLoop.width  * gameLoop.xStartRegion,
+            gameLoop.height * gameLoop.yStartRegion,
             gameLoop.player.imageKey
         ];
         // setup player
@@ -64,11 +75,14 @@ gameLoop = {
         }
     },
     
-    update: function(){
-        neutralMap.updateMap();    // update neutral map states
-        //updatePlayer(player, playerSpeed);
-        gameLoop.mouseMovement(gameLoop.player.sprite, gameLoop.player.speed);
-        gameLoop.keyboardMovement(gameLoop.player.sprite, gameLoop.player.speed);
+    update: () => {
+        neutralMap.updateMap();    // update neutral map states[]
+        let movementData = [
+            gameLoop.player.sprite,
+            gameLoop.player.speed,
+            gameLoop.controlType
+        ];
+        gameLoop.movePlayer(...movementData);
         gameLoop.score.amount += gameLoop.score.bonus1;
 
         // update score and text
