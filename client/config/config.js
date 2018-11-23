@@ -1,4 +1,9 @@
 const config = {
+    default: {
+        player:{},
+        score: {},
+        debug: false
+    },
     loader:{
         x: 80,
         y: 150,
@@ -24,7 +29,9 @@ const config = {
             text: 'SCORE:'
         }
     },
-
+    gameLoop:{
+        
+    },
     neutralMap:{
         velocity: 120,
         mapsCount: 2,
@@ -33,13 +40,12 @@ const config = {
 };
 
 config.default.player = {
-
-    topVelocityX: 10,
-    topVelocityY: 10,
+    speed: 10,
     spriteSrc: "../spriteLocation.png",
-    score: {
-        font: 'bold 30px Courier',
-        color: '#fff',
-        text: 'SCORE:'
-    }
 };
+
+config.default.score = {
+    font: 'bold 30px Courier',
+    color: '#fff',
+    text: 'SCORE:'
+}
