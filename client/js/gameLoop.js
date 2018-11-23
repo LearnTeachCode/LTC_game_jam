@@ -11,6 +11,7 @@ gameLoop.init = (data) => {
     gameLoop._height = data.height   || config.init.screenHeight;
     gameLoop.xStartRegion = data.xStartRegion || config.gameLoop.xStartRegion;
     gameLoop.yStartRegion = data.yStartRegion || config.gameLoop.yStartRegion;
+    gameLoop.difficulty   = data.difficulty || 1;
     if (data.debug && data.debug.isOn === true){
         gameLoop.debugMode = data.debug.isOn;
         gameLoop.debug = data.debug;
@@ -63,7 +64,8 @@ gameLoop = {
         ];
         // setup player
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
-        gameLoop.player.sprite.anchor.setTo(0.5, 0.5);
+        const spriteCenter = [0.5, 0.5]; //1st is x, 2nd is Y!
+        gameLoop.player.sprite.anchor.setTo(...spriteCenter);
 
         let gameScoreData = [
             gameLoop.score.x,
@@ -91,9 +93,9 @@ gameLoop = {
 
         if(gameLoop.debugMode){
             if(gameLoop.debug.controls.isDown(Phaser.KeyCode.OPEN_BRACKET))
-                neutralMap.changeMapSpeed(-1);
+                neutralMap.changeMapSpeed(-gameLoop.difficulty);
             if(gameLoop.debug.controls.isDown(Phaser.KeyCode.CLOSED_BRACKET))
-                neutralMap.changeMapSpeed(1);
+                neutralMap.changeMapSpeed(gameLoop.difficulty);
         }
 
     }
