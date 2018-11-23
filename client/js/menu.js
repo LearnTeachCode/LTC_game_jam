@@ -18,7 +18,9 @@ var menuState = {
         titleText.anchor.setTo(0.5);
 
         let startButton = game.add.button(w / 2, 2 / 3 * h, 'startButton', menuState.startGame, this, 0, 0, 0);
-        startButton.anchor.setTo(0.5)
+        startButton.anchor.setTo(0.5);
+        //game.state.start('loadingScreen');
+
     }
 };
 

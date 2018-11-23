@@ -16,7 +16,7 @@ var config = {
     },
 
     player:{
-        speed: 10,
+        speed: 50,
         score:{
             font: 'bold 30px Courier',
             color: '#fff',
@@ -28,5 +28,15 @@ var config = {
         velocity: 120,
         mapsCount: 2,
         mapLabel: 'neutral-map',
+    },
+
+    loadingScreen:{
+        bgm: {
+            mp3file: 'assets/audio/bodenstaendig_2000_in_rock_4bit.mp3',
+            oggfile: 'assets/audio/bodenstaendig_2000_in_rock_4bit.ogg',
+            label: 'loadingScreen-bgm',
+        },
+        screenImg: 'assets/img/flame-blackBG.png',
+        velocity: 120,
     },
 }
