@@ -90,6 +90,21 @@ loadingScreenState.changeState = () => {
 }
 
 /**
+ * loadingScreenState.setupStartText prompts user to click
+ * params: None
+ * return: (Phaser.Text) loadingScreenState.loadText
+ */
+loadingScreenState.setupLoadText = () => {
+    // setup loading text
+    loadingScreenState.style = { font: "65px Arial", fill: "#ff0044", align: "center" };
+    loadingScreenState.loadValue = 0;
+    let tempText = "Loading: " + loadingScreenState.loadValue + " %";
+    loadingScreenState.loadText = game.add.text(game.world.centerX, game.world.centerY, tempText, loadingScreenState.style);
+    loadingScreenState.loadText.anchor.set(0.5);
+    return loadingScreenState.loadText;
+}    
+
+/**
  * loadingScreenState.updateLoadCount
  * params: None
  * return: None
@@ -106,7 +121,7 @@ loadingScreenState.updateLoadText = () => {
 /**
  * loadingScreenState.setupStartText prompts user to click
  * params: None
- * return: (boolean) return true if startText is created, false otherwise
+ * return: (Phaser.Text) loadingScreenState.startText
  */
 loadingScreenState.setupStartText = () => {
     // setup screen text
@@ -114,9 +129,7 @@ loadingScreenState.setupStartText = () => {
     loadingScreenState.startText.anchor.set(0.5);
     loadingScreenState.startText.alpha = 0.1;
     game.add.tween(loadingScreenState.startText).to( { alpha: 1 }, 500, "Linear", true);
-    if (loadingScreenState.startText)
-        return true;
-    return false;
+    return loadingScreenState.startText;
 }    
 
 /**
@@ -130,14 +143,8 @@ loadingScreenState.create = () => {
     loadingScreenState.getMapSpeed();
     loadingScreenState.createMaps();
 
-    // setup loading text
-    loadingScreenState.style = { font: "65px Arial", fill: "#ff0044", align: "center" };
-    loadingScreenState.loadValue = 0;
-    let tempText = "Loading: " + loadingScreenState.loadValue + " %";
-    loadingScreenState.loadText = game.add.text(game.world.centerX, game.world.centerY, tempText, loadingScreenState.style);
-    loadingScreenState.loadText.anchor.set(0.5);
-
-    // simulate loading assets, if loadValue is 100%, let user click to start game
+    // simulate loading sequence, if loadValue is 100%, let user click to start game
+    loadingScreenState.setupLoadText();
     let repeatCount = 100;
     game.time.events.repeat(Phaser.Timer.SECOND * 3 / repeatCount, repeatCount, loadingScreenState.updateLoadText, this);
 
