@@ -24,12 +24,6 @@ menuState = {
         game.state.start("gameLoop");
     },
 
-    // TODO: Move this into load.js and use config data, and this data structure
-    preload: () => {
-        game.load.image(menuState.startButton.imageKey, menuState.startButton.spriteSrc);
-        game.load.image(menuState.background.imageKey, menuState.background.spriteSrc);
-    },
-
     create: () => {
         const spriteCenter = [0.5, 0.5];    // [X, Y]
 

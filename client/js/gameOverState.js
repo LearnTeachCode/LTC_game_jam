@@ -15,11 +15,6 @@ gameOverState = {
         game.state.start('gameLoop');
     },
 
-    // TODO: Move this into load.js and use config data, and this data structure
-    preload: () => {
-        game.load.image(gameOverState.restartButton.imageKey, gameOverState.restartButton.spriteSrc);
-    },
-
     create: () => {
         const spriteCenter = [0.5, 0.5];    // [X, Y]
 
