@@ -1,23 +1,57 @@
-var gameOverState = {
+// initialize gameOverState 1st so it functions as a namespace
+let gameOverState = {};
+gameOverState = {
+    init: (data) => {
+        data = typeof data === "undefined" ? {} : data;
+        gameOverState.width = data.width || config.init.screenWidth;
+        gameOverState.height = data.height || config.init.screenHeight;
+        gameOverState.finalScoreLabel = data.finalScoreLabel || config.default.finalScoreLabel;
+        gameOverState.finalScoreText = data.finalScoreText || config.default.finalScoreText;
+        gameOverState.finalScore = data.score || config.default.score;
+        gameOverState.restartButton = data.restartButton || config.default.restartButton;
+    },
+
     restartGame: function () {
         game.state.start('gameLoop');
     },
 
-    // TODO: Move this into load.js
-    preload: function () {
-        game.load.image('restartButton', 'assets/img/startButton.png');
+    // TODO: Move this into load.js and use config data, and this data structure
+    preload: () => {
+        game.load.image(gameOverState.restartButton.imageKey, gameOverState.restartButton.spriteSrc);
     },
 
-    create: function () {
-        let gameOverLabel = game.add.text(w / 2, 0.25 * h, 'Game Over!', { font: '35px Courier', fill: '#fff' });
-        gameOverLabel.anchor.setTo(0.5);
-        let finalScoreLabel = game.add.text(w / 2, 0.33 * h, 'Final Score:', { font: '30px Courier', fill: '#fff' });
-        finalScoreLabel.anchor.setTo(0.5);
-        let finalScore = game.add.text(w / 2, 0.45 * h, playerScore, { font: '30px Courier', fill: '#fff' });
-        finalScore.anchor.setTo(0.5);
+    create: () => {
+        const spriteCenter = [0.5, 0.5];    // [X, Y]
 
-        let restartButton = game.add.button(w / 2, 2 / 3 * h, 'restartButton', gameOverState.restartGame, this, 0, 0, 0);
-        restartButton.anchor.setTo(0.5);
+        let finalScoreLabelData = [
+            gameOverState.width * gameOverState.finalScoreLabel.xRegion,
+            gameOverState.height * gameOverState.finalScoreLabel.yRegion,
+            gameOverState.finalScoreLabel.text,
+            gameOverState.finalScoreLabel.style
+        ];
+        gameOverState.finalScoreLabel.textObj = game.add.text(...finalScoreLabelData);
+        gameOverState.finalScoreLabel.textObj.anchor.setTo(...spriteCenter);
+
+        let finalScoreData = [
+            gameOverState.width * gameOverState.finalScoreText.xRegion,
+            gameOverState.height * gameOverState.finalScoreText.yRegion,
+            gameOverState.finalScore.amount,
+            gameOverState.finalScoreText.style
+        ];
+        gameOverState.finalScoreText.textObj = game.add.text(...finalScoreData);
+        gameOverState.finalScoreText.textObj.anchor.setTo(...spriteCenter);
+
+        let restartButtonData = [
+            gameOverState.width * gameOverState.restartButton.xRegion,
+            gameOverState.height * gameOverState.restartButton.yRegion,
+            gameOverState.restartButton.imageKey,
+            gameOverState.restartGame,
+            gameOverState,
+            0,
+            0,
+            0
+        ];
+        gameOverState.restartButton.button = game.add.button(...restartButtonData);
+        gameOverState.restartButton.button.anchor.setTo(...spriteCenter);
     }
-
 };

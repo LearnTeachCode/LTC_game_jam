@@ -38,6 +38,31 @@ const config = {
     }
 };
 
+config.default.menuBackground = {
+    xRegion: 0.5,
+    yRegion: 0.5,
+    imageKey: "mainMenuBackground",
+    spriteSrc: "assets/img/mainMenuBackground.jpg"
+}
+
+config.default.menuTitle = {
+    xRegion: 0.5,
+    yRegion: 0.4,
+    text: "Path Light",
+    style: {
+        font: "bold 70px Courier",
+        fill: "#ADD8E6",
+        strokeThickness: 3
+    }
+};
+
+config.default.startButton = {
+    xRegion: 0.5,
+    yRegion: 0.66,
+    imageKey: "startButton",
+    spriteSrc: "assets/img/startButton.png"
+};
+
 config.default.player = {
     speed: 50,
     imageKey: "player",
@@ -71,3 +96,39 @@ config.default.controls = {
     mouse: 0,
     keyboard: 1
 }
+
+config.default.gameOverLabel = {
+    xRegion: 0.5,
+    yRegion: 0.25,
+    text: "Game Over!",
+    style: {
+        font: "35px Courier",
+        fill: "#fff"
+    }
+};
+
+config.default.finalScoreLabel = {
+    xRegion: 0.5,
+    yRegion: 0.33,
+    text: "Final Score:",
+    style: {
+        font: "30px Courier",
+        fill: "#fff"
+    }
+};
+
+config.default.finalScoreText = {
+    xRegion: 0.5,
+    yRegion: 0.45,
+    style: {
+        font: "30px Courier",
+        fill: "#fff"
+    }
+};
+
+config.default.restartButton = {
+    xRegion: 0.5,
+    yRegion: 0.66,
+    imageKey: "restartButton",
+    spriteSrc: "assets/img/startButton.png" // TODO: Make restart button
+};
