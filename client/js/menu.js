@@ -2,12 +2,12 @@
 let menuState = {};
 menuState = {
     init: (data) => {
-        data = typeof data === "undefined" ? {} : data;
+        data = typeof data === "undefined" ? { menuState: {} } : data;
         menuState.width = data.width || config.init.screenWidth;
         menuState.height = data.height || config.init.screenHeight;
-        menuState.background = data.menuBackground || config.default.menuBackground;
-        menuState.title = data.menuTitle || config.default.menuTitle;
-        menuState.startButton = data.startButton || config.default.startButton;
+        menuState.background = data.menuState.background || config.menuState.background;
+        menuState.title = data.menuState.title || config.menuState.title;
+        menuState.startButton = data.menuState.startButton || config.menuState.startButton;
     },
 
     getScaleValueToEnvelopeRect: (childWidth, childHeight, parentWidth, parentHeight) => {

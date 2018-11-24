@@ -2,13 +2,13 @@
 let gameOverState = {};
 gameOverState = {
     init: (data) => {
-        data = typeof data === "undefined" ? {} : data;
+        data = typeof data === "undefined" ? { gameOverState: {} } : data;
         gameOverState.width = data.width || config.init.screenWidth;
         gameOverState.height = data.height || config.init.screenHeight;
-        gameOverState.finalScoreLabel = data.finalScoreLabel || config.default.finalScoreLabel;
-        gameOverState.finalScoreText = data.finalScoreText || config.default.finalScoreText;
+        gameOverState.finalScoreLabel = data.gameOverState.finalScoreLabel || config.gameOverState.finalScoreLabel;
+        gameOverState.finalScoreText = data.gameOverState.finalScoreText || config.gameOverState.finalScoreText;
         gameOverState.finalScore = data.score || config.default.score;
-        gameOverState.restartButton = data.restartButton || config.default.restartButton;
+        gameOverState.restartButton = data.gameOverState.restartButton || config.gameOverState.restartButton;
     },
 
     restartGame: function () {

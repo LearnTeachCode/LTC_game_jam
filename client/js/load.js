@@ -12,13 +12,13 @@ var loadState = {
 
         //Load your images, spritesheets, bitmaps...
         // Menu loads
-        game.load.image(config.default.menuBackground.imageKey, config.default.menuBackground.spriteSrc);
-        game.load.image(config.default.startButton.imageKey, config.default.startButton.spriteSrc);
+        game.load.image(config.menuState.background.imageKey, config.menuState.background.spriteSrc);
+        game.load.image(config.menuState.startButton.imageKey, config.menuState.startButton.spriteSrc);
         // Game loop loads
         game.load.image('player', config.loader.playerImage);
         game.load.image(config.neutralMap.mapLabel, config.loader.mapImage);
         // Game over loads
-        game.load.image(config.default.restartButton.imageKey, config.default.restartButton.spriteSrc);
+        game.load.image(config.gameOverState.restartButton.imageKey, config.gameOverState.restartButton.spriteSrc);
 
         //Load your sounds, efx, music...
         //Example: game.load.audio('rockas', 'assets/snd/rockas.wav');
