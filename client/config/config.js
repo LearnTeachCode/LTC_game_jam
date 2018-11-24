@@ -27,6 +27,30 @@ const config = {
         phoneWidth: 360,
         phoneHeight: 740
     },
+    menuState: {
+        background: {
+            xRegion: 0.5,
+            yRegion: 0.5,
+            imageKey: "mainMenuBackground",
+            spriteSrc: "assets/img/mainMenuBackground.jpg"
+        },
+        title: {
+            xRegion: 0.5,
+            yRegion: 0.4,
+            text: "Path Light",
+            style: {
+                font: "bold 70px Courier",
+                fill: "#ADD8E6",
+                strokeThickness: 3
+            }
+        },
+        startButton: {
+            xRegion: 0.5,
+            yRegion: 0.66,
+            imageKey: "startButton",
+            spriteSrc: "assets/img/startButton.png"
+        }
+    },
     gameLoop:{
         xStartRegion: 0.5,
         yStartRegion: 0.75
@@ -35,6 +59,40 @@ const config = {
         velocity: 120,
         mapsCount: 2,
         mapLabel: 'neutral-map'
+    },
+    gameOverState: {
+        gameOverLabel: {
+            xRegion: 0.5,
+            yRegion: 0.25,
+            text: "Game Over!",
+            style: {
+                font: "35px Courier",
+                fill: "#fff"
+            }
+        },
+        finalScoreLabel: {
+            xRegion: 0.5,
+            yRegion: 0.33,
+            text: "Final Score:",
+            style: {
+                font: "30px Courier",
+                fill: "#fff"
+            }
+        },
+        finalScoreText: {
+            xRegion: 0.5,
+            yRegion: 0.45,
+            style: {
+                font: "30px Courier",
+                fill: "#fff"
+            }
+        },
+        restartButton: {
+            xRegion: 0.5,
+            yRegion: 0.66,
+            imageKey: "restartButton",
+            spriteSrc: "assets/img/startButton.png" // TODO: Make restart button
+        }
     }
 };
 

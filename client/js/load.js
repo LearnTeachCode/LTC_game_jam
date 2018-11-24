@@ -11,9 +11,14 @@ var loadState = {
         var loadingLabel = game.add.text(config.loader.x, config.loader.y, config.loader.text, {font: '30px Courier', fill: '#fff'});
 
         //Load your images, spritesheets, bitmaps...
-        game.load.image('boiler-logo', config.loader.logo);
+        // Menu loads
+        game.load.image(config.menuState.background.imageKey, config.menuState.background.spriteSrc);
+        game.load.image(config.menuState.startButton.imageKey, config.menuState.startButton.spriteSrc);
+        // Game loop loads
         game.load.image('player', config.loader.playerImage);
         game.load.image(config.neutralMap.mapLabel, config.loader.mapImage);
+        // Game over loads
+        game.load.image(config.gameOverState.restartButton.imageKey, config.gameOverState.restartButton.spriteSrc);
 
         //Load your sounds, efx, music...
         //Example: game.load.audio('rockas', 'assets/snd/rockas.wav');

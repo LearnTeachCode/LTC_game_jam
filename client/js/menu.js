@@ -1,34 +1,63 @@
-var menuState = {
-    startGame: function () {
-        game.state.start('gameLoop');
+// initialize menuState 1st so it functions as a namespace
+let menuState = {};
+menuState = {
+    init: (data) => {
+        data = typeof data === "undefined" ? { menuState: {} } : data;
+        menuState.width = data.width || config.init.screenWidth;
+        menuState.height = data.height || config.init.screenHeight;
+        menuState.background = data.menuState.background || config.menuState.background;
+        menuState.title = data.menuState.title || config.menuState.title;
+        menuState.startButton = data.menuState.startButton || config.menuState.startButton;
     },
 
-    // TODO: Move this into load.js
-    preload: function () {
-        game.load.image('startButton', 'assets/img/startButton.png');
-        game.load.image('mainMenuBackground', 'assets/img/mainMenuBackground.jpg');
+    getScaleValueToEnvelopeRect: (childWidth, childHeight, parentWidth, parentHeight) => {
+        let xScale = parentWidth / childWidth;
+        let yScale = parentHeight / childHeight;
+        if (childHeight * xScale >= parentHeight)
+            return xScale;
+        else
+            return yScale;
     },
 
-    create: function () {
-        let mainMenuBackground = game.add.image(w / 2, h / 2, 'mainMenuBackground');
-        mainMenuBackground.anchor.setTo(0.5);
-        mainMenuBackground.scale.x = mainMenuBackground.scale.y = getScaleValueToEnvelopeRect(mainMenuBackground.width, mainMenuBackground.height, w, h);
+    startGame: function() {
+        //game.state.start("gameLoop", data);   // data is currently undefined
+        game.state.start("gameLoop");
+    },
 
-        let titleText = game.add.text(w / 2, 0.4 * h, 'Path Light', { font: '70px Courier', fill: '#ADD8E6', strokeThickness: 3 });
-        titleText.anchor.setTo(0.5);
+    create: () => {
+        const spriteCenter = [0.5, 0.5];    // [X, Y]
 
-        let startButton = game.add.button(w / 2, 2 / 3 * h, 'startButton', menuState.startGame, this, 0, 0, 0);
-        startButton.anchor.setTo(0.5);
-        //game.state.start('loadingScreen');
+        let menuBackgroundData = [
+            menuState.width * menuState.background.xRegion,
+            menuState.height * menuState.background.yRegion,
+            menuState.background.imageKey
+        ];
+        menuState.background.sprite = game.add.image(...menuBackgroundData);
+        menuState.background.sprite.anchor.setTo(...spriteCenter);
+        menuState.background.sprite.scale.x =
+            menuState.background.sprite.scale.y =
+            menuState.getScaleValueToEnvelopeRect(menuState.background.sprite.width, menuState.background.sprite.height, menuState.width, menuState.height);
 
+        let menuTitleData = [
+            menuState.width * menuState.title.xRegion,
+            menuState.height * menuState.title.yRegion,
+            menuState.title.text,
+            menuState.title.style
+        ];
+        menuState.title.textObj = game.add.text(...menuTitleData);
+        menuState.title.textObj.anchor.setTo(...spriteCenter);
+
+        let startButtonData = [
+            menuState.width * menuState.startButton.xRegion,
+            menuState.height * menuState.startButton.yRegion,
+            menuState.startButton.imageKey,
+            menuState.startGame,
+            menuState,
+            0,
+            0,
+            0
+        ];
+        menuState.startButton.button = game.add.button(...startButtonData);
+        menuState.startButton.button.anchor.setTo(...spriteCenter);
     }
-};
-
-function getScaleValueToEnvelopeRect(childWidth, childHeight, parentWidth, parentHeight) {
-    let xScale = parentWidth / childWidth;
-    let yScale = parentHeight / childHeight;
-    if (childHeight * xScale >= parentHeight)
-        return xScale;
-    else
-        return yScale;
 };
