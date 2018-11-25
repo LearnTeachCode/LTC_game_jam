@@ -8,6 +8,7 @@ menuState = {
         menuState.background = data.menuState.background || config.menuState.background;
         menuState.title = data.menuState.title || config.menuState.title;
         menuState.startButton = data.menuState.startButton || config.menuState.startButton;
+        menuState.startButtonDots = data.menuState.startButtonDots || config.menuState.startButtonDots;
     },
 
     getScaleValueToEnvelopeRect: (childWidth, childHeight, parentWidth, parentHeight) => {
@@ -25,15 +26,16 @@ menuState = {
     },
 
     create: () => {
-        const spriteCenter = [0.5, 0.5];    // [X, Y]
+        const graphicCenter = [0.5, 0.5];    // [X, Y]
 
+        // Instantiate graphics ---------------------------------------
         let menuBackgroundData = [
             menuState.width * menuState.background.xRegion,
             menuState.height * menuState.background.yRegion,
             menuState.background.imageKey
         ];
         menuState.background.sprite = game.add.image(...menuBackgroundData);
-        menuState.background.sprite.anchor.setTo(...spriteCenter);
+        menuState.background.sprite.anchor.setTo(...graphicCenter);
         menuState.background.sprite.scale.x =
             menuState.background.sprite.scale.y =
             menuState.getScaleValueToEnvelopeRect(menuState.background.sprite.width, menuState.background.sprite.height, menuState.width, menuState.height);
@@ -41,23 +43,52 @@ menuState = {
         let menuTitleData = [
             menuState.width * menuState.title.xRegion,
             menuState.height * menuState.title.yRegion,
-            menuState.title.text,
-            menuState.title.style
+            menuState.title.imageKey
         ];
-        menuState.title.textObj = game.add.text(...menuTitleData);
-        menuState.title.textObj.anchor.setTo(...spriteCenter);
+        menuState.title.sprite = game.add.sprite(...menuTitleData);
+        menuState.title.sprite.anchor.setTo(...graphicCenter);
 
         let startButtonData = [
             menuState.width * menuState.startButton.xRegion,
             menuState.height * menuState.startButton.yRegion,
             menuState.startButton.imageKey,
             menuState.startGame,
-            menuState,
-            0,
-            0,
-            0
+            menuState
         ];
         menuState.startButton.button = game.add.button(...startButtonData);
-        menuState.startButton.button.anchor.setTo(...spriteCenter);
+        menuState.startButton.button.anchor.setTo(...graphicCenter);
+
+        let startButtonDotsData = [
+            menuState.width * menuState.startButtonDots.xRegion,
+            menuState.height * menuState.startButtonDots.yRegion,
+            menuState.startButtonDots.imageKey
+        ];
+        menuState.startButtonDots.sprite = game.add.sprite(...startButtonDotsData);
+        menuState.startButtonDots.sprite.anchor.setTo(...graphicCenter);
+
+        // Animate graphics ---------------------------------------
+        menuState.startButtonTweenToTransparentData = [
+            menuState.startButton.tweenToTransparentProperties,
+            menuState.startButton.opacityCycleDurationInSeconds * 1000 / 2,
+            menuState.startButton.tweenToTransparentEasing,
+            true    // autostart tween, saves a call to tween.start()
+        ];
+        menuState.startButtonTweenToOpaqueData = [
+            menuState.startButton.tweenToOpaqueProperties,
+            menuState.startButton.opacityCycleDurationInSeconds * 1000 / 2,
+            menuState.startButton.tweenToOpaqueEasing,
+            true    // autostart tween, saves a call to tween.start()
+        ];
+        menuState.tweenStartButtonToTransparent();
+    },
+
+    tweenStartButtonToTransparent: function () {
+        menuState.startButton.tweenForward = game.add.tween(menuState.startButton.button).to(...menuState.startButtonTweenToTransparentData);
+        menuState.startButton.tweenForward.onComplete.add(menuState.tweenStartButtonToOpaque);  // begin tweening to opaque after finished tweening to transparent
+    },
+
+    tweenStartButtonToOpaque: function () {
+        menuState.startButton.tweenBackward = game.add.tween(menuState.startButton.button).to(...menuState.startButtonTweenToOpaqueData);
+        menuState.startButton.tweenBackward.onComplete.add(menuState.tweenStartButtonToTransparent);    // begin tweening to transparent after finished tweening to opaque
     }
 };

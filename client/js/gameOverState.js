@@ -16,7 +16,7 @@ gameOverState = {
     },
 
     create: () => {
-        const spriteCenter = [0.5, 0.5];    // [X, Y]
+        const graphicCenter = [0.5, 0.5];    // [X, Y]
 
         let finalScoreLabelData = [
             gameOverState.width * gameOverState.finalScoreLabel.xRegion,
@@ -25,7 +25,7 @@ gameOverState = {
             gameOverState.finalScoreLabel.style
         ];
         gameOverState.finalScoreLabel.textObj = game.add.text(...finalScoreLabelData);
-        gameOverState.finalScoreLabel.textObj.anchor.setTo(...spriteCenter);
+        gameOverState.finalScoreLabel.textObj.anchor.setTo(...graphicCenter);
 
         let finalScoreData = [
             gameOverState.width * gameOverState.finalScoreText.xRegion,
@@ -34,19 +34,16 @@ gameOverState = {
             gameOverState.finalScoreText.style
         ];
         gameOverState.finalScoreText.textObj = game.add.text(...finalScoreData);
-        gameOverState.finalScoreText.textObj.anchor.setTo(...spriteCenter);
+        gameOverState.finalScoreText.textObj.anchor.setTo(...graphicCenter);
 
         let restartButtonData = [
             gameOverState.width * gameOverState.restartButton.xRegion,
             gameOverState.height * gameOverState.restartButton.yRegion,
             gameOverState.restartButton.imageKey,
             gameOverState.restartGame,
-            gameOverState,
-            0,
-            0,
-            0
+            gameOverState
         ];
         gameOverState.restartButton.button = game.add.button(...restartButtonData);
-        gameOverState.restartButton.button.anchor.setTo(...spriteCenter);
+        gameOverState.restartButton.button.anchor.setTo(...graphicCenter);
     }
 };
