@@ -8,7 +8,7 @@ const spriteTest = () => {
     // setup player
     gameLoop.testBlock = game.add.sprite(...playerStartData);
     var blk = gameLoop.testBlock;
-    
+
 };
 let gameLoop = {};
 gameLoop = {
@@ -62,6 +62,7 @@ gameLoop = {
     // phaser methods -------------------------
 
     create: () => {
+        game.physics.startSystem(Phaser.Physics.ARCADE);
         neutralMap.create();    // setup neutral map sprites
         spriteTest(); //eanDebug get rid of this function when finished testing
         let playerStartData = [
