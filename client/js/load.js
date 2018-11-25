@@ -39,7 +39,6 @@ loadState = {
         loadState.bgm.fadeIn(4000);
         return loadState.bgm.isPlaying;
     },
-
     /**
      * loadState.stopMusic stops the music
      * params: None
@@ -110,18 +109,25 @@ loadState = {
      * return: None
      */
     preload: () => {
-        //var loadingLabel = game.add.text(config.loader.x, config.loader.y, config.loader.text, {font: "30px Courier", fill: "#fff"});
+        //Load your images, spritesheets, bitmaps...
 
-        // load loader assets
+        // Loader loads
         game.load.image(config.default.loader.loadScreen.spriteLabel, config.default.loader.loadScreen.spriteSrc);
         // Firefox doesn't support mp3 files, so use ogg
         game.load.audio(loadState.bgmLabel, [loadState.mp3File, loadState.oggFile]);
 
-        // load player assets
-        game.load.image("player", config.default.loader.playerImage);
+        // Menu loads
+        game.load.image(config.menuState.background.imageKey, config.menuState.background.spriteSrc);
+        game.load.image(config.menuState.title.imageKey, config.menuState.title.spriteSrc);
+        game.load.image(config.menuState.startButton.imageKey, config.menuState.startButton.spriteSrc);
+        game.load.image(config.menuState.startButtonDots.imageKey, config.menuState.startButtonDots.spriteSrc);
 
-        // load neutral map assets
+        // Game loop loads
+        game.load.image("player", config.default.loader.playerImage);
         game.load.image(config.neutralMap.imgKey, config.neutralMap.imgSrc);
+
+        // Game over loads
+        game.load.image(config.gameOverState.restartButton.imageKey, config.gameOverState.restartButton.spriteSrc);
     },
 
     /**
