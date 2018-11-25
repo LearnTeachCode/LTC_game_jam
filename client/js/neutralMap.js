@@ -40,12 +40,12 @@ neutralMap.createMaps = () => {
 
     for(var i = 0; i < neutralMap.mapsCount; i++){
         // create map and give it an ID
-        tempMap = game.add.sprite(0, currentYPosition, config.neutralMap.mapLabel);
-        tempMap.name = config.neutralMap.mapLabel + '-' + i;
+        tempMap = game.add.sprite(0, currentYPosition, config.neutralMap.imgKey);
+        tempMap.name = config.neutralMap.imgKey + '-' + i;
         game.physics.arcade.enable(tempMap);
 
         // ensure map fits on screen
-        scaleMapValue = config.init.screenWidth / tempMap.width;
+        let scaleMapValue = config.init.screenWidth / tempMap.width;
         tempMap.scale.setTo(scaleMapValue);
         
         // add new map to the stack list and prepare Y position for next map to stack on this one
