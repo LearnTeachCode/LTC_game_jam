@@ -90,6 +90,7 @@ bootState.debugBootState = (timer) => {
         return result;
     }
 }
+
 bootState.startState = (stateName, timer) => {
     //From Ean: is there a reason for using a timer to delay game state?
     setTimeout(function () {
@@ -105,6 +106,7 @@ bootState.startState = (stateName, timer) => {
         game.state.start(stateName);
     }, timer);
 }
+
 bootState.create = () => {
     var timerDelta = 500;   // how much wait time to increment
     var bootString = 'Booting up';
