@@ -1,41 +1,168 @@
-var loadState = {
+/**
+ * loadState plays animation and tune while player waits for game loop
+ */
 
-    preload: function () {
+let loadState = {};
 
-        /*
-        Load all game assets
-        Place your load bar, some messages.
-        In this case of loading, only text is placed...
-        */
+loadState = {
+    init: (data) => {
+        data = typeof data === "undefined" ? { loadState: {} } : data;
+        loadState.loadValue = data.loadValue || config.default.loader.loadValue;
+        loadState.background = data.background || config.default.loader.background;
 
-        var loadingLabel = game.add.text(config.loader.x, config.loader.y, config.loader.text, {font: '30px Courier', fill: '#fff'});
+        // images
+        loadState.textSprite;      // sprite image placeholder
+        loadState.screenSprite;    // sprite image placeholder
+        loadState.textImgLabel = data.textImgLabel || config.default.loader.loadText.spriteLabel;
+        loadState.textImgSrc = data.textImgSrc || config.default.loader.loadText.spriteSrc;
+        loadState.textImgX = data.textImgX || config.default.loader.loadText.xPosition;
+        loadState.textImgY = data.textImgY || config.default.loader.loadText.yPosition;
+        loadState.screenImgLabel = data.screenImgLabel || config.default.loader.loadScreen.spriteLabel;
+        loadState.screenImgSrc = data.screenImgSrc || config.default.loader.loadScreen.spriteSrc;
+        loadState.screenImgX = data.screenImgX || config.default.loader.loadScreen.xPosition;
+        loadState.screenImgY = data.screenImgY || config.default.loader.loadScreen.yPosition;
 
+        // audio
+        loadState.bgmLabel = data.bgmLabel || config.default.loader.bgm.label;
+        loadState.mp3File = data.mp3File || config.default.loader.bgm.mp3File;
+        loadState.oggFile = data.oggFile || config.default.loader.bgm.oggFile;
+        return loadState;
+    },
+
+    /**
+     * loadState.createScreenImg generates the sprites for loading screen
+     * params: None
+     * return: Sprite object
+     */
+    createScreenImg: () => {
+        let tempScreenImg = game.add.sprite(loadState.screenImgX, game.world.centerY/2, loadState.screenImgLabel);
+        let tempTextImg = game.add.sprite(loadState.textImgX, loadState.textImgY, loadState.textImgLabel);
+        // hide sprites initially
+        tempScreenImg.alpha = 0;
+        tempTextImg.alpha = 0;
+
+        // ensure map fits on screen
+        let scaleMapValue = config.init.screenWidth / tempScreenImg.width;
+        tempScreenImg.scale.setTo(scaleMapValue);
+        loadState.screenSprite = tempScreenImg;
+
+        scaleMapValue = config.init.screenWidth / tempTextImg.width;
+        tempTextImg.scale.setTo(scaleMapValue);
+        loadState.textSprite = tempTextImg;
+    },
+
+    /**
+     * loadState.startMusic fades in music at a given time
+     * params: None
+     * return: (boolean) True if music is playing, false otherwise
+     */
+    startMusic: (milliseconds = 4000) => {
+        // have to hard code, else triggers a "nonfloat value" error for fadeIn
+        loadState.bgm.fadeIn(4000);
+        return loadState.bgm.isPlaying;
+    },
+    /**
+     * loadState.stopMusic stops the music
+     * params: None
+     * return: (boolean) True if music is not playing, false otherwise
+     */
+    endMusic: (waitTime) => {
+        loadState.bgm.fadeOut(waitTime);
+        return loadState.bgm.isPlaying;
+    },
+
+    /**
+     * loadState.endState shuts down current state before calling state change
+     * params: None
+     * return: (boolean) True if loadValue is 100%, false otherwise
+     */
+    endState: () => {
+        const theGameIsDoneLoading = loadState.loadValue >= 100
+        if (theGameIsDoneLoading){
+            let waitTime = 2;   // delay by number of seconds
+            loadState.endMusic(500*waitTime);  // stop the music
+            // game.add.tween(loadState.startText).to( { alpha: 0 }, 1000 * waitTime, "Linear", true);
+            game.time.events.repeat(Phaser.Timer.SECOND * waitTime, 1, loadState.changeState, this);
+        }
+        return theGameIsDoneLoading;
+    },
+
+    /**
+     * loadState.changeState moves onto next state
+     * params: None
+     * return: None
+     */
+    changeState: () => {
+        game.state.start("menu");
+    },
+
+    /**
+     * loadState.updateLoadCount
+     * params: None
+     * return: None
+     */
+    updateLoadImgs: () => {
+        loadState.loadValue++;
+
+        let tempAlpha = loadState.loadValue / 100;
+        loadState.screenSprite.alpha = tempAlpha;
+        loadState.textSprite.alpha = tempAlpha;
+        //loadState.screenSprite.setTo({alpha: tempAlpha});
+        //game.add.tween(loadState.screenSprite).to( { alpha: loadState.loadValue }, 0, "Linear", true);
+        if (loadState.loadValue >= 100)
+            loadState.endState();
+        return loadState.textUI;
+    },
+        
+    /**
+     * loadState.preload sets up the loading screen state
+     * params: None
+     * return: None
+     */
+    preload: () => {
         //Load your images, spritesheets, bitmaps...
+
+        // Loader loads
+        game.load.image(loadState.screenImgLabel, loadState.screenImgSrc);
+        game.load.image(loadState.textImgLabel, loadState.textImgSrc);
+        // Firefox doesn't support mp3 files, so use ogg
+        game.load.audio(loadState.bgmLabel, [loadState.mp3File, loadState.oggFile]);
+
         // Menu loads
         game.load.image(config.menuState.background.imageKey, config.menuState.background.spriteSrc);
         game.load.image(config.menuState.title.imageKey, config.menuState.title.spriteSrc);
         game.load.image(config.menuState.startButton.imageKey, config.menuState.startButton.spriteSrc);
         game.load.image(config.menuState.startButtonDots.imageKey, config.menuState.startButtonDots.spriteSrc);
+
         // Game loop loads
-        game.load.image('player', config.loader.playerImage);
-        game.load.image(config.neutralMap.mapLabel, config.loader.mapImage);
-        game.load.image("holder", config.loader.placeHolder);
+        game.load.image(config.loader.playerImage.key, config.loader.playerImage.src);
+        game.load.image(config.loader.mapImage.key,    config.loader.mapImage.src);
+        game.load.image(config.loader.placeHolder.key, config.loader.placeHolder.src);
+        game.load.image(config.default.neutralMap.key, config.default.neutralMap.src);
 
         // Game over loads
         game.load.image(config.gameOverState.restartButton.imageKey, config.gameOverState.restartButton.spriteSrc);
-
-        //Load your sounds, efx, music...
-        //Example: game.load.audio('rockas', 'assets/snd/rockas.wav');
-        game.load.audio(config.loader.bgm.label, [config.loader.bgm.mp3file, config.loader.bgm.oggfile]);
-
-        //Load your data, JSON, Querys...
-        //Example: game.load.json('version', 'http://phaser.io/version.json');
-
     },
 
-    create: function () {
-        game.stage.setBackgroundColor('#000');
-        game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-        game.state.start('menu');
-    }
+    /**
+    * loadState.create sets up the loading screen state
+    * params: None
+    * return: None
+    */
+    create: () => {
+        // setup screen image
+        game.stage.backgroundColor = loadState.background;
+        //loadState.getMapSpeed();
+        loadState.createScreenImg();
+
+        // simulate loading sequence, if loadValue is 100%, end scene
+        let repeatCount = 100;
+        game.time.events.repeat(Phaser.Timer.SECOND*3/repeatCount, repeatCount, loadState.updateLoadImgs, this);
+
+        // setup music and fade in music
+        loadState.bgm = game.add.audio(loadState.bgmLabel);
+        loadState.bgm.onDecoded.add(loadState.startMusic, this);
+
+        return "create";
+    },
 };

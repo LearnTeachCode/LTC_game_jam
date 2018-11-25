@@ -1,5 +1,6 @@
 const config = {
-    default: {
+    //Any NONE GAME STATE config information goes under default
+    default: { 
         player:{},
         score: {},
         debug: {}
@@ -11,8 +12,15 @@ const config = {
         font: '30px Courier',
         fill: '#fff',
         logo: 'assets/img/boilerplate-logo.png',
-        playerImage: 'assets/img/template-player-face.png',
-        mapImage: 'assets/img/floorBG.png',
+        background: "#000000",
+        playerImage: {
+            src: 'assets/img/template-player-face.png',
+            key: "playerLoad"
+        },
+        mapImage:{ 
+            src: 'assets/img/floorBG.png',
+            key: "gameMap"
+        },
         placeHolder: {
             src: "assets/img/placeholder.png",
             key: "placeHolder"
@@ -23,6 +31,20 @@ const config = {
             label:   "loadingScreen-bgm"
         },
         sceenImg: "assets/img/flame-blackBG.png",
+        loadValue:  0,
+        loadScreen:{
+            spriteSrc:      "assets/img/Loading_Screen_Asset.png",
+            spriteLabel:    "loadScreen",
+            xPosition: 0,
+            yPosition: 100
+        },
+        loadText:{
+            spriteSrc:      "assets/img/Loading_Text_Asset.png",
+            spriteLabel:    "loadText",
+            xPosition: 0,
+            yPosition: 10
+        },
+        cursors: {},
         velocity: 120
     },
     init:{
@@ -74,7 +96,8 @@ const config = {
     neutralMap:{
         velocity: 120,
         mapsCount: 2,
-        mapLabel: 'neutral-map'
+        imgKey: "neutralMap",
+        imgSrc: "assets/img/Floor_BG_Asset.png"
     },
     gameOverState: {
         gameOverLabel: {
@@ -128,13 +151,13 @@ config.default.blocks = {
 
 config.default.score = {
     style : {
-        font: 'bold 30px Courier',
-        color: '#fff',
+        font: "bold 30px Courier",
+        color: "#fff",
     },    
     interface: {},
     amount: 0,
     bonus1: 1,
-    text: 'SCORE:',
+    text: "SCORE:",
     x: 0,
     y: 5
 };
@@ -144,9 +167,16 @@ config.default.debug = {
     controls: {}
 };
 
+config.default.neutralMap = {
+    velocity: 120,
+    mapsCount: 2,
+    key: "neutralMap",
+    src: "assets/img/Floor_BG_Asset.png"
+}
+
 config.default.gameMap = {
     normalSpeed: 1,
-    hardSpeed: 2,
+    hardSpeed: 2
 };
 
 config.default.controls = {
