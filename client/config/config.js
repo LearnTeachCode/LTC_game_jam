@@ -113,7 +113,7 @@ const config = {
 };
 
 config.default.player = {
-    speed: 50,
+    speed: 20,
     imageKey: "player",
     spriteSrc: "../spriteLocation.png"
 };
