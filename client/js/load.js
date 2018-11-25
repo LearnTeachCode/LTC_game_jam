@@ -7,25 +7,25 @@ let loadState = {};
 loadState = {
     init: (data) => {
         data = typeof data === "undefined" ? { loadState: {} } : data;
-        loadState.loadValue = data.loadValue || config.default.loader.loadValue;
-        loadState.background = data.background || config.default.loader.background;
+        loadState.loadValue = data.loadValue || config.loader.loadValue;
+        loadState.background = data.background || config.loader.background;
 
         // images
         loadState.textSprite;      // sprite image placeholder
         loadState.screenSprite;    // sprite image placeholder
-        loadState.textImgLabel = data.textImgLabel || config.default.loader.loadText.spriteLabel;
-        loadState.textImgSrc = data.textImgSrc || config.default.loader.loadText.spriteSrc;
-        loadState.textImgX = data.textImgX || config.default.loader.loadText.xPosition;
-        loadState.textImgY = data.textImgY || config.default.loader.loadText.yPosition;
-        loadState.screenImgLabel = data.screenImgLabel || config.default.loader.loadScreen.spriteLabel;
-        loadState.screenImgSrc = data.screenImgSrc || config.default.loader.loadScreen.spriteSrc;
-        loadState.screenImgX = data.screenImgX || config.default.loader.loadScreen.xPosition;
-        loadState.screenImgY = data.screenImgY || config.default.loader.loadScreen.yPosition;
+        loadState.textImgLabel = data.textImgLabel || config.loader.loadText.spriteLabel;
+        loadState.textImgSrc = data.textImgSrc || config.loader.loadText.spriteSrc;
+        loadState.textImgX = data.textImgX || config.loader.loadText.xPosition;
+        loadState.textImgY = data.textImgY || config.loader.loadText.yPosition;
+        loadState.screenImgLabel = data.screenImgLabel || config.loader.loadScreen.spriteLabel;
+        loadState.screenImgSrc = data.screenImgSrc || config.loader.loadScreen.spriteSrc;
+        loadState.screenImgX = data.screenImgX || config.loader.loadScreen.xPosition;
+        loadState.screenImgY = data.screenImgY || config.loader.loadScreen.yPosition;
 
         // audio
-        loadState.bgmLabel = data.bgmLabel || config.default.loader.bgm.label;
-        loadState.mp3File = data.mp3File || config.default.loader.bgm.mp3File;
-        loadState.oggFile = data.oggFile || config.default.loader.bgm.oggFile;
+        loadState.bgmLabel = data.bgmLabel || config.loader.bgm.label;
+        loadState.mp3 = data.mp3 || config.loader.bgm.mp3;
+        loadState.ogg = data.ogg || config.loader.bgm.ogg;
         return loadState;
     },
 
@@ -126,7 +126,7 @@ loadState = {
         game.load.image(loadState.screenImgLabel, loadState.screenImgSrc);
         game.load.image(loadState.textImgLabel, loadState.textImgSrc);
         // Firefox doesn't support mp3 files, so use ogg
-        game.load.audio(loadState.bgmLabel, [loadState.mp3File, loadState.oggFile]);
+        game.load.audio(loadState.bgmLabel, [loadState.mp3, loadState.ogg]);
 
         // Menu loads
         game.load.image(config.menuState.background.imageKey, config.menuState.background.spriteSrc);
@@ -135,8 +135,10 @@ loadState = {
         game.load.image(config.menuState.startButtonDots.imageKey, config.menuState.startButtonDots.spriteSrc);
 
         // Game loop loads
-        game.load.image("player", config.default.loader.playerImage);
-        game.load.image(config.neutralMap.imgKey, config.neutralMap.imgSrc);
+        game.load.image(config.loader.playerImage.key, config.loader.playerImage.src);
+        game.load.image(config.loader.mapImage.key,    config.loader.mapImage.src);
+        game.load.image(config.loader.placeHolder.key, config.loader.placeHolder.src);
+        game.load.image(config.default.neutralMap.key, config.default.neutralMap.src);
 
         // Game over loads
         game.load.image(config.gameOverState.restartButton.imageKey, config.gameOverState.restartButton.spriteSrc);

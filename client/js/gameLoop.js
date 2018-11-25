@@ -1,4 +1,17 @@
 //initiliaze gameLoop 1st so it functions as a namespace
+const spriteTest = () => {
+    let playerStartData = [
+        50,
+        50,
+        config.loader.placeHolder.key
+    ];
+    // setup player
+    gameLoop.testBlock = game.add.sprite(...playerStartData);
+    var blk = gameLoop.testBlock;
+    game.physics.enable(blk, Phaser.Physics.ARCADE);
+    blk.immovable = true;
+    blk.scale.setTo(2,2);
+};
 let gameLoop = {};
 gameLoop = {
     init: (data) => {
@@ -10,7 +23,7 @@ gameLoop = {
         gameLoop.xStartRegion = data.xStartRegion || config.gameLoop.xStartRegion;
         gameLoop.yStartRegion = data.yStartRegion || config.gameLoop.yStartRegion;
         gameLoop.difficulty   = data.difficulty || 1;
-        gameLoop.controlType  = data.controlType || config.default.controls.mouse;
+        gameLoop.player.controlType  = data.controlType || config.default.controls.mouse;
         if (data.debug && data.debug.isOn === true){
             gameLoop.debugMode = data.debug.isOn;
             gameLoop.debug = data.debug;
@@ -19,50 +32,23 @@ gameLoop = {
             gameLoop.debugMode = false;
         }
     },
-    mouseMovement: (player, playerSpeed) => {
-        let cursorDistanceFromPlayer = game.input.x - player.x;
-        let intendedMoveDirection = Math.sign(cursorDistanceFromPlayer);
-        let playerMovementDelta = cursorDistanceFromPlayer;
-        if (Math.abs(cursorDistanceFromPlayer) > playerSpeed)
-            playerMovementDelta = intendedMoveDirection * playerSpeed;
-        player.x += playerMovementDelta;
-    },
-
-    keyboardMovement: (player, playerSpeed) => {
-        if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            player.x -= playerSpeed;
-        }
-        if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            player.x += playerSpeed;
-        }
-    },
-
-    movePlayer : (player, speed, type) => {
-        var mouse = 0;
-        var keyboard = 1;
-
-        if (type === keyboard) {
-            gameLoop.keyboardMovement(player, speed);
-        }
-        else {
-            gameLoop.mouseMovement(player,speed);
-        }
-    },
-    // phaser methods -------------------------
+    // phaser default methods (subStates) -------------------------
 
     create: () => {
+        game.physics.startSystem(Phaser.Physics.ARCADE);
         neutralMap.create();    // setup neutral map sprites
+        spriteTest(); //eanDebug get rid of this function when finished testing
+
+        //setup player object
         let playerStartData = [
             gameLoop.width  * gameLoop.xStartRegion,
             gameLoop.height * gameLoop.yStartRegion,
             gameLoop.player.imageKey
         ];
-        // setup player
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
-        //1st is x, 2nd is Y!
-        const spriteCenter = [0.5, 0.5];
-        gameLoop.player.sprite.anchor.setTo(...spriteCenter);
+        playerUtilities.create(gameLoop.player);
 
+        //setup score UI
         let gameScoreData = [
             gameLoop.score.x,
             gameLoop.score.y,
@@ -77,13 +63,9 @@ gameLoop = {
     
     update: () => {
         neutralMap.updateMap();    // update neutral map states[]
-        let movementData = [
-            gameLoop.player.sprite,
-            gameLoop.player.speed,
-            gameLoop.controlType
-        ];
-        gameLoop.movePlayer(...movementData);
-        gameLoop.score.amount += gameLoop.score.bonus1;
+        playerUtilities.update(gameLoop.player);
+
+        //gameLoop.score.amount += gameLoop.score.bonus1;
 
         // update score and text
         gameLoop.score.interface.setText(gameLoop.score.text + gameLoop.score.amount);
