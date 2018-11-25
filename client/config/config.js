@@ -2,24 +2,8 @@ const config = {
     default: {
         player:{},
         score: {},
-        debug: {}
-    },
-    loader:{
-        x: 80,
-        y: 150,
-        text: 'loading...',
-        font: '30px Courier',
-        fill: '#fff',
-        logo: 'assets/img/boilerplate-logo.png',
-        playerImage: 'assets/img/template-player-face.png',
-        mapImage: 'assets/img/sample-neutral-map.png',
-        bgm: {
-            mp3file: "assets/audio/bodenstaendig_2000_in_rock_4bit.mp3",
-            oggfile: "assets/audio/bodenstaendig_2000_in_rock_4bit.ogg",
-            label:   "loadingScreen-bgm"
-        },
-        sceenImg: "assets/img/flame-blackBG.png",
-        velocity: 120
+        debug: {},
+        loader: {},
     },
     init:{
         screenWidth: 640,
@@ -58,7 +42,8 @@ const config = {
     neutralMap:{
         velocity: 120,
         mapsCount: 2,
-        mapLabel: 'neutral-map'
+        imgKey: "neutralMap",
+        imgSrc: "assets/img/sample-neutral-map.png"
     },
     gameOverState: {
         gameOverLabel: {
@@ -104,13 +89,13 @@ config.default.player = {
 
 config.default.score = {
     style : {
-        font: 'bold 30px Courier',
-        color: '#fff',
+        font: "bold 30px Courier",
+        color: "#fff",
     },    
     interface: {},
     amount: 0,
     bonus1: 1,
-    text: 'SCORE:',
+    text: "SCORE:",
     x: 0,
     y: 5
 };
@@ -128,4 +113,27 @@ config.default.gameMap = {
 config.default.controls = {
     mouse: 0,
     keyboard: 1
+}
+
+config.default.loader = {
+    font:       "30px Courier",
+    fontFill:   "#fff",
+    fontAlign:  "center",
+    loadValue:  0,
+    loadScreen:{
+        spriteSrc:      "assets/img/Loading_Screen_Asset.png",
+        spriteLabel:    "loadScreen",
+    },
+    loadText:{
+        spriteSrc:      "assets/img/Loading_Text_Asset.png",
+        spriteLabel:    "loadText",
+    },
+    playerImage:    "assets/img/template-player-face.png",
+    mapImage:       "assets/img/sample-neutral-map.png",
+    bgm: {
+        mp3File: "assets/audio/bodenstaendig_2000_in_rock_4bit.mp3",
+        oggFile: "assets/audio/bodenstaendig_2000_in_rock_4bit.ogg",
+        label:   "loadingScreen-bgm"
+    },
+    cursors: {},
 }
