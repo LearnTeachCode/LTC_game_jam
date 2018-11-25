@@ -1,0 +1,11 @@
+1.0.0
+
++ Initial Proof of Concept Build
+
+1.1.2
+
++ Internal Bug fixes
++ Internal Restructuring
++ Character moves a lot faster in game play demo
++ Eric's troll main menu screen added
++ Game Over screen in debug mode only
