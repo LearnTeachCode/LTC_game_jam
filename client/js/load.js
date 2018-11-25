@@ -13,8 +13,9 @@ var loadState = {
         //Load your images, spritesheets, bitmaps...
         // Menu loads
         game.load.image(config.menuState.background.imageKey, config.menuState.background.spriteSrc);
+        game.load.image(config.menuState.title.imageKey, config.menuState.title.spriteSrc);
         game.load.image(config.menuState.startButton.imageKey, config.menuState.startButton.spriteSrc);
-
+        game.load.image(config.menuState.startButtonDots.imageKey, config.menuState.startButtonDots.spriteSrc);
         // Game loop loads
         game.load.image('player', config.loader.playerImage);
         game.load.image(config.neutralMap.mapLabel, config.loader.mapImage);

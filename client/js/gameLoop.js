@@ -8,7 +8,9 @@ const spriteTest = () => {
     // setup player
     gameLoop.testBlock = game.add.sprite(...playerStartData);
     var blk = gameLoop.testBlock;
-
+    game.physics.enable(blk, Phaser.Physics.ARCADE);
+    blk.immovable = true;
+    blk.scale.setTo(2,2);
 };
 let gameLoop = {};
 gameLoop = {
@@ -96,7 +98,7 @@ gameLoop = {
             gameLoop.controlType
         ];
         gameLoop.movePlayer(...movementData);
-        gameLoop.score.amount += gameLoop.score.bonus1;
+        //gameLoop.score.amount += gameLoop.score.bonus1;
 
         // update score and text
         gameLoop.score.interface.setText(gameLoop.score.text + gameLoop.score.amount);
