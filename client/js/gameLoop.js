@@ -1,4 +1,15 @@
 //initiliaze gameLoop 1st so it functions as a namespace
+const spriteTest = () => {
+    let playerStartData = [
+        50,
+        50,
+        config.loader.placeHolder.key
+    ];
+    // setup player
+    gameLoop.testBlock = game.add.sprite(...playerStartData);
+    var blk = gameLoop.testBlock;
+    
+};
 let gameLoop = {};
 gameLoop = {
     init: (data) => {
@@ -52,6 +63,7 @@ gameLoop = {
 
     create: () => {
         neutralMap.create();    // setup neutral map sprites
+        spriteTest(); //eanDebug get rid of this function when finished testing
         let playerStartData = [
             gameLoop.width  * gameLoop.xStartRegion,
             gameLoop.height * gameLoop.yStartRegion,

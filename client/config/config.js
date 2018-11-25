@@ -13,6 +13,10 @@ const config = {
         logo: 'assets/img/boilerplate-logo.png',
         playerImage: 'assets/img/template-player-face.png',
         mapImage: 'assets/img/sample-neutral-map.png',
+        placeHolder: {
+            src: "assets/img/placeholder.png",
+            key: "placeHolder"
+        },
         bgm: {
             mp3file: "assets/audio/bodenstaendig_2000_in_rock_4bit.mp3",
             oggfile: "assets/audio/bodenstaendig_2000_in_rock_4bit.ogg",
@@ -53,7 +57,12 @@ const config = {
     },
     gameLoop:{
         xStartRegion: 0.5,
-        yStartRegion: 0.75
+        yStartRegion: 0.75,
+        blocks: {
+            full: {},
+            half: {},
+            quarter: {}
+        }
     },
     neutralMap:{
         velocity: 120,
@@ -101,6 +110,14 @@ config.default.player = {
     imageKey: "player",
     spriteSrc: "../spriteLocation.png"
 };
+
+config.default.blocks = {
+    score: { //this model is subject to change
+        full: 25,
+        half: 50,
+        quarter: 100
+    }
+}
 
 config.default.score = {
     style : {
