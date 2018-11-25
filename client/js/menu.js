@@ -25,7 +25,7 @@ menuState = {
     },
 
     create: () => {
-        const spriteCenter = [0.5, 0.5];    // [X, Y]
+        const graphicCenter = [0.5, 0.5];    // [X, Y]
 
         let menuBackgroundData = [
             menuState.width * menuState.background.xRegion,
@@ -33,7 +33,7 @@ menuState = {
             menuState.background.imageKey
         ];
         menuState.background.sprite = game.add.image(...menuBackgroundData);
-        menuState.background.sprite.anchor.setTo(...spriteCenter);
+        menuState.background.sprite.anchor.setTo(...graphicCenter);
         menuState.background.sprite.scale.x =
             menuState.background.sprite.scale.y =
             menuState.getScaleValueToEnvelopeRect(menuState.background.sprite.width, menuState.background.sprite.height, menuState.width, menuState.height);
@@ -45,19 +45,16 @@ menuState = {
             menuState.title.style
         ];
         menuState.title.textObj = game.add.text(...menuTitleData);
-        menuState.title.textObj.anchor.setTo(...spriteCenter);
+        menuState.title.textObj.anchor.setTo(...graphicCenter);
 
         let startButtonData = [
             menuState.width * menuState.startButton.xRegion,
             menuState.height * menuState.startButton.yRegion,
             menuState.startButton.imageKey,
             menuState.startGame,
-            menuState,
-            0,
-            0,
-            0
+            menuState
         ];
         menuState.startButton.button = game.add.button(...startButtonData);
-        menuState.startButton.button.anchor.setTo(...spriteCenter);
+        menuState.startButton.button.anchor.setTo(...graphicCenter);
     }
 };
