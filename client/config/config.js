@@ -22,8 +22,8 @@ const config = {
         velocity: 120
     },
     init:{
-        screenWidth: 640,
-        screenHeight: 480,
+        screenWidth: 375,
+        screenHeight: 812,
         phoneWidth: 360,
         phoneHeight: 740
     },
@@ -32,23 +32,30 @@ const config = {
             xRegion: 0.5,
             yRegion: 0.5,
             imageKey: "mainMenuBackground",
-            spriteSrc: "assets/img/mainMenuBackground.jpg"
+            spriteSrc: "assets/img/Main_Menu_Red.png"
         },
         title: {
             xRegion: 0.5,
-            yRegion: 0.4,
-            text: "Path Light",
-            style: {
-                font: "bold 70px Courier",
-                fill: "#ADD8E6",
-                strokeThickness: 3
-            }
+            yRegion: 0.383,
+            imageKey: "titleGraphic",
+            spriteSrc: "assets/img/PathLight_Title_Asset.png"
         },
         startButton: {
             xRegion: 0.5,
-            yRegion: 0.66,
+            yRegion: 0.496,
             imageKey: "startButton",
-            spriteSrc: "assets/img/startButton.png"
+            spriteSrc: "assets/img/Start_Button_Asset.png",
+            opacityCycleDurationInSeconds: 3,
+            tweenToTransparentProperties: { alpha: 0.5 },
+            tweenToOpaqueProperties: { alpha: 1.0 },
+            tweenToTransparentEasing: Phaser.Easing.Quadratic.In,
+            tweenToOpaqueEasing: Phaser.Easing.Quadratic.Out
+        },
+        startButtonDots: {
+            xRegion: 0.5,
+            yRegion: 0.5,
+            imageKey: "startButtonDots",
+            spriteSrc: "assets/img/Start_Dots_Asset.png"
         }
     },
     gameLoop:{
