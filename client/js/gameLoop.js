@@ -55,10 +55,12 @@ gameLoop = {
         var keyboard = 1;
 
         if (type === keyboard) {
-            gameLoop.keyboardMovement(player, speed);
+            //gameLoop.keyboardMovement(player, speed);
+            playerUtilities.keyboardMovement(player, speed);
         }
         else {
-            gameLoop.mouseMovement(player,speed);
+            //gameLoop.mouseMovement(player,speed);
+            playerUtilities.mouseMovement(player, speed);
         }
     },
     // phaser methods -------------------------
