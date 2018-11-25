@@ -7,13 +7,21 @@ let loadState = {};
 loadState = {
     init: (data) => {
         data = typeof data === "undefined" ? { loadState: {} } : data;
-        loadState.font = data.font || config.default.loader.font;
-        loadState.fontFill = data.fontFill || config.default.loader.fontFill;
-        loadState.fontAlign = data.fontAlign || config.default.loader.fontAlign;
-        loadState.textUI;
-        loadState.loadText = data.text || config.default.loader.text;
-        loadState.loadText = "Loading...";
         loadState.loadValue = data.loadValue || config.default.loader.loadValue;
+
+        // images
+        loadState.textSprite;      // sprite image placeholder
+        loadState.screenSprite;    // sprite image placeholder
+        loadState.textImgLabel = data.textImgLabel || config.default.loader.loadText.spriteLabel;
+        loadState.textImgSrc = data.textImgSrc || config.default.loader.loadText.spriteSrc;
+        loadState.textImgX = data.textImgX || config.default.loader.loadText.xPosition;
+        loadState.textImgY = data.textImgY || config.default.loader.loadText.yPosition;
+        loadState.screenImgLabel = data.screenImgLabel || config.default.loader.loadScreen.spriteLabel;
+        loadState.screenImgSrc = data.screenImgSrc || config.default.loader.loadScreen.spriteSrc;
+        loadState.screenImgX = data.screenImgX || config.default.loader.loadScreen.xPosition;
+        loadState.screenImgY = data.screenImgY || config.default.loader.loadScreen.yPosition;
+
+        // audio
         loadState.bgmLabel = data.bgmLabel || config.default.loader.bgm.label;
         loadState.mp3File = data.mp3File || config.default.loader.bgm.mp3File;
         loadState.oggFile = data.oggFile || config.default.loader.bgm.oggFile;
@@ -26,7 +34,20 @@ loadState = {
      * return: Sprite object
      */
     createScreenImg: () => {
-        // TODO
+        let tempScreenImg = game.add.sprite(loadState.screenImgX, game.world.centerY/2, loadState.screenImgLabel);
+        let tempTextImg = game.add.sprite(loadState.textImgX, loadState.textImgY, loadState.textImgLabel);
+        tempScreenImg.alpha = 0;
+        tempTextImg.alpha = 0;
+        // game.physics.arcade.enable(tempMap);
+
+        // ensure map fits on screen
+        let scaleMapValue = config.init.screenWidth / tempScreenImg.width;
+        tempScreenImg.scale.setTo(scaleMapValue);
+        loadState.screenSprite = tempScreenImg;
+
+        scaleMapValue = config.init.screenWidth / tempTextImg.width;
+        tempTextImg.scale.setTo(scaleMapValue);
+        loadState.textSprite = tempTextImg;
     },
 
     /**
@@ -75,29 +96,18 @@ loadState = {
     },
 
     /**
-     * loadState.setupStartText prompts user to click
-     * params: None
-     * return: (Phaser.Text) loadState.loadText
-     */
-    setupLoadText: () => {
-        // TODO setup loading text as assets/img/loadtext.png
-        // setup loading text
-        loadState.style = { font: loadState.font, fill: loadState.fontFill, align: loadState.fontAlign };
-        let tempText = "Loading: " + loadState.loadValue + " %";
-        loadState.textUI = game.add.text(game.world.centerX, game.world.centerY, tempText, loadState.style);
-        loadState.textUI.anchor.set(0.5);
-        return loadState.textUI;
-    },
-
-    /**
      * loadState.updateLoadCount
      * params: None
      * return: None
      */
-    updateLoadText: () => {
+    updateLoadImgs: () => {
         loadState.loadValue++;
-        let tempText = "Loading: " + loadState.loadValue + " %";
-        loadState.textUI.setText(tempText);
+
+        let tempAlpha = loadState.loadValue / 100;
+        loadState.screenSprite.alpha = tempAlpha;
+        loadState.textSprite.alpha = tempAlpha;
+        //loadState.screenSprite.setTo({alpha: tempAlpha});
+        //game.add.tween(loadState.screenSprite).to( { alpha: loadState.loadValue }, 0, "Linear", true);
         if (loadState.loadValue >= 100)
             loadState.endState();
         return loadState.textUI;
@@ -112,7 +122,8 @@ loadState = {
         //Load your images, spritesheets, bitmaps...
 
         // Loader loads
-        game.load.image(config.default.loader.loadScreen.spriteLabel, config.default.loader.loadScreen.spriteSrc);
+        game.load.image(loadState.screenImgLabel, loadState.screenImgSrc);
+        game.load.image(loadState.textImgLabel, loadState.textImgSrc);
         // Firefox doesn't support mp3 files, so use ogg
         game.load.audio(loadState.bgmLabel, [loadState.mp3File, loadState.oggFile]);
 
@@ -142,9 +153,8 @@ loadState = {
         loadState.createScreenImg();
 
         // simulate loading sequence, if loadValue is 100%, let user click to start game
-        loadState.setupLoadText();
         let repeatCount = 100;
-        game.time.events.repeat(Phaser.Timer.SECOND * 3 / repeatCount, repeatCount, loadState.updateLoadText, this);
+        game.time.events.repeat(Phaser.Timer.SECOND* 3/100, 100, loadState.updateLoadImgs, this);
 
         // setup music and fade in music
         loadState.bgm = game.add.audio(loadState.bgmLabel);

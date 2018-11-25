@@ -45,7 +45,7 @@ neutralMap.createMaps = () => {
         game.physics.arcade.enable(tempMap);
 
         // ensure map fits on screen
-        scaleMapValue = config.init.screenWidth / tempMap.width;
+        let scaleMapValue = config.init.screenWidth / tempMap.width;
         tempMap.scale.setTo(scaleMapValue);
         
         // add new map to the stack list and prepare Y position for next map to stack on this one

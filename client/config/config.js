@@ -50,7 +50,7 @@ const config = {
         velocity: 120,
         mapsCount: 2,
         imgKey: "neutralMap",
-        imgSrc: "assets/img/sample-neutral-map.png"
+        imgSrc: "assets/img/Floor_BG_Asset.png"
     },
     gameOverState: {
         gameOverLabel: {
@@ -130,10 +130,14 @@ config.default.loader = {
     loadScreen:{
         spriteSrc:      "assets/img/Loading_Screen_Asset.png",
         spriteLabel:    "loadScreen",
+        xPosition: 0,
+        yPosition: 100,
     },
     loadText:{
         spriteSrc:      "assets/img/Loading_Text_Asset.png",
         spriteLabel:    "loadText",
+        xPosition: 0,
+        yPosition: 10,
     },
     playerImage:    "assets/img/template-player-face.png",
     mapImage:       "assets/img/sample-neutral-map.png",
