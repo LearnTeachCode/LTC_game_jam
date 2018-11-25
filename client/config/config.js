@@ -15,7 +15,7 @@ const config = {
         background: "#000000",
         playerImage: {
             src: 'assets/img/template-player-face.png',
-            key: "playerLoad"
+            key: "player"
         },
         mapImage:{ 
             src: 'assets/img/floorBG.png',
@@ -26,15 +26,15 @@ const config = {
             key: "placeHolder"
         },
         bgm: {
-            mp3file: "assets/audio/bodenstaendig_2000_in_rock_4bit.mp3",
-            oggfile: "assets/audio/bodenstaendig_2000_in_rock_4bit.ogg",
+            mp3: "assets/audio/bodenstaendig_2000_in_rock_4bit.mp3",
+            ogg: "assets/audio/bodenstaendig_2000_in_rock_4bit.ogg",
             label:   "loadingScreen-bgm"
         },
         sceenImg: "assets/img/flame-blackBG.png",
         loadValue:  0,
         loadScreen:{
-            spriteSrc:      "assets/img/Loading_Screen_Asset.png",
-            spriteLabel:    "loadScreen",
+            spriteSrc: "assets/img/Loading_Screen_Asset.png",
+            spriteLabel: "loadScreen",
             xPosition: 0,
             yPosition: 100
         },
