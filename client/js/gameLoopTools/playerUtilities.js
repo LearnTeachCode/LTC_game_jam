@@ -1,5 +1,14 @@
 const playerUtilities = {};
+playerUtilities.create = (player) => {
+    game.physics.enable(player.sprite, Phaser.Physics.ARCADE);
+    player.sprite.body.collideWorldBounds  = true;
+    const spriteCenter = [0.5, 0.5];
+    player.sprite.anchor.setTo(...spriteCenter);
+};
 
+playerUtilities.update = (player) => {
+    
+}
 playerUtilities.mouseMovement = (player, playerSpeed) => {
     let cursorXDistanceFromPlayer = game.input.x - player.x;
     let cursorYDistanceFromPlayer = game.input.y - player.y

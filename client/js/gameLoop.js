@@ -50,19 +50,17 @@ gameLoop = {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         neutralMap.create();    // setup neutral map sprites
         spriteTest(); //eanDebug get rid of this function when finished testing
+
+        //setup player object
         let playerStartData = [
             gameLoop.width  * gameLoop.xStartRegion,
             gameLoop.height * gameLoop.yStartRegion,
             gameLoop.player.imageKey
         ];
-        // setup player
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
-        game.physics.enable(gameLoop.player.sprite, Phaser.Physics.ARCADE);
-        gameLoop.player.sprite.body.collideWorldBounds  = true;
-        //1st is x, 2nd is Y!
-        const spriteCenter = [0.5, 0.5];
-        gameLoop.player.sprite.anchor.setTo(...spriteCenter);
+        playerUtilities.create(gameLoop.player);
 
+        //setup score UI
         let gameScoreData = [
             gameLoop.score.x,
             gameLoop.score.y,
