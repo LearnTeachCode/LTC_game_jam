@@ -67,28 +67,28 @@ menuState = {
         menuState.startButtonDots.sprite.anchor.setTo(...graphicCenter);
 
         // Animate graphics ---------------------------------------
-        menuState.tweenStartButtonToTransparent();
-    },
-
-    tweenStartButtonToTransparent: function () {
-        let startButtonTweenToTransparentData = [
+        menuState.startButtonTweenToTransparentData = [
             menuState.startButton.tweenToTransparentProperties,
             menuState.startButton.opacityCycleDurationInSeconds * 1000 / 2,
             menuState.startButton.tweenToTransparentEasing,
             true    // autostart tween, saves a call to tween.start()
         ];
-        menuState.startButton.tweenForward = game.add.tween(menuState.startButton.button).to(...startButtonTweenToTransparentData);
-        menuState.startButton.tweenForward.onComplete.add(menuState.tweenStartButtonToOpaque);  // begin tweening to opaque after finished tweening to transparent
-    },
-
-    tweenStartButtonToOpaque: function () {
-        let startButtonTweenToOpaqueData = [
+        menuState.startButtonTweenToOpaqueData = [
             menuState.startButton.tweenToOpaqueProperties,
             menuState.startButton.opacityCycleDurationInSeconds * 1000 / 2,
             menuState.startButton.tweenToOpaqueEasing,
             true    // autostart tween, saves a call to tween.start()
         ];
-        menuState.startButton.tweenBackward = game.add.tween(menuState.startButton.button).to(...startButtonTweenToOpaqueData);
+        menuState.tweenStartButtonToTransparent();
+    },
+
+    tweenStartButtonToTransparent: function () {
+        menuState.startButton.tweenForward = game.add.tween(menuState.startButton.button).to(...menuState.startButtonTweenToTransparentData);
+        menuState.startButton.tweenForward.onComplete.add(menuState.tweenStartButtonToOpaque);  // begin tweening to opaque after finished tweening to transparent
+    },
+
+    tweenStartButtonToOpaque: function () {
+        menuState.startButton.tweenBackward = game.add.tween(menuState.startButton.button).to(...menuState.startButtonTweenToOpaqueData);
         menuState.startButton.tweenBackward.onComplete.add(menuState.tweenStartButtonToTransparent);    // begin tweening to transparent after finished tweening to opaque
     }
 };
