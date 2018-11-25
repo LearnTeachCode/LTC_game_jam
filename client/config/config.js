@@ -12,7 +12,7 @@ const config = {
         fill: '#fff',
         logo: 'assets/img/boilerplate-logo.png',
         playerImage: 'assets/img/template-player-face.png',
-        mapImage: 'assets/img/sample-neutral-map.png',
+        mapImage: 'assets/img/floorBG.png',
         placeHolder: {
             src: "assets/img/placeholder.png",
             key: "placeHolder"

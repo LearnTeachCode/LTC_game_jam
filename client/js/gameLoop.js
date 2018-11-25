@@ -23,7 +23,7 @@ gameLoop = {
         gameLoop.xStartRegion = data.xStartRegion || config.gameLoop.xStartRegion;
         gameLoop.yStartRegion = data.yStartRegion || config.gameLoop.yStartRegion;
         gameLoop.difficulty   = data.difficulty || 1;
-        gameLoop.controlType  = data.controlType || config.default.controls.mouse;
+        gameLoop.player.controlType  = data.controlType || config.default.controls.mouse;
         if (data.debug && data.debug.isOn === true){
             gameLoop.debugMode = data.debug.isOn;
             gameLoop.debug = data.debug;
@@ -32,19 +32,7 @@ gameLoop = {
             gameLoop.debugMode = false;
         }
     },
-
-    movePlayer : (player, speed, type) => {
-        var mouse = 0;
-        var keyboard = 1;
-
-        if (type === keyboard) {
-            playerUtilities.keyboardMovement(player, speed);
-        }
-        else {
-            playerUtilities.mouseMovement(player, speed);
-        }
-    },
-    // phaser methods -------------------------
+    // phaser default methods (subStates) -------------------------
 
     create: () => {
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -75,12 +63,8 @@ gameLoop = {
     
     update: () => {
         neutralMap.updateMap();    // update neutral map states[]
-        let movementData = [
-            gameLoop.player.sprite,
-            gameLoop.player.speed,
-            1 //gameLoop.controlType
-        ];
-        gameLoop.movePlayer(...movementData);
+        playerUtilities.update(gameLoop.player);
+
         //gameLoop.score.amount += gameLoop.score.bonus1;
 
         // update score and text
