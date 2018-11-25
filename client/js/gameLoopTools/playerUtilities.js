@@ -15,13 +15,15 @@ playerUtilities.mouseMovement = (player, playerSpeed) => {
     };
     player.x += playerMovementXDelta;
     player.y += playerMovementYDelta;
+    
 };
 
 playerUtilities.keyboardMovement = (player, playerSpeed) => {
-    if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-        player.x -= playerSpeed;
-    }
-    if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-        player.x += playerSpeed;
-    }
-}
+ 
+    //Taking advantage of coercion to implement keyboard control algorithm
+    let xVelocityInput = (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) - game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) * playerSpeed;
+    let yVelocityInput = (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) - game.input.keyboard.isDown(Phaser.Keyboard.UP)) * playerSpeed;
+    
+    player.x += xVelocityInput;
+    player.y += yVelocityInput;
+};

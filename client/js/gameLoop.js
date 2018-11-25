@@ -32,25 +32,15 @@ gameLoop = {
             gameLoop.debugMode = false;
         }
     },
-    keyboardMovement: (player, playerSpeed) => {
-        if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            player.x -= playerSpeed;
-        }
-        if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            player.x += playerSpeed;
-        }
-    },
 
     movePlayer : (player, speed, type) => {
         var mouse = 0;
         var keyboard = 1;
 
         if (type === keyboard) {
-            //gameLoop.keyboardMovement(player, speed);
             playerUtilities.keyboardMovement(player, speed);
         }
         else {
-            //gameLoop.mouseMovement(player,speed);
             playerUtilities.mouseMovement(player, speed);
         }
     },
@@ -67,6 +57,8 @@ gameLoop = {
         ];
         // setup player
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
+        game.physics.enable(gameLoop.player.sprite, Phaser.Physics.ARCADE);
+        gameLoop.player.sprite.body.collideWorldBounds  = true;
         //1st is x, 2nd is Y!
         const spriteCenter = [0.5, 0.5];
         gameLoop.player.sprite.anchor.setTo(...spriteCenter);
@@ -88,7 +80,7 @@ gameLoop = {
         let movementData = [
             gameLoop.player.sprite,
             gameLoop.player.speed,
-            gameLoop.controlType
+            1 //gameLoop.controlType
         ];
         gameLoop.movePlayer(...movementData);
         //gameLoop.score.amount += gameLoop.score.bonus1;
