@@ -9,3 +9,13 @@
 + Character moves a lot faster in game play demo
 + Eric's troll main menu screen added
 + Game Over screen in debug mode only
+
+1.2.0
+ 
+ + Eric's troll main menu screen is gone
+ + Real main menu screen added
+ + Loading screen added
+ + Character now has omni-directional movement
+ + Basic Block Models are in game, only 1 size is currently rendered
+ + Unecessary Boot Lag removed
+ + Internal Restructuring
