@@ -89,5 +89,7 @@ bootState.create = () => {
     bootState.setUserData();
 
     // run load state after boot string sequence
-    game.time.events.repeat(Phaser.Timer.SECOND*waitTime, 1, bootState.startState, this);
+    //game.time.events.repeat(Phaser.Timer.SECOND*waitTime, 1, bootState.startState, this);
+
+    bootState.startState();
 }
