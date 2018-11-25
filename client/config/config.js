@@ -126,6 +126,7 @@ config.default.loader = {
     font:       "30px Courier",
     fontFill:   "#fff",
     fontAlign:  "center",
+    background: "#000000",
     loadValue:  0,
     loadScreen:{
         spriteSrc:      "assets/img/Loading_Screen_Asset.png",

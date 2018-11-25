@@ -8,6 +8,7 @@ loadState = {
     init: (data) => {
         data = typeof data === "undefined" ? { loadState: {} } : data;
         loadState.loadValue = data.loadValue || config.default.loader.loadValue;
+        loadState.background = data.background || config.default.loader.background;
 
         // images
         loadState.textSprite;      // sprite image placeholder
@@ -36,9 +37,9 @@ loadState = {
     createScreenImg: () => {
         let tempScreenImg = game.add.sprite(loadState.screenImgX, game.world.centerY/2, loadState.screenImgLabel);
         let tempTextImg = game.add.sprite(loadState.textImgX, loadState.textImgY, loadState.textImgLabel);
+        // hide sprites initially
         tempScreenImg.alpha = 0;
         tempTextImg.alpha = 0;
-        // game.physics.arcade.enable(tempMap);
 
         // ensure map fits on screen
         let scaleMapValue = config.init.screenWidth / tempScreenImg.width;
@@ -76,14 +77,14 @@ loadState = {
      * return: (boolean) True if loadValue is 100%, false otherwise
      */
     endState: () => {
-        if (loadState.loadValue >= 100){
+        const theGameIsDoneLoading = loadState.loadValue >= 100
+        if (theGameIsDoneLoading){
             let waitTime = 2;   // delay by number of seconds
             loadState.endMusic(500*waitTime);  // stop the music
             // game.add.tween(loadState.startText).to( { alpha: 0 }, 1000 * waitTime, "Linear", true);
             game.time.events.repeat(Phaser.Timer.SECOND * waitTime, 1, loadState.changeState, this);
-            return true;
         }
-        return false;
+        return theGameIsDoneLoading;
     },
 
     /**
@@ -148,19 +149,18 @@ loadState = {
     */
     create: () => {
         // setup screen image
-        game.stage.backgroundColor = "#000000";
+        game.stage.backgroundColor = loadState.background;
         //loadState.getMapSpeed();
         loadState.createScreenImg();
 
-        // simulate loading sequence, if loadValue is 100%, let user click to start game
+        // simulate loading sequence, if loadValue is 100%, end scene
         let repeatCount = 100;
-        game.time.events.repeat(Phaser.Timer.SECOND* 3/100, 100, loadState.updateLoadImgs, this);
+        game.time.events.repeat(Phaser.Timer.SECOND*3/repeatCount, repeatCount, loadState.updateLoadImgs, this);
 
         // setup music and fade in music
         loadState.bgm = game.add.audio(loadState.bgmLabel);
         loadState.bgm.onDecoded.add(loadState.startMusic, this);
 
-        // setup user controls
         return "create";
     },
 };
