@@ -1,9 +1,12 @@
 const bootState = {};
-console.log(game, "is the current game nameSpace")
-bootState.gameTitle = 'LTC_GameJam_Colors-thingy-stuff';
-bootState.bootString = 'Booting up';
-bootState.gametextBootString;
-bootState.userData;
+
+bootState.init = (data) => {
+    data = typeof data === "undefined" ? config.boot : data;
+    bootState.gameTitle = config.default.gameInformation.title;
+    bootState.bootString = data.bootString || config.boot.bootString;
+    bootState.gametextBootString;
+    bootState.userData;
+}
 
 // Retrieve user data
 bootState.getUserDevice    = () => {

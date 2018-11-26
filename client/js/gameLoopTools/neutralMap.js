@@ -15,7 +15,7 @@ neutralMap.mapsCount = config.default.neutralMap.mapsCount;      // number chang
  * otherwise, use current value of neutralMap.velocity as default
  */
 neutralMap.getMapSpeed = () => {
-    if (DEBUG){
+    if (config.default.debug.isOn === true){
         if (config.default.neutralMap.velocity){
             console.log("Config mapSpeed: " + config.default.neutralMap.velocity);
         }
@@ -53,7 +53,7 @@ neutralMap.createMaps = () => {
         currentYPosition -= tempMap.height;
     }
 
-    if(DEBUG){
+    if(config.default.debug.isOn === true){
         for(var key in neutralMap.maps)
             console.log("Debug: neutralMap y-position = " + neutralMap.maps[key].body.y);
     }
