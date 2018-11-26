@@ -43,7 +43,7 @@ gameLoop = {
         let playerStartData = [
             gameLoop.width  * gameLoop.xStartRegion,
             gameLoop.height * gameLoop.yStartRegion,
-            gameLoop.player.imageKey
+            gameLoop.player.key
         ];
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
         playerUtilities.create(gameLoop.player);

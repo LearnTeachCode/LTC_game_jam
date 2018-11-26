@@ -14,7 +14,7 @@ const config = {
         logo: 'assets/img/boilerplate-logo.png',
         background: "#000000",
         playerImage: {
-            src: 'assets/img/template-player-face.png',
+            src: 'assets/img/templatePlayerFace.png',
             key: "player"
         },
         mapImage:{ 
@@ -22,24 +22,24 @@ const config = {
             key: "gameMap"
         },
         placeHolder: {
-            src: "assets/img/placeholder.png",
+            src: "assets/img/placeHolder.png",
             key: "placeHolder"
         },
         bgm: {
-            mp3: "assets/audio/bodenstaendig_2000_in_rock_4bit.mp3",
-            ogg: "assets/audio/bodenstaendig_2000_in_rock_4bit.ogg",
-            label:   "loadingScreen-bgm"
+            mp3: "assets/audio/bodenstaendig2000InRock4bit.mp3",
+            ogg: "assets/audio/bodenstaendig2000InRock4bit.ogg",
+            label:   "loadingScreenBgm"
         },
-        sceenImg: "assets/img/flame-blackBG.png",
+        sceenImg: "",
         loadValue:  0,
         loadScreen:{
-            spriteSrc: "assets/img/Loading_Screen_Asset.png",
+            src: "assets/img/loadingScreenAsset.png",
             spriteLabel: "loadScreen",
             xPosition: 0,
             yPosition: 100
         },
         loadText:{
-            spriteSrc:      "assets/img/Loading_Text_Asset.png",
+            src:      "assets/img/loadingTextAsset.png",
             spriteLabel:    "loadText",
             xPosition: 0,
             yPosition: 10
@@ -60,20 +60,20 @@ const config = {
         background: {
             xRegion: 0.5,
             yRegion: 0.5,
-            imageKey: "mainMenuBackground",
-            spriteSrc: "assets/img/Main_Menu_Red.png"
+            key: "mainMenuBackground",
+            src: "assets/img/mainMenuRed.png"
         },
         title: {
             xRegion: 0.5,
             yRegion: 0.383,
-            imageKey: "titleGraphic",
-            spriteSrc: "assets/img/PathLight_Title_Asset.png"
+            key: "titleGraphic",
+            src: "assets/img/pathLightTitleAsset.png"
         },
         startButton: {
             xRegion: 0.5,
             yRegion: 0.496,
-            imageKey: "startButton",
-            spriteSrc: "assets/img/Start_Button_Asset.png",
+            key: "startButton",
+            src: "assets/img/startButtonAsset.png",
             opacityCycleDurationInSeconds: 3,
             tweenToTransparentProperties: { alpha: 0.5 },
             tweenToOpaqueProperties: { alpha: 1.0 },
@@ -83,8 +83,8 @@ const config = {
         startButtonDots: {
             xRegion: 0.5,
             yRegion: 0.5,
-            imageKey: "startButtonDots",
-            spriteSrc: "assets/img/Start_Dots_Asset.png"
+            key: "startButtonDots",
+            src: "assets/img/startDotsAsset.png"
         }
     },
     gameLoop:{
@@ -100,7 +100,7 @@ const config = {
         velocity: 120,
         mapsCount: 2,
         imgKey: "neutralMap",
-        imgSrc: "assets/img/Floor_BG_Asset.png"
+        imgSrc: "assets/img/floorBgAsset.png"
     },
     gameOverState: {
         gameOverLabel: {
@@ -132,16 +132,16 @@ const config = {
         restartButton: {
             xRegion: 0.5,
             yRegion: 0.66,
-            imageKey: "restartButton",
-            spriteSrc: "assets/img/startButton.png" // TODO: Make restart button
+            key: "restartButton",
+            src: "assets/img/startButton.png" // TODO: Make restart button
         }
     }
 };
 
 config.default.player = {
     speed: 4,
-    imageKey: "player",
-    spriteSrc: "../spriteLocation.png"
+    key: "player",
+    src: "../spriteLocation.png"
 };
 
 config.default.blocks = {
@@ -174,7 +174,7 @@ config.default.neutralMap = {
     velocity: 120,
     mapsCount: 2,
     key: "neutralMap",
-    src: "assets/img/Floor_BG_Asset.png"
+    src: "assets/img/floorBgAsset.png"
 }
 
 config.default.gameMap = {

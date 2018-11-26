@@ -39,7 +39,7 @@ gameOverState = {
         let restartButtonData = [
             gameOverState.width * gameOverState.restartButton.xRegion,
             gameOverState.height * gameOverState.restartButton.yRegion,
-            gameOverState.restartButton.imageKey,
+            gameOverState.restartButton.key,
             gameOverState.restartGame,
             gameOverState
         ];
