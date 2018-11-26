@@ -153,7 +153,7 @@ config.default.blocks = {
         key: "halfBlock"
     },
     quarter: {
-        score: 50,
+        score: 100,
         src: "assets/img/quarterBlock.png",
         key: "quarterBlock"
     }
