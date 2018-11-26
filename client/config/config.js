@@ -145,10 +145,20 @@ config.default.player = {
 };
 
 config.default.blocks = {
-    score: { //this model is subject to change
-        full: 25,
-        half: 50,
-        quarter: 100
+   full: {
+       score: 25,
+       src: "assets/img/fullBlock.png",
+       key: "fullBlock"
+   },
+    half: {
+        score: 50,
+        src: "assets/img/halfBlock.png",
+        key: "halfBlock"
+    },
+    quarter: {
+        score: 50,
+        src: "assets/img/quaterBlock.png",
+        key: "quarter"
     }
 }
 
