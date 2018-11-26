@@ -3,14 +3,14 @@ const spriteTest = () => {
     let playerStartData = [
         50,
         50,
-        config.loader.placeHolder.key
+        config.default.blocks.quarter.key
     ];
     // setup player
     gameLoop.testBlock = game.add.sprite(...playerStartData);
     var blk = gameLoop.testBlock;
     game.physics.enable(blk, Phaser.Physics.ARCADE);
     blk.immovable = true;
-    blk.scale.setTo(2,2);
+    //blk.scale.setTo(2,2);
 };
 let gameLoop = {};
 gameLoop = {

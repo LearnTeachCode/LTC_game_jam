@@ -1,10 +1,6 @@
 const config = {
     //Any NONE GAME STATE config information goes under default
-    default: { 
-        player:{},
-        score: {},
-        debug: {}
-    },
+    default: {},
     loader:{
         x: 80,
         y: 150,
@@ -48,7 +44,8 @@ const config = {
         velocity: 120
     },
     init:{
-        screenWidth: 375,
+        //screenWidth: 375,
+        screenWidth: 297,
         screenHeight: 812,
         phoneWidth: 360,
         phoneHeight: 740
@@ -157,8 +154,8 @@ config.default.blocks = {
     },
     quarter: {
         score: 50,
-        src: "assets/img/quaterBlock.png",
-        key: "quarter"
+        src: "assets/img/quarterBlock.png",
+        key: "quarterBlock"
     }
 }
 
@@ -181,10 +178,33 @@ config.default.debug = {
 };
 
 config.default.neutralMap = {
-    velocity: 120,
+    velocity: 25,
     mapsCount: 2,
+    mapScale : 0,
     key: "neutralMap",
     src: "assets/img/floorBgAsset.png"
+};
+
+config.default.difficultyModifiers = {
+    easy: {
+        velocity: 0.75,
+        inc: 0.01,
+        bonus: 0.75,
+    },
+    medium: {
+        velocity: 1,
+        inc: 0.03,
+        bonus: 1.0,
+    },
+    hard:{
+        velocity: 0.75,
+        inc: 0.01,
+        bonus: 0.75,
+    }  
+};
+
+config.default.settings = {
+    velocity: 25
 }
 
 config.default.gameMap = {

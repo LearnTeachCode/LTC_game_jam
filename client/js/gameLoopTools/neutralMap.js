@@ -6,7 +6,7 @@
 // neutral map variables
 const neutralMap = {};
 neutralMap.maps;
-neutralMap.velocity = config.default.neutralMap.velocity;
+neutralMap.velocity = config.default.settings.velocity;
 neutralMap.mapsCount = config.default.neutralMap.mapsCount;      // number changes pending size of map versus size of screen
 
 /**
@@ -16,12 +16,10 @@ neutralMap.mapsCount = config.default.neutralMap.mapsCount;      // number chang
  */
 neutralMap.getMapSpeed = () => {
     if (config.default.debug.isOn === true){
-        if (config.default.neutralMap.velocity){
-            console.log("Config mapSpeed: " + config.default.neutralMap.velocity);
+        if (config.default.settings.velocity){
+            console.log("Config mapSpeed: " + config.default.settings.velocity);
         }
     }
-    // if(config.neutralMap.mapSpeed && !isNaN(parseFloat(config.default.neutralMap.velocity)))
-    //     neutralMap.velocity = config.neutralMap.mapSpeed;
 }
 
 neutralMap.changeMapSpeed = (deltaSpeed) => {
@@ -45,8 +43,8 @@ neutralMap.createMaps = () => {
         game.physics.arcade.enable(tempMap);
 
         // ensure map fits on screen
-        let scaleMapValue = config.init.screenWidth / tempMap.width;
-        tempMap.scale.setTo(scaleMapValue);
+        // let scaleMapValue = config.init.screenWidth / tempMap.width;
+        // tempMap.scale.setTo(scaleMapValue);
         
         // add new map to the stack list and prepare Y position for next map to stack on this one
         neutralMap.maps.push(tempMap);
@@ -65,7 +63,7 @@ neutralMap.updateMap = () => {
         if(neutralMap.maps[key].body.y >= neutralMap.maps[key].height){
             neutralMap.maps[key].body.y = 0 - neutralMap.maps[key].height;
         }
-        neutralMap.maps[key].body.velocity.y = config.default.neutralMap.velocity;
+        neutralMap.maps[key].body.velocity.y = config.default.settings.velocity;
     }
 }
 
