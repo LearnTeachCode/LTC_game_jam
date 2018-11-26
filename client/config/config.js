@@ -178,7 +178,6 @@ config.default.debug = {
 };
 
 config.default.neutralMap = {
-    velocity: 25,
     mapsCount: 2,
     mapScale : 0,
     key: "neutralMap",
@@ -187,24 +186,26 @@ config.default.neutralMap = {
 
 config.default.difficultyModifiers = {
     easy: {
-        velocity: 0.75,
-        inc: 0.01,
+        velocityModifer: 0.75,
+        velocityIncrease: 0.10,
         bonus: 0.75,
     },
     medium: {
-        velocity: 1,
-        inc: 0.03,
+        velocityModifer: 1,
+        velocityIncrease: 0.15,
         bonus: 1.0,
     },
     hard:{
-        velocity: 0.75,
-        inc: 0.01,
+        velocityModifer: 1.25,
+        velocityIncrease: 0.25,
         bonus: 0.75,
     }  
 };
 
 config.default.settings = {
-    velocity: 25
+    mapVelocity: 15,
+    maxMapVelocity: 150,
+    increaseIntervals: 10000 //10 seconds
 }
 
 config.default.gameMap = {

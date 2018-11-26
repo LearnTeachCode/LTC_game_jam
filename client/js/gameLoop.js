@@ -75,8 +75,8 @@ gameLoop = {
             let downScrollCheat = gameLoop.debug.controls.isDown(Phaser.KeyCode.CLOSED_BRACKET);
             let gameOverCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.SPACEBAR);
 
-            upScrollCheat   ? neutralMap.changeMapSpeed(-gameLoop.difficulty) : -1;
-            downScrollCheat ? neutralMap.changeMapSpeed(gameLoop.difficulty)  : -1;
+            upScrollCheat   ? neutralMap.setMapSpeed(-gameLoop.difficulty) : -1;
+            downScrollCheat ? neutralMap.setMapSpeed(gameLoop.difficulty)  : -1;
             gameOverCheat   ? game.state.start("end") : -1;
         }
 
