@@ -29,29 +29,38 @@ playerUtilities.move = (player, type) => {
     return type;
 };
 playerUtilities.mouseMovement = (player, playerSpeed) => {
-    let cursorXDistanceFromPlayer = game.input.x - player.x;
-    let cursorYDistanceFromPlayer = game.input.y - player.y
-    let velocityX = Math.sign(cursorXDistanceFromPlayer);
-    let velocityY = Math.sign(cursorYDistanceFromPlayer);
-    let playerMovementXDelta = cursorXDistanceFromPlayer;
-    let playerMovementYDelta = cursorYDistanceFromPlayer;
-    if (Math.abs(cursorXDistanceFromPlayer) > playerSpeed) {
-        playerMovementXDelta = velocityX * playerSpeed;
+    let movementVector = {
+        x: game.input.x - player.x,
+        y: game.input.y - player.y
     };
-    if (Math.abs(cursorYDistanceFromPlayer) > playerSpeed) {
-        playerMovementYDelta = velocityY * playerSpeed;
-    };
-    player.x += playerMovementXDelta;
-    player.y += playerMovementYDelta;
-    
+    let movementVectorMagnitude = Math.sqrt(
+        Math.pow(movementVector.x, 2) +
+        Math.pow(movementVector.y, 2));
+    if (movementVectorMagnitude != 0) {
+        if (movementVectorMagnitude > playerSpeed) {
+            // normalize the vector
+            movementVector.x /= movementVectorMagnitude;
+            movementVector.y /= movementVectorMagnitude;
+            // scale the vector to maximum speed
+            movementVector.x *= playerSpeed;
+            movementVector.y *= playerSpeed;
+        }
+        player.x += movementVector.x;
+        player.y += movementVector.y;
+    }
 };
 
 playerUtilities.keyboardMovement = (player, playerSpeed) => {
- 
     //Taking advantage of coercion to implement keyboard control algorithm
     let xVelocityInput = (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) - game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) * playerSpeed;
     let yVelocityInput = (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) - game.input.keyboard.isDown(Phaser.Keyboard.UP)) * playerSpeed;
-    
+
+    // Set diagonal effective speed equal to horizontal/vertical effective speed
+    if (xVelocityInput != 0 && yVelocityInput != 0) {
+        xVelocityInput *= Math.sqrt(0.5);
+        yVelocityInput *= Math.sqrt(0.5);
+    }
+
     player.x += xVelocityInput;
     player.y += yVelocityInput;
 };
