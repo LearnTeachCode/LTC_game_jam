@@ -13,17 +13,12 @@ playerUtilities.update = (player) => {
 playerUtilities.move = (player, type) => {
     let mouseType    = type === 0;
     let keyboardType = type === 1;
-    let touchType    = type === 2;
     
     if (mouseType){
         playerUtilities.mouseMovement(player.sprite, player.speed);
     }
     else if(keyboardType){
         playerUtilities.keyboardMovement(player.sprite, player.speed);
-    }
-    //optimization note: this check should be 1st since users are more likely to be mobile
-    else if (touchType){
-        //playerUtilities.touchMovement(player, player.speed);
     }
 
     return type;

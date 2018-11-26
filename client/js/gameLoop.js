@@ -1,16 +1,9 @@
 //initiliaze gameLoop 1st so it functions as a namespace
 const spriteTest = () => {
-    let playerStartData = [
-        50,
-        50,
-        config.default.blocks.quarter.key
-    ];
-    // setup player
-    gameLoop.testBlock = game.add.sprite(...playerStartData);
+    
     var blk = gameLoop.testBlock;
     game.physics.enable(blk, Phaser.Physics.ARCADE);
     blk.immovable = true;
-    //blk.scale.setTo(2,2);
 };
 let gameLoop = {};
 gameLoop = {
