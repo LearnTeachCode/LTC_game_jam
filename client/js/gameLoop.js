@@ -61,6 +61,14 @@ gameLoop = {
         }
     },
     
+    incrementMapVelocity: (ve) => {
+        let delta = config.default.difficultyModifiers[config.default.settings.difficulty].velocityModifier;
+        let newVelocity = ve * delta;
+        let maxV = config.default.settings.maxMapVelocity
+        newVelocity = newVelocity > maxV ? maxV : newVelocity;
+        //playerUtilities.update(gameLoop.player);
+
+    },
     update: () => {
         neutralMap.updateMap();    // update neutral map states[]
         playerUtilities.update(gameLoop.player);

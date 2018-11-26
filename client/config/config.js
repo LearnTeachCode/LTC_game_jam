@@ -186,17 +186,17 @@ config.default.neutralMap = {
 
 config.default.difficultyModifiers = {
     easy: {
-        velocityModifer: 0.75,
+        velocityModifier: 0.75,
         velocityIncrease: 0.10,
         bonus: 0.75,
     },
     medium: {
-        velocityModifer: 1,
+        velocityModifier: 1,
         velocityIncrease: 0.15,
         bonus: 1.0,
     },
     hard:{
-        velocityModifer: 1.25,
+        velocityModifier: 1.25,
         velocityIncrease: 0.25,
         bonus: 0.75,
     }  
@@ -205,7 +205,8 @@ config.default.difficultyModifiers = {
 config.default.settings = {
     mapVelocity: 15,
     maxMapVelocity: 150,
-    increaseIntervals: 10000 //10 seconds
+    increaseIntervals: 10000, //10 seconds
+    difficulty: "easy"
 }
 
 config.default.gameMap = {
