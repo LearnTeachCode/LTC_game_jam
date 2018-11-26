@@ -33,13 +33,13 @@ const config = {
         sceenImg: "",
         loadValue:  0,
         loadScreen:{
-            spriteSrc: "assets/img/loadingScreenAsset.png",
+            src: "assets/img/loadingScreenAsset.png",
             spriteLabel: "loadScreen",
             xPosition: 0,
             yPosition: 100
         },
         loadText:{
-            spriteSrc:      "assets/img/loadingTextAsset.png",
+            src:      "assets/img/loadingTextAsset.png",
             spriteLabel:    "loadText",
             xPosition: 0,
             yPosition: 10
@@ -60,20 +60,20 @@ const config = {
         background: {
             xRegion: 0.5,
             yRegion: 0.5,
-            imageKey: "mainMenuBackground",
-            spriteSrc: "assets/img/mainMenuRed.png"
+            key: "mainMenuBackground",
+            src: "assets/img/mainMenuRed.png"
         },
         title: {
             xRegion: 0.5,
             yRegion: 0.383,
-            imageKey: "titleGraphic",
-            spriteSrc: "assets/img/pathLightTitleAsset.png"
+            key: "titleGraphic",
+            src: "assets/img/pathLightTitleAsset.png"
         },
         startButton: {
             xRegion: 0.5,
             yRegion: 0.496,
-            imageKey: "startButton",
-            spriteSrc: "assets/img/startButtonAsset.png",
+            key: "startButton",
+            src: "assets/img/startButtonAsset.png",
             opacityCycleDurationInSeconds: 3,
             tweenToTransparentProperties: { alpha: 0.5 },
             tweenToOpaqueProperties: { alpha: 1.0 },
@@ -83,8 +83,8 @@ const config = {
         startButtonDots: {
             xRegion: 0.5,
             yRegion: 0.5,
-            imageKey: "startButtonDots",
-            spriteSrc: "assets/img/startDotsAsset.png"
+            key: "startButtonDots",
+            src: "assets/img/startDotsAsset.png"
         }
     },
     gameLoop:{
@@ -132,16 +132,16 @@ const config = {
         restartButton: {
             xRegion: 0.5,
             yRegion: 0.66,
-            imageKey: "restartButton",
-            spriteSrc: "assets/img/startButton.png" // TODO: Make restart button
+            key: "restartButton",
+            src: "assets/img/startButton.png" // TODO: Make restart button
         }
     }
 };
 
 config.default.player = {
     speed: 4,
-    imageKey: "player",
-    spriteSrc: "../spriteLocation.png"
+    key: "player",
+    src: "../spriteLocation.png"
 };
 
 config.default.blocks = {

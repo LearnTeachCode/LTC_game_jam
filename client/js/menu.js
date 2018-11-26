@@ -32,7 +32,7 @@ menuState = {
         let menuBackgroundData = [
             menuState.width * menuState.background.xRegion,
             menuState.height * menuState.background.yRegion,
-            menuState.background.imageKey
+            menuState.background.key
         ];
         menuState.background.sprite = game.add.image(...menuBackgroundData);
         menuState.background.sprite.anchor.setTo(...graphicCenter);
@@ -43,7 +43,7 @@ menuState = {
         let menuTitleData = [
             menuState.width * menuState.title.xRegion,
             menuState.height * menuState.title.yRegion,
-            menuState.title.imageKey
+            menuState.title.key
         ];
         menuState.title.sprite = game.add.sprite(...menuTitleData);
         menuState.title.sprite.anchor.setTo(...graphicCenter);
@@ -51,7 +51,7 @@ menuState = {
         let startButtonData = [
             menuState.width * menuState.startButton.xRegion,
             menuState.height * menuState.startButton.yRegion,
-            menuState.startButton.imageKey,
+            menuState.startButton.key,
             menuState.startGame,
             menuState
         ];
@@ -61,7 +61,7 @@ menuState = {
         let startButtonDotsData = [
             menuState.width * menuState.startButtonDots.xRegion,
             menuState.height * menuState.startButtonDots.yRegion,
-            menuState.startButtonDots.imageKey
+            menuState.startButtonDots.key
         ];
         menuState.startButtonDots.sprite = game.add.sprite(...startButtonDotsData);
         menuState.startButtonDots.sprite.anchor.setTo(...graphicCenter);

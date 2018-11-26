@@ -14,11 +14,11 @@ loadState = {
         loadState.textSprite;      // sprite image placeholder
         loadState.screenSprite;    // sprite image placeholder
         loadState.textImgLabel = data.textImgLabel || config.loader.loadText.spriteLabel;
-        loadState.textImgSrc = data.textImgSrc || config.loader.loadText.spriteSrc;
+        loadState.textImgSrc = data.textImgSrc || config.loader.loadText.src;
         loadState.textImgX = data.textImgX || config.loader.loadText.xPosition;
         loadState.textImgY = data.textImgY || config.loader.loadText.yPosition;
         loadState.screenImgLabel = data.screenImgLabel || config.loader.loadScreen.spriteLabel;
-        loadState.screenImgSrc = data.screenImgSrc || config.loader.loadScreen.spriteSrc;
+        loadState.screenImgSrc = data.screenImgSrc || config.loader.loadScreen.src;
         loadState.screenImgX = data.screenImgX || config.loader.loadScreen.xPosition;
         loadState.screenImgY = data.screenImgY || config.loader.loadScreen.yPosition;
 
@@ -129,10 +129,10 @@ loadState = {
         game.load.audio(loadState.bgmLabel, [loadState.mp3, loadState.ogg]);
 
         // Menu loads
-        game.load.image(config.menuState.background.imageKey, config.menuState.background.spriteSrc);
-        game.load.image(config.menuState.title.imageKey, config.menuState.title.spriteSrc);
-        game.load.image(config.menuState.startButton.imageKey, config.menuState.startButton.spriteSrc);
-        game.load.image(config.menuState.startButtonDots.imageKey, config.menuState.startButtonDots.spriteSrc);
+        game.load.image(config.menuState.background.key, config.menuState.background.src);
+        game.load.image(config.menuState.title.key, config.menuState.title.src);
+        game.load.image(config.menuState.startButton.key, config.menuState.startButton.src);
+        game.load.image(config.menuState.startButtonDots.key, config.menuState.startButtonDots.src);
 
         // Game loop loads
         game.load.image(config.loader.playerImage.key, config.loader.playerImage.src);
@@ -141,7 +141,7 @@ loadState = {
         game.load.image(config.default.neutralMap.key, config.default.neutralMap.src);
 
         // Game over loads
-        game.load.image(config.gameOverState.restartButton.imageKey, config.gameOverState.restartButton.spriteSrc);
+        game.load.image(config.gameOverState.restartButton.key, config.gameOverState.restartButton.src);
     },
 
     /**
