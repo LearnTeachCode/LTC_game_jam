@@ -1,9 +1,12 @@
 const bootState = {};
-console.log(game, "is the current game nameSpace")
-bootState.gameTitle = 'LTC_GameJam_Colors-thingy-stuff';
-bootState.bootString = 'Booting up';
-bootState.gametextBootString;
-bootState.userData;
+
+bootState.init = (data) => {
+    data = typeof data === "undefined" ? config.boot : data;
+    bootState.gameTitle = config.default.gameInformation.title;
+    bootState.bootString = data.bootString || config.boot.bootString;
+    bootState.gametextBootString;
+    bootState.userData;
+}
 
 // Retrieve user data
 bootState.getUserDevice    = () => {
@@ -16,7 +19,6 @@ bootState.getUserDevice    = () => {
     newDataText = (game.device.linux) ? newDataText + 'linux,': newDataText;
 
     if(newDataText != ''){
-        // remove last comma in newDataText
         newDataText = newDataText.substring(0, newDataText.length - 1);
     }
     return newDataText;
@@ -27,7 +29,6 @@ bootState.getUserBrowser   = () => {
     newDataText = (game.device.safari) ? newDataText + 'safari,': newDataText;
     newDataText = (game.device.firefox) ? newDataText + 'firefox,': newDataText;
     if(newDataText != ''){
-        // remove last comma in newDataText
         newDataText = newDataText.substring(0, newDataText.length - 1);
     }
     return newDataText;
@@ -38,15 +39,11 @@ bootState.getUserAudioType = () =>{
     newDataText = (game.device.wav) ? newDataText + 'wav,': newDataText;
     newDataText = (game.device.ogg) ? newDataText + 'ogg,': newDataText;
     if(newDataText != ''){
-        // remove last comma in newDataText
         newDataText = newDataText.substring(0, newDataText.length - 1);
     }
     return newDataText;
 }
 
-/*
-   From Ean: Hong, make sure all of our functions have an entry/exit point so we can make them testible
-*/
 bootState.setUserData = () => {
     let data = {};
     data['device']    = bootState.getUserDevice();

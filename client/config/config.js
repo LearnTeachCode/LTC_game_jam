@@ -53,6 +53,9 @@ const config = {
         phoneWidth: 360,
         phoneHeight: 740
     },
+    boot:{
+        bootString : "...preparing to load."
+    },
     menuState: {
         background: {
             xRegion: 0.5,
@@ -182,4 +185,8 @@ config.default.gameMap = {
 config.default.controls = {
     mouse: 0,
     keyboard: 1
-}
+};
+
+config.default.gameInformation = {
+    title: "PathLight"
+};
