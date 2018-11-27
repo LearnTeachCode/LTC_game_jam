@@ -51,15 +51,6 @@ gameLoop = {
         gameLoop.difficultyIncrease = gameLoop.manageDifficulty();
     },
     
-    incrementMapVelocity: (ve) => {
-        let delta = config.default.difficultyModifiers[config.default.settings.difficulty].velocityModifier;
-        let newVelocity = ve * delta;
-        let maxV = config.default.settings.maxMapVelocity
-        newVelocity = newVelocity > maxV ? maxV : newVelocity;
-        //playerUtilities.update(gameLoop.player);
-
-    },
-
     update: () => {
         neutralMap.updateMap();    // update neutral map states[]
         playerUtilities.update(gameLoop.player);
@@ -84,7 +75,7 @@ gameLoop = {
     //This will eventually be an isolated module
     manageDifficulty: () => {
         let data = config.default.difficultyModifiers[gameLoop.difficulty];
-        let interval = setInterval(function(){
+        let velocityIncreaser = () => {
             let atMaxDifficulty = gameLoop.velocity >= config.default.settings.maxMapVelocity
             if (atMaxDifficulty){
                 gameLoop.velocity = config.default.settings.maxMapVelocity;
@@ -92,8 +83,13 @@ gameLoop = {
             };
 
             gameLoop.velocity *= data.velocityIncrease;
+            neutralMap.setMapSpeed(gameLoop.velocity);
+            //blockUtilities.setVelocity(gameLoop.velocity);
 
-        }, config.default.settings.intervalTiming);
+        };
+
+        let intervalData = [velocityIncreaser, config.default.settings.intervalTiming]
+        let interval = setInterval(...intervalData);
 
         return interval;
     }
