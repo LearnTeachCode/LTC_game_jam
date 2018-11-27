@@ -16,7 +16,7 @@ blockUtilities.initMarkers = () => {
 
         //wrap to the top of the map
         if (startMarker.y > game.world.height){
-            startMarker.y = config.default.gameMap.endMarker.y + 4;
+            startMarker.y = -(game.world.height + config.default.settings.wrapOffset);
         }
     }
 
@@ -28,15 +28,15 @@ blockUtilities.initMarkers = () => {
 
     let endMarker = game.add.sprite(...endMarkerData);
     game.physics.enable(endMarker, Phaser.Physics.ARCADE);
-    endMarker.visible = false;
+    endMarker.visible = true;
     endMarker.update = () => {
         endMarker.body.velocity.y = config.default.settings.mapVelocity;
 
         //wrap to the top of the map
         if (endMarker.y > game.world.height){
-            endMarker.y = config.default.gameMap.endMarker.y;
+            endMarker.y = -(game.world.height + config.default.settings.wrapOffset);
         }
-    }    
+    }
 
     return [startMarker, endMarker];
 }

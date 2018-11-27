@@ -13,7 +13,7 @@ const config = {
             src: 'assets/img/templatePlayerFace.png',
             key: "player"
         },
-        mapImage:{ 
+        mapImage:{
             src: 'assets/img/floorBG.png',
             key: "gameMap"
         },
@@ -138,7 +138,8 @@ const config = {
 config.default.settings = {
     tileHeight: 58,
     tileWidth:  74,
-    mapVelocity: 300, //25
+    wrapOffset: -1,
+    mapVelocity: 150, //25
     maxMapVelocity: 150,
     increaseIntervals: 10000, //10 seconds
     difficulty: "easy"
@@ -172,7 +173,7 @@ config.default.score = {
     style : {
         font: "bold 30px Courier",
         color: "#fff",
-    },    
+    },
     interface: {},
     amount: 0,
     bonus1: 1,
@@ -208,7 +209,7 @@ config.default.difficultyModifiers = {
         velocityModifier: 1.25,
         velocityIncrease: 0.25,
         bonus: 0.75,
-    }  
+    }
 };
 
 config.default.gameMap = {

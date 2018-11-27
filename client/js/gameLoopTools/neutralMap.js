@@ -45,7 +45,7 @@ neutralMap.createMaps = () => {
         // ensure map fits on screen
         // let scaleMapValue = config.init.screenWidth / tempMap.width;
         // tempMap.scale.setTo(scaleMapValue);
-        
+
         // add new map to the stack list and prepare Y position for next map to stack on this one
         neutralMap.maps.push(tempMap);
         currentYPosition -= tempMap.height;
@@ -60,8 +60,10 @@ neutralMap.createMaps = () => {
 neutralMap.updateMap = () => {
     // check if map image has gone passed the screen, if so, place map back to other side of screen
     for (var key in neutralMap.maps){
-        if(neutralMap.maps[key].body.y >= neutralMap.maps[key].height){
-            neutralMap.maps[key].body.y = 0 - neutralMap.maps[key].height;
+    // if(neutralMap.maps[key].body.y >= neutralMap.maps[key].height){
+        if(neutralMap.maps[key].y > game.world.height) {
+            //neutralMap.maps[key].y = 0 - neutralMap.maps[key].height;
+            neutralMap.maps[key].y = -(game.world.height + config.default.settings.wrapOffset);
         }
         neutralMap.maps[key].body.velocity.y = config.default.settings.mapVelocity;
     }
