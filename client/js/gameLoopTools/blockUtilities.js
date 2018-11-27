@@ -1,8 +1,54 @@
 const blockUtilities = {};
 //initialize sprite pool, should be a phaser group
-blockUtilities.collection = [];
+blockUtilities.initMarkers = () => {
+
+    let startMarkerData = [
+        config.default.gameMap.startMarker.x,
+        config.default.gameMap.startMarker.y,
+        config.default.blocks.quarter.key
+    ];
+
+    let startMarker = game.add.sprite(...startMarkerData);
+    game.physics.enable(startMarker, Phaser.Physics.ARCADE);
+    startMarker.visible = true;
+    startMarker.update = () => {
+        startMarker.body.velocity.y = config.default.settings.mapVelocity;
+
+        //wrap to the top of the map
+        if (startMarker.y > game.world.height){
+            startMarker.y = config.default.gameMap.endMarker.y + 4;
+        }
+    }
+
+    let endMarkerData = [
+        config.default.gameMap.endMarker.x,
+        config.default.gameMap.endMarker.y,
+        config.default.blocks.quarter.key
+    ];
+
+    let endMarker = game.add.sprite(...endMarkerData);
+    game.physics.enable(endMarker, Phaser.Physics.ARCADE);
+    endMarker.visible = false;
+    endMarker.update = () => {
+        endMarker.body.velocity.y = config.default.settings.mapVelocity;
+
+        //wrap to the top of the map
+        if (endMarker.y > game.world.height){
+            endMarker.y = config.default.gameMap.endMarker.y;
+        }
+    }    
+
+    return [startMarker, endMarker];
+}
+
 blockUtilities.init = (data) => {
-    blockUtilities.mapVelocity = data.mapVelocity || config.delfault.settings.mapVelocity;
+    let markers = blockUtilities.initMarkers();
+    blockUtilities.startMarker = markers[0];
+    blockUtilities.endMarker   = markers[1];
+    blockUtilities.collection = game.add.group();
+    blockUtilities.collection.enableBody = true;
+    blockUtilities.collection.physicsBodyType = Phaser.Physics.ARCADE;
+    blockUtilities.mapVelocity = config.default.settings.mapVelocity;
 };
 blockUtilities.setVelocity = (value) => {
     blockUtilities.mapVelocity = value;

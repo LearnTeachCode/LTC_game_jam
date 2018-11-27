@@ -134,6 +134,15 @@ const config = {
         }
     }
 };
+//Settings should be initated 1st out of all defaults
+config.default.settings = {
+    tileHeight: 58,
+    tileWidth:  74,
+    mapVelocity: 300, //25
+    maxMapVelocity: 150,
+    increaseIntervals: 10000, //10 seconds
+    difficulty: "easy"
+};
 
 config.default.player = {
     speed: 4,
@@ -202,16 +211,15 @@ config.default.difficultyModifiers = {
     }  
 };
 
-config.default.settings = {
-    tileHeight: 0,
-    tileWidth:  0,
-    mapVelocity: 15,
-    maxMapVelocity: 150,
-    increaseIntervals: 10000, //10 seconds
-    difficulty: "easy"
-}
-
 config.default.gameMap = {
+    startMarker: {
+        x: 0,
+        y: config.default.settings.tileHeight * -1
+    },
+    endMarker: {
+        x: 0,
+        y: config.default.settings.tileHeight * -14
+    },
     normalSpeed: 1,
     hardSpeed: 2
 };
