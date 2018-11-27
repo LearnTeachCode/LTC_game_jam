@@ -1,9 +1,19 @@
 //initiliaze gameLoop 1st so it functions as a namespace
 const spriteTest = () => {
-    
+    let playerStartData = [
+        0,
+        0,
+        config.default.blocks.quarter.key
+    ];
+    // setup player
+    gameLoop.testBlock = game.add.sprite(...playerStartData);
     var blk = gameLoop.testBlock;
     game.physics.enable(blk, Phaser.Physics.ARCADE);
     blk.immovable = true;
+
+    blk.update = () => {
+        blk.body.velocity.y = config.default.settings.mapVelocity;
+    }
 };
 let gameLoop = {};
 gameLoop = {

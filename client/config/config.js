@@ -203,6 +203,8 @@ config.default.difficultyModifiers = {
 };
 
 config.default.settings = {
+    tileHeight: 0,
+    tileWidth:  0,
     mapVelocity: 15,
     maxMapVelocity: 150,
     increaseIntervals: 10000, //10 seconds
