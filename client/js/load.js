@@ -36,19 +36,29 @@ loadState = {
      */
     createScreenImg: () => {
         let tempScreenImg = game.add.sprite(loadState.screenImgX, game.world.centerY/2, loadState.screenImgLabel);
-        let tempTextImg = game.add.sprite(loadState.textImgX, loadState.textImgY, loadState.textImgLabel);
+        //let tempTextImg = game.add.sprite(loadState.textImgX, loadState.textImgY, loadState.textImgLabel);
         // hide sprites initially
         tempScreenImg.alpha = 0;
-        tempTextImg.alpha = 0;
+        //tempTextImg.alpha = 0;
 
         // ensure map fits on screen
         let scaleMapValue = config.init.screenWidth / tempScreenImg.width;
         tempScreenImg.scale.setTo(scaleMapValue);
         loadState.screenSprite = tempScreenImg;
 
-        scaleMapValue = config.init.screenWidth / tempTextImg.width;
-        tempTextImg.scale.setTo(scaleMapValue);
-        loadState.textSprite = tempTextImg;
+        //scaleMapValue = config.init.screenWidth / tempTextImg.width;
+        //tempTextImg.scale.setTo(scaleMapValue);
+        //loadState.textSprite = tempTextImg;
+    },
+
+    loadingBar: (barSprite, barX, barY) => {
+        //console.log("loading is " + game.load.progress + " complete");
+        var loadingBar = game.add.sprite(barX, barY, barSprite);
+        scaleMapValue = config.init.screenWidth / loadingBar.width;
+        loadingBar.scale.setTo(scaleMapValue);
+        //console.log(loadingBar.height);
+        loadState.create();
+        game.load.setPreloadSprite(loadingBar);
     },
 
     /**
@@ -106,7 +116,7 @@ loadState = {
 
         let tempAlpha = loadState.loadValue / 100;
         loadState.screenSprite.alpha = tempAlpha;
-        loadState.textSprite.alpha = tempAlpha;
+        //loadState.textSprite.alpha = tempAlpha;
         //loadState.screenSprite.setTo({alpha: tempAlpha});
         //game.add.tween(loadState.screenSprite).to( { alpha: loadState.loadValue }, 0, "Linear", true);
         if (loadState.loadValue >= 100)
@@ -121,10 +131,9 @@ loadState = {
      */
     preload: () => {
         //Load your images, spritesheets, bitmaps...
-
         // Loader loads
-        game.load.image(loadState.screenImgLabel, loadState.screenImgSrc);
         game.load.image(loadState.textImgLabel, loadState.textImgSrc);
+        game.load.image(loadState.screenImgLabel, loadState.screenImgSrc);
         // Firefox doesn't support mp3 files, so use ogg
         game.load.audio(loadState.bgmLabel, [loadState.mp3, loadState.ogg]);
 
@@ -142,6 +151,7 @@ loadState = {
 
         // Game over loads
         game.load.image(config.gameOverState.restartButton.key, config.gameOverState.restartButton.src);
+        game.load.onFileComplete.add(function(){loadState.loadingBar(loadState.textImgLabel, loadState.textImgX, loadState.textImgY);}, loadState);
     },
 
     /**
@@ -154,7 +164,6 @@ loadState = {
         game.stage.backgroundColor = loadState.background;
         //loadState.getMapSpeed();
         loadState.createScreenImg();
-
         // simulate loading sequence, if loadValue is 100%, end scene
         let repeatCount = 100;
         game.time.events.repeat(Phaser.Timer.SECOND*3/repeatCount, repeatCount, loadState.updateLoadImgs, this);
