@@ -6,11 +6,12 @@ gameLoop = {
         data = typeof data === "undefined" ? {} : data;
         gameLoop.player  = data.player   || config.default.player;
         gameLoop.score   = data.score    || config.default.score;
-        gameLoop.width  = data.width    || config.init.screenWidth;
-        gameLoop.height = data.height   || config.init.screenHeight;
+        gameLoop.width   = data.width    || config.init.screenWidth;
+        gameLoop.height  = data.height   || config.init.screenHeight;
         gameLoop.xStartRegion = data.xStartRegion || config.gameLoop.xStartRegion;
         gameLoop.yStartRegion = data.yStartRegion || config.gameLoop.yStartRegion;
-        gameLoop.difficulty   = data.difficulty || 1;
+        gameLoop.difficulty   = data.difficulty   || config.default.settings.difficulty;
+        gameLoop.velocity     = data.velocity     || config.default.settings.mapVelocity;
         gameLoop.player.controlType  = data.controlType || config.default.controls.mouse;
         if (data.debug && data.debug.isOn === true){
             gameLoop.debugMode = data.debug.isOn;
@@ -45,7 +46,9 @@ gameLoop = {
         gameLoop.score.interface = game.add.text(...gameScoreData);
         if (gameLoop.debugMode === true) {
             gameLoop.debug.controls  = game.input.keyboard;
-        }
+        };
+
+        gameLoop.difficultyIncrease = gameLoop.manageDifficulty();
     },
     
     incrementMapVelocity: (ve) => {
@@ -56,6 +59,7 @@ gameLoop = {
         //playerUtilities.update(gameLoop.player);
 
     },
+
     update: () => {
         neutralMap.updateMap();    // update neutral map states[]
         playerUtilities.update(gameLoop.player);
@@ -75,5 +79,22 @@ gameLoop = {
             gameOverCheat   ? game.state.start("end") : -1;
         }
 
+    },
+
+    //This will eventually be an isolated module
+    manageDifficulty: () => {
+        let data = config.default.difficultyModifiers[gameLoop.difficulty];
+        let interval = setInterval(function(){
+            let atMaxDifficulty = gameLoop.velocity >= config.default.settings.maxMapVelocity
+            if (atMaxDifficulty){
+                gameLoop.velocity = config.default.settings.maxMapVelocity;
+                return;
+            };
+
+            gameLoop.velocity *= data.velocityIncrease;
+
+        }, config.default.settings.intervalTiming);
+
+        return interval;
     }
 };

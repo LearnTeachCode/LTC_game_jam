@@ -50,9 +50,11 @@ blockUtilities.init = (data) => {
     blockUtilities.collection.physicsBodyType = Phaser.Physics.ARCADE;
     blockUtilities.mapVelocity = config.default.settings.mapVelocity;
 };
+
 blockUtilities.setVelocity = (value) => {
     blockUtilities.mapVelocity = value;
 };
+
 blockUtilities.create = (controller, data) => {
     let block = {};
     const blockData = config.default.blocks[data.type];
@@ -66,4 +68,6 @@ blockUtilities.create = (controller, data) => {
     blockUtilities.collection.push(block);
     return block;
 };
-blockUtilities.update = (block) => {};
+blockUtilities.update = (data) => {
+    
+};

@@ -141,7 +141,7 @@ config.default.settings = {
     wrapOffset: -1,
     mapVelocity: 150, //25
     maxMapVelocity: 150,
-    increaseIntervals: 10000, //10 seconds
+    intervalTiming: 10000, //10 seconds
     difficulty: "easy"
 };
 
@@ -208,7 +208,7 @@ config.default.difficultyModifiers = {
     hard:{
         velocityModifier: 1.25,
         velocityIncrease: 0.25,
-        bonus: 0.75,
+        bonus: 1.25,
     }
 };
 
