@@ -13,8 +13,7 @@
 
 <h1> Our Slack </h1>
 <h4>
-    http://learnteachcode.slack.com/
-    (https is not currently working)
+    https://learnteachcode.org/slack
     #game-dev channel
 </h4>
 
