@@ -1,5 +1,6 @@
 const blockUtilities = {};
 //initialize sprite pool, should be a phaser group
+blockUtilities.onScreenWrap = false; //callback function that happens when a marker goes back to the top of the layout
 blockUtilities.initMarkers = () => {
 
     let startMarkerData = [
@@ -17,6 +18,11 @@ blockUtilities.initMarkers = () => {
         //wrap to the top of the map
         if (startMarker.y > game.world.height){
             startMarker.y = -(game.world.height + config.default.settings.wrapOffset);
+
+            let wrapEvent = (typeof blockUtilities.onScreenWrap === "function");
+            if(wrapEvent){
+                blockUtilities.onScreenWrap(startMarker);
+            }
         }
     }
 
@@ -35,6 +41,11 @@ blockUtilities.initMarkers = () => {
         //wrap to the top of the map
         if (endMarker.y > game.world.height){
             endMarker.y = -(game.world.height + config.default.settings.wrapOffset);
+
+            let wrapEvent = (typeof blockUtilities.onScreenWrap === "function");
+            if(wrapEvent){
+                blockUtilities.onScreenWrap(endMarker);
+            }
         }
     }
 
