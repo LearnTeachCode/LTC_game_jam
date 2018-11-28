@@ -1,4 +1,9 @@
-// initialize menuState 1st so it functions as a namespace
+    /**
+     * Initializes the menuState 1st; declaring all the variables for width, height, etc.. so menuState will functions as a namespace.
+     * @function init
+     * @param  {Object} data  An object declaring the width, height, background, title, startButton, and startButtonDots
+     * @return {Object}       
+     */
 let menuState = {};
 menuState = {
     init: (data) => {
@@ -10,7 +15,15 @@ menuState = {
         menuState.startButton = data.menuState.startButton || config.menuState.startButton;
         menuState.startButtonDots = data.menuState.startButtonDots || config.menuState.startButtonDots;
     },
-
+    /** $pure
+     * Makes sure the background image fills the game display no matter the size of the background.
+     * @function getScaleValueToEnvelopeRect
+     * @param  {Object} childWidth   Background width
+     * @param  {Object} childHeight  Background height
+     * @param  {Object} parentWidth  The game display's width
+     * @param  {Object} parentHeight The game display's height
+     * @return {Number}                           
+     */
     getScaleValueToEnvelopeRect: (childWidth, childHeight, parentWidth, parentHeight) => {
         let xScale = parentWidth / childWidth;
         let yScale = parentHeight / childHeight;
