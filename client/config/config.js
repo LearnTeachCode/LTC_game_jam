@@ -63,6 +63,17 @@ const config = {
             key: "mainMenuBackground",
             src: "assets/img/mainMenuRed.png"
         },
+        background2: {
+            xRegion: 0.5,
+            yRegion: 0.5,
+            key: "mainMenuBackground2",
+            src: "assets/img/mainMenuBlue.png",
+            opacityCycleDurationInSeconds: 7,
+            tweenToTransparentProperties: { alpha: 0 },
+            tweenToOpaqueProperties: { alpha: 1.0 },
+            tweenToTransparentEasing: Phaser.Easing.Quadratic.InOut,
+            tweenToOpaqueEasing: Phaser.Easing.Quadratic.InOut
+        },
         title: {
             xRegion: 0.5,
             yRegion: 0.383,
