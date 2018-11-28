@@ -60,6 +60,10 @@ blockUtilities.init = (data) => {
     blockUtilities.collection.enableBody = true;
     blockUtilities.collection.physicsBodyType = Phaser.Physics.ARCADE;
     blockUtilities.mapVelocity = config.default.settings.mapVelocity;
+
+    blockUtilities.onScreenWrap = (block) => {
+        console.log("event test!! a block has wrapped the screen!!")
+    };
 };
 
 blockUtilities.setVelocity = (value) => {

@@ -88,7 +88,7 @@ gameLoop = {
 
         };
 
-        let intervalData = [velocityIncreaser, config.default.settings.intervalTiming]
+        let intervalData = [velocityIncreaser, config.default.settings.difficultyInterval];
         let interval = setInterval(...intervalData);
 
         return interval;

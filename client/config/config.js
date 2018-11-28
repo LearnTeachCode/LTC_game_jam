@@ -139,9 +139,9 @@ config.default.settings = {
     tileHeight: 58,
     tileWidth:  74,
     wrapOffset: -1,
-    mapVelocity: 150, //25
+    mapVelocity: 25,
     maxMapVelocity: 150,
-    intervalTiming: 10000, //10 seconds
+    difficultyInterval: 10000, //10 seconds
     difficulty: "easy"
 };
 
