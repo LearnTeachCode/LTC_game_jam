@@ -5,7 +5,7 @@ gameLoop = {
     init: (data) => {
         data = typeof data === "undefined" ? {} : data;
         gameLoop.player  = data.player   || config.default.player;
-        gameLoop.score   = data.score    || config.default.score;
+        //gameLoop.score   = data.score    || config.default.score;
         gameLoop.width   = data.width    || config.init.screenWidth;
         gameLoop.height  = data.height   || config.init.screenHeight;
         gameLoop.xStartRegion = data.xStartRegion || config.gameLoop.xStartRegion;
@@ -37,13 +37,9 @@ gameLoop = {
         playerUtilities.create(gameLoop.player);
 
         //setup score UI
-        let gameScoreData = [
-            gameLoop.score.x,
-            gameLoop.score.y,
-            gameLoop.score.text,
-            gameLoop.score.style
-        ];
-        gameLoop.score.interface = game.add.text(...gameScoreData);
+        gameScore.init();
+        gameScore.create();
+
         if (gameLoop.debugMode === true) {
             gameLoop.debug.controls  = game.input.keyboard;
         };
@@ -55,10 +51,8 @@ gameLoop = {
         neutralMap.updateMap();    // update neutral map states[]
         playerUtilities.update(gameLoop.player);
 
-        //gameLoop.score.amount += gameLoop.score.bonus1;
-
         // update score and text
-        gameLoop.score.interface.setText(gameLoop.score.text + gameLoop.score.amount);
+        gameScore.setText(gameScore.amount + gameScore.bonus);
 
         if(gameLoop.debugMode){
             let upScrollCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.OPEN_BRACKET);

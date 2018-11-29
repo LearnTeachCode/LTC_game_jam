@@ -177,10 +177,59 @@ config.default.score = {
     },
     interface: {},
     amount: 0,
-    bonus1: 1,
+    bonus: 1,
     text: "SCORE:",
-    x: 0,
-    y: 5
+    // x: config.default.settings.tileWidth - 10,
+    x: 10,
+    y: 5,
+    numOffsetX: 10,
+    spriteMap:{},
+    sprites:{
+        scoreText:{
+            src: "assets/img/scoreTexts/scoreTextAsset.png",
+            key: "scoreText"
+        },
+        textNum0:{
+            src: "assets/img/scoreTexts/textNum0.png",
+            key: "textNum0"
+        },
+        textNum1:{
+            src: "assets/img/scoreTexts/textNum1.png",
+            key: "textNum1"
+        },
+        textNum2:{
+            src: "assets/img/scoreTexts/textNum2.png",
+            key: "textNum2"
+        },
+        textNum3:{
+            src: "assets/img/scoreTexts/textNum3.png",
+            key: "textNum3"
+        },
+        textNum4:{
+            src: "assets/img/scoreTexts/textNum4.png",
+            key: "textNum4"
+        },
+        textNum5:{
+            src: "assets/img/scoreTexts/textNum5.png",
+            key: "textNum5"
+        },
+        textNum6:{
+            src: "assets/img/scoreTexts/textNum6.png",
+            key: "textNum6"
+        },
+        textNum7:{
+            src: "assets/img/scoreTexts/textNum7.png",
+            key: "textNum7"
+        },
+        textNum8:{
+            src: "assets/img/scoreTexts/textNum8.png",
+            key: "textNum8"
+        },
+        textNum9:{
+            src: "assets/img/scoreTexts/textNum9.png",
+            key: "textNum9"
+        },
+    }
 };
 
 config.default.debug = {
