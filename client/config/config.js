@@ -183,7 +183,18 @@ config.default.score = {
     x: 10,
     y: 5,
     numOffsetX: 10,
-    spriteMap:{},
+    spriteMap:{
+        "0": "textNum0",
+        "1": "textNum1",
+        "2": "textNum2",
+        "3": "textNum3",
+        "4": "textNum4",
+        "5": "textNum5",
+        "6": "textNum6",
+        "7": "textNum7",
+        "8": "textNum8",
+        "9": "textNum9"
+    },
     sprites:{
         scoreText:{
             src: "assets/img/scoreTexts/scoreTextAsset.png",
