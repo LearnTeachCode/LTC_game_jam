@@ -12,7 +12,6 @@ gameLoop = {
         gameLoop.yStartRegion = data.yStartRegion || config.gameLoop.yStartRegion;
         gameLoop.difficulty   = data.difficulty   || config.default.settings.difficulty;
         gameLoop.velocity     = data.velocity     || config.default.settings.mapVelocity;
-        gameLoop.player.controlType  = data.controlType || config.default.controls.mouse;
         if (data.debug && data.debug.isOn === true){
             gameLoop.debugMode = data.debug.isOn;
             gameLoop.debug = data.debug;
@@ -35,6 +34,8 @@ gameLoop = {
         ];
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
         playerUtilities.create(gameLoop.player);
+        // clicking the mouse during this state will change the control type to mouse
+        game.input.onDown.add(() => { gameLoop.player.controlType = config.default.controls.mouse; });
 
         //setup score UI
         let gameScoreData = [

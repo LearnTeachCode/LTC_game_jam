@@ -156,8 +156,14 @@ config.default.settings = {
     difficulty: "easy"
 };
 
+config.default.controls = {
+    mouse: 0,
+    keyboard: 1
+};
+
 config.default.player = {
     speed: 4,
+    controlType: config.default.controls.mouse,
     color:  0xFFFFFF,
     key: "player",
     src: "../spriteLocation.png"
@@ -235,11 +241,6 @@ config.default.gameMap = {
     },
     normalSpeed: 1,
     hardSpeed: 2
-};
-
-config.default.controls = {
-    mouse: 0,
-    keyboard: 1
 };
 
 config.default.colors = {
