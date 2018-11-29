@@ -130,6 +130,7 @@ loadState = {
 
         // Menu loads
         game.load.image(config.menuState.background.key, config.menuState.background.src);
+        game.load.image(config.menuState.background2.key, config.menuState.background2.src);
         game.load.image(config.menuState.title.key, config.menuState.title.src);
         game.load.image(config.menuState.startButton.key, config.menuState.startButton.src);
         game.load.image(config.menuState.startButtonDots.key, config.menuState.startButtonDots.src);
