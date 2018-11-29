@@ -30,7 +30,7 @@ const config = {
             ogg: "assets/audio/bodenstaendig2000InRock4bit.ogg",
             label:   "loadingScreenBgm"
         },
-        sceenImg: "",
+        screenImg: "",
         loadValue:  0,
         loadScreen:{
             src: "assets/img/loadingScreenAsset.png",
