@@ -16,7 +16,7 @@ gameScore = {
         gameScore.scoreTextKey = data.textImgLabel || config.default.score.sprites.scoreText.key;
         gameScore.spriteMap = data.spriteMap || config.default.score.spriteMap;
 
-        return gameScore;
+        return true;
     },
 
     updateScoreNumbers: () => {
@@ -51,6 +51,6 @@ gameScore = {
     create: () => {
         // Score text
         gameScore.scoreSprite = game.add.sprite(gameScore.x, gameScore.y, gameScore.scoreTextKey);
-        return gameScore;
+        return true;
     },
 };

@@ -182,30 +182,13 @@ config.default.blocks = {
 }
 
 config.default.score = {
-    style : {
-        font: "bold 30px Courier",
-        color: "#fff",
-    },
     interface: {},
     amount: 0,
     bonus: 1,
     text: "SCORE:",
-    // x: config.default.settings.tileWidth - 10,
-    x: config.init.screenWidth - 200,
+    x: config.default.settings.tileWidth,
     y: 5,
-    numOffsetX: 17,
-    spriteMap:{
-        "0": "textNum0",
-        "1": "textNum1",
-        "2": "textNum2",
-        "3": "textNum3",
-        "4": "textNum4",
-        "5": "textNum5",
-        "6": "textNum6",
-        "7": "textNum7",
-        "8": "textNum8",
-        "9": "textNum9"
-    },
+    numOffsetX: 17,     // score value, number of spaces
     sprites:{
         scoreText:{
             src: "assets/img/scoreTexts/scoreTextAsset.png",
@@ -250,8 +233,21 @@ config.default.score = {
         textNum9:{
             src: "assets/img/scoreTexts/textNum9.png",
             key: "textNum9"
-        },
-    }
+        }
+    },
+};
+
+config.default.score.spriteMap = {
+    "0": config.default.score.sprites.textNum0.key,
+    "1": config.default.score.sprites.textNum1.key,
+    "2": config.default.score.sprites.textNum2.key,
+    "3": config.default.score.sprites.textNum3.key,
+    "4": config.default.score.sprites.textNum4.key,
+    "5": config.default.score.sprites.textNum5.key,
+    "6": config.default.score.sprites.textNum6.key,
+    "7": config.default.score.sprites.textNum7.key,
+    "8": config.default.score.sprites.textNum8.key,
+    "9": config.default.score.sprites.textNum9.key
 };
 
 config.default.debug = {
@@ -317,3 +313,4 @@ config.default.colors = {
 config.default.gameInformation = {
     title: "PathLight"
 };
+
