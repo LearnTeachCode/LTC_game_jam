@@ -43,3 +43,28 @@ var colorUtilities = {
         return r + g + b;
     }
 };
+
+colorUtilities.colorStates = {
+       activeColors: [], //array of 2
+       activeNumber: 0,
+       spawnedPickups: [],
+       blockColors: []
+};
+
+colorUtilities.setNextActiveColor = (color) => {
+    let activeNumber = colorUtilities.colorStates.activeNumber;
+    let activeColors = colorUtilities.colorStates.activeColors;
+    let nextColorIsFirstSlot = colorUtilities.colorStates.activeNum === 0;
+    activeColors[activeNumber] = color;
+
+    colorUtilities.colorStates.activeNumber = nextColorIsFirstSlot ? activeNumber + 1 : activeNumber - 1;    
+}
+
+colorUtilities.getColorCombo = (color1, color2) => {
+    const colorsAreTheSame = color1 === color2;
+    let results = colorsAreTheSame ? color1 : colorUtilities.mixColors(color1, color2);
+    return results
+};
+
+
+

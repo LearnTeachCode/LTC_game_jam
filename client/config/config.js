@@ -254,10 +254,24 @@ config.default.colors = {
     green: 0x00FF00
 };
 
+config.default.colorStates = {
+    activeColors: ["color1", "color2"],
+    spawnedPickups: [],
+    blockColors:  []
+};
+
 config.default.mapUtilities = {
-    rowSize = 14,
-    columnSize = 4 
-}
+    rowSize: 14,
+    columnSize: 4,
+    icons : {
+        full: 9,
+        half: 8,
+        quarter: 7,
+        pickup: 6,
+        colorBeam: 5
+    }
+    
+};
 
 config.default.gameInformation = {
     title: "PathLight"
