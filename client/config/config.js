@@ -26,7 +26,7 @@ const config = {
             ogg: "assets/audio/bodenstaendig2000InRock4bit.ogg",
             label:   "loadingScreenBgm"
         },
-        sceenImg: "",
+        screenImg: "",
         loadValue:  0,
         loadScreen:{
             src: "assets/img/loadingScreenAsset.png",
@@ -147,6 +147,7 @@ config.default.settings = {
 
 config.default.player = {
     speed: 4,
+    color: config.default.colors.white,
     key: "player",
     src: "../spriteLocation.png"
 };
@@ -228,6 +229,18 @@ config.default.gameMap = {
 config.default.controls = {
     mouse: 0,
     keyboard: 1
+};
+
+config.default.colors = {
+    white: 0xFFFFFF,
+    // primaries
+    red: 0xFF0000,
+    yellow: 0xFFFF00,
+    blue: 0x0000FF,
+    // secondaries
+    orange: 0xFF8000,
+    purple: 0x800080,
+    green: 0x00FF00
 };
 
 config.default.gameInformation = {
