@@ -147,7 +147,7 @@ config.default.settings = {
 
 config.default.player = {
     speed: 4,
-    color: config.default.colors.white,
+    color:  0xFFFFFF,
     key: "player",
     src: "../spriteLocation.png"
 };
