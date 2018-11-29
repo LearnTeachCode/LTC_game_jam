@@ -180,9 +180,9 @@ config.default.score = {
     bonus: 1,
     text: "SCORE:",
     // x: config.default.settings.tileWidth - 10,
-    x: 10,
+    x: config.init.screenWidth - 200,
     y: 5,
-    numOffsetX: 10,
+    numOffsetX: 17,
     spriteMap:{
         "0": "textNum0",
         "1": "textNum1",

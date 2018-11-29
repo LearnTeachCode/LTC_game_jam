@@ -19,20 +19,21 @@ gameScore = {
         return gameScore;
     },
 
-    setSpriteMap: () => {
-
-    },
-
     updateScoreNumbers: () => {
         // kill all the children (that sounds... wrong)
-        while (gameScore.scoreSprite.children > 0)
-            gameScore.scoreSprite.removeChild(0);
+        if (gameScore.scoreSprite.children.length > 0){
+            gameScore.scoreSprite.removeChildren();
+        }
         
         // create children based on score amount
         let amountStr = gameScore.amount.toString();
-        let offSet = gameScore.numOffsetX;
+        let offSetX = gameScore.numOffsetX;
+        let length = amountStr.length;
 
-        //gameScore.scoreSprite.addChild(0);
+        for(var i = 0; i < length; i++){
+            gameScore.scoreSprite.addChild(game.make.sprite(offSetX+gameScore.scoreSprite.width, gameScore.y, gameScore.spriteMap[amountStr[i]]));
+            offSetX += gameScore.numOffsetX;
+        }
         return gameScore.scoreSprite;
     },
 
@@ -50,7 +51,6 @@ gameScore = {
     create: () => {
         // Score text
         gameScore.scoreSprite = game.add.sprite(gameScore.x, gameScore.y, gameScore.scoreTextKey);
-        gameScore.setSpriteMap();
         return gameScore;
     },
 };

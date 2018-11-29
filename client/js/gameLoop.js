@@ -5,7 +5,6 @@ gameLoop = {
     init: (data) => {
         data = typeof data === "undefined" ? {} : data;
         gameLoop.player  = data.player   || config.default.player;
-        //gameLoop.score   = data.score    || config.default.score;
         gameLoop.width   = data.width    || config.init.screenWidth;
         gameLoop.height  = data.height   || config.init.screenHeight;
         gameLoop.xStartRegion = data.xStartRegion || config.gameLoop.xStartRegion;
@@ -51,7 +50,7 @@ gameLoop = {
         neutralMap.updateMap();    // update neutral map states[]
         playerUtilities.update(gameLoop.player);
 
-        // update score and text
+        // update score
         gameScore.setText(gameScore.amount + gameScore.bonus);
 
         if(gameLoop.debugMode){
