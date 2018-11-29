@@ -254,6 +254,11 @@ config.default.colors = {
     green: 0x00FF00
 };
 
+config.default.mapUtilities = {
+    rowSize = 14,
+    columnSize = 4 
+}
+
 config.default.gameInformation = {
     title: "PathLight"
 };
