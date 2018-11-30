@@ -130,6 +130,7 @@ loadState = {
 
         // Menu loads
         game.load.image(config.menuState.background.key, config.menuState.background.src);
+        game.load.image(config.menuState.background2.key, config.menuState.background2.src);
         game.load.image(config.menuState.title.key, config.menuState.title.src);
         game.load.image(config.menuState.startButton.key, config.menuState.startButton.src);
         game.load.image(config.menuState.startButtonDots.key, config.menuState.startButtonDots.src);
@@ -138,6 +139,7 @@ loadState = {
         game.load.image(config.loader.playerImage.key, config.loader.playerImage.src);
         game.load.image(config.loader.mapImage.key,    config.loader.mapImage.src);
         game.load.image(config.loader.placeHolder.key, config.loader.placeHolder.src);
+        game.load.image(config.default.blocks.quarter.key, config.default.blocks.quarter.src);
         game.load.image(config.default.neutralMap.key, config.default.neutralMap.src);
 
         // Game over loads

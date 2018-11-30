@@ -6,7 +6,7 @@
 // neutral map variables
 const neutralMap = {};
 neutralMap.maps;
-neutralMap.velocity = config.default.neutralMap.velocity;
+neutralMap.velocity = config.default.settings.mapVelocity;
 neutralMap.mapsCount = config.default.neutralMap.mapsCount;      // number changes pending size of map versus size of screen
 
 /**
@@ -16,15 +16,13 @@ neutralMap.mapsCount = config.default.neutralMap.mapsCount;      // number chang
  */
 neutralMap.getMapSpeed = () => {
     if (config.default.debug.isOn === true){
-        if (config.default.neutralMap.velocity){
-            console.log("Config mapSpeed: " + config.default.neutralMap.velocity);
+        if (config.default.settings.mapVelocity){
+            console.log("Config mapSpeed: " + config.default.settings.mapVelocity);
         }
     }
-    // if(config.neutralMap.mapSpeed && !isNaN(parseFloat(config.default.neutralMap.velocity)))
-    //     neutralMap.velocity = config.neutralMap.mapSpeed;
 }
 
-neutralMap.changeMapSpeed = (deltaSpeed) => {
+neutralMap.setMapSpeed = (deltaSpeed) => {
     neutralMap.velocity += deltaSpeed;
     if (DEBUG){
         console.log("Map Speed Changed! Current speed: " + neutralMap.velocity)
@@ -45,9 +43,9 @@ neutralMap.createMaps = () => {
         game.physics.arcade.enable(tempMap);
 
         // ensure map fits on screen
-        let scaleMapValue = config.init.screenWidth / tempMap.width;
-        tempMap.scale.setTo(scaleMapValue);
-        
+        // let scaleMapValue = config.init.screenWidth / tempMap.width;
+        // tempMap.scale.setTo(scaleMapValue);
+
         // add new map to the stack list and prepare Y position for next map to stack on this one
         neutralMap.maps.push(tempMap);
         currentYPosition -= tempMap.height;
@@ -62,10 +60,12 @@ neutralMap.createMaps = () => {
 neutralMap.updateMap = () => {
     // check if map image has gone passed the screen, if so, place map back to other side of screen
     for (var key in neutralMap.maps){
-        if(neutralMap.maps[key].body.y >= neutralMap.maps[key].height){
-            neutralMap.maps[key].body.y = 0 - neutralMap.maps[key].height;
+    // if(neutralMap.maps[key].body.y >= neutralMap.maps[key].height){
+        if(neutralMap.maps[key].y > game.world.height) {
+            //neutralMap.maps[key].y = 0 - neutralMap.maps[key].height;
+            neutralMap.maps[key].y = -(game.world.height + config.default.settings.wrapOffset);
         }
-        neutralMap.maps[key].body.velocity.y = config.default.neutralMap.velocity;
+        neutralMap.maps[key].body.velocity.y = config.default.settings.mapVelocity;
     }
 }
 

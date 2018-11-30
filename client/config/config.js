@@ -1,10 +1,6 @@
 const config = {
     //Any NONE GAME STATE config information goes under default
-    default: { 
-        player:{},
-        score: {},
-        debug: {}
-    },
+    default: {},
     loader:{
         x: 80,
         y: 150,
@@ -17,7 +13,7 @@ const config = {
             src: 'assets/img/templatePlayerFace.png',
             key: "player"
         },
-        mapImage:{ 
+        mapImage:{
             src: 'assets/img/floorBG.png',
             key: "gameMap"
         },
@@ -30,7 +26,7 @@ const config = {
             ogg: "assets/audio/bodenstaendig2000InRock4bit.ogg",
             label:   "loadingScreenBgm"
         },
-        sceenImg: "",
+        screenImg: "",
         loadValue:  0,
         loadScreen:{
             src: "assets/img/loadingScreenAsset.png",
@@ -48,7 +44,8 @@ const config = {
         velocity: 120
     },
     init:{
-        screenWidth: 375,
+        //screenWidth: 375,
+        screenWidth: 297,
         screenHeight: 812,
         phoneWidth: 360,
         phoneHeight: 740
@@ -62,6 +59,17 @@ const config = {
             yRegion: 0.5,
             key: "mainMenuBackground",
             src: "assets/img/mainMenuRed.png"
+        },
+        background2: {
+            xRegion: 0.5,
+            yRegion: 0.5,
+            key: "mainMenuBackground2",
+            src: "assets/img/mainMenuBlue.png",
+            opacityCycleDurationInSeconds: 7,
+            tweenToTransparentProperties: { alpha: 0 },
+            tweenToOpaqueProperties: { alpha: 1.0 },
+            tweenToTransparentEasing: Phaser.Easing.Quadratic.InOut,
+            tweenToOpaqueEasing: Phaser.Easing.Quadratic.InOut
         },
         title: {
             xRegion: 0.5,
@@ -137,18 +145,39 @@ const config = {
         }
     }
 };
+//Settings should be initated 1st out of all defaults
+config.default.settings = {
+    tileHeight: 58,
+    tileWidth:  74,
+    wrapOffset: -1,
+    mapVelocity: 25,
+    maxMapVelocity: 150,
+    difficultyInterval: 10000, //10 seconds
+    difficulty: "easy"
+};
 
 config.default.player = {
     speed: 4,
+    color:  0xFFFFFF,
     key: "player",
     src: "../spriteLocation.png"
 };
 
 config.default.blocks = {
-    score: { //this model is subject to change
-        full: 25,
-        half: 50,
-        quarter: 100
+   full: {
+       score: 25,
+       src: "assets/img/fullBlock.png",
+       key: "fullBlock"
+   },
+    half: {
+        score: 50,
+        src: "assets/img/halfBlock.png",
+        key: "halfBlock"
+    },
+    quarter: {
+        score: 100,
+        src: "assets/img/quarterBlock.png",
+        key: "quarterBlock"
     }
 }
 
@@ -156,7 +185,7 @@ config.default.score = {
     style : {
         font: "bold 30px Courier",
         color: "#fff",
-    },    
+    },
     interface: {},
     amount: 0,
     bonus1: 1,
@@ -171,13 +200,39 @@ config.default.debug = {
 };
 
 config.default.neutralMap = {
-    velocity: 120,
     mapsCount: 2,
+    mapScale : 0,
     key: "neutralMap",
     src: "assets/img/floorBgAsset.png"
-}
+};
+
+config.default.difficultyModifiers = {
+    easy: {
+        velocityModifier: 0.75,
+        velocityIncrease: 0.10,
+        bonus: 0.75,
+    },
+    medium: {
+        velocityModifier: 1,
+        velocityIncrease: 0.15,
+        bonus: 1.0,
+    },
+    hard:{
+        velocityModifier: 1.25,
+        velocityIncrease: 0.25,
+        bonus: 1.25,
+    }
+};
 
 config.default.gameMap = {
+    startMarker: {
+        x: 0,
+        y: config.default.settings.tileHeight * -1
+    },
+    endMarker: {
+        x: 0,
+        y: config.default.settings.tileHeight * -14
+    },
     normalSpeed: 1,
     hardSpeed: 2
 };
@@ -185,6 +240,18 @@ config.default.gameMap = {
 config.default.controls = {
     mouse: 0,
     keyboard: 1
+};
+
+config.default.colors = {
+    white: 0xFFFFFF,
+    // primaries
+    red: 0xFF0000,
+    yellow: 0xFFFF00,
+    blue: 0x0000FF,
+    // secondaries
+    orange: 0xFF8000,
+    purple: 0x800080,
+    green: 0x00FF00
 };
 
 config.default.gameInformation = {

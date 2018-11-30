@@ -1,28 +1,17 @@
 //initiliaze gameLoop 1st so it functions as a namespace
-const spriteTest = () => {
-    let playerStartData = [
-        50,
-        50,
-        config.loader.placeHolder.key
-    ];
-    // setup player
-    gameLoop.testBlock = game.add.sprite(...playerStartData);
-    var blk = gameLoop.testBlock;
-    game.physics.enable(blk, Phaser.Physics.ARCADE);
-    blk.immovable = true;
-    blk.scale.setTo(2,2);
-};
+
 let gameLoop = {};
 gameLoop = {
     init: (data) => {
         data = typeof data === "undefined" ? {} : data;
         gameLoop.player  = data.player   || config.default.player;
         gameLoop.score   = data.score    || config.default.score;
-        gameLoop.width  = data.width    || config.init.screenWidth;
-        gameLoop.height = data.height   || config.init.screenHeight;
+        gameLoop.width   = data.width    || config.init.screenWidth;
+        gameLoop.height  = data.height   || config.init.screenHeight;
         gameLoop.xStartRegion = data.xStartRegion || config.gameLoop.xStartRegion;
         gameLoop.yStartRegion = data.yStartRegion || config.gameLoop.yStartRegion;
-        gameLoop.difficulty   = data.difficulty || 1;
+        gameLoop.difficulty   = data.difficulty   || config.default.settings.difficulty;
+        gameLoop.velocity     = data.velocity     || config.default.settings.mapVelocity;
         gameLoop.player.controlType  = data.controlType || config.default.controls.mouse;
         if (data.debug && data.debug.isOn === true){
             gameLoop.debugMode = data.debug.isOn;
@@ -37,8 +26,7 @@ gameLoop = {
     create: () => {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         neutralMap.create();    // setup neutral map sprites
-        spriteTest(); //eanDebug get rid of this function when finished testing
-
+        blockUtilities.init();
         //setup player object
         let playerStartData = [
             gameLoop.width  * gameLoop.xStartRegion,
@@ -58,7 +46,9 @@ gameLoop = {
         gameLoop.score.interface = game.add.text(...gameScoreData);
         if (gameLoop.debugMode === true) {
             gameLoop.debug.controls  = game.input.keyboard;
-        }
+        };
+
+        gameLoop.difficultyIncrease = gameLoop.manageDifficulty();
     },
     
     update: () => {
@@ -75,10 +65,32 @@ gameLoop = {
             let downScrollCheat = gameLoop.debug.controls.isDown(Phaser.KeyCode.CLOSED_BRACKET);
             let gameOverCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.SPACEBAR);
 
-            upScrollCheat   ? neutralMap.changeMapSpeed(-gameLoop.difficulty) : -1;
-            downScrollCheat ? neutralMap.changeMapSpeed(gameLoop.difficulty)  : -1;
+            upScrollCheat   ? neutralMap.setMapSpeed(-gameLoop.difficulty) : -1;
+            downScrollCheat ? neutralMap.setMapSpeed(gameLoop.difficulty)  : -1;
             gameOverCheat   ? game.state.start("end") : -1;
         }
 
+    },
+
+    //This will eventually be an isolated module
+    manageDifficulty: () => {
+        let data = config.default.difficultyModifiers[gameLoop.difficulty];
+        let velocityIncreaser = () => {
+            let atMaxDifficulty = gameLoop.velocity >= config.default.settings.maxMapVelocity
+            if (atMaxDifficulty){
+                gameLoop.velocity = config.default.settings.maxMapVelocity;
+                return;
+            };
+
+            gameLoop.velocity *= data.velocityIncrease;
+            neutralMap.setMapSpeed(gameLoop.velocity);
+            //blockUtilities.setVelocity(gameLoop.velocity);
+
+        };
+
+        let intervalData = [velocityIncreaser, config.default.settings.difficultyInterval];
+        let interval = setInterval(...intervalData);
+
+        return interval;
     }
 };
