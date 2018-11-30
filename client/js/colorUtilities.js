@@ -56,9 +56,37 @@ colorUtilities.setNextActiveColor = (color) => {
     let activeColors = colorUtilities.colorStates.activeColors;
     let nextColorIsFirstSlot = colorUtilities.colorStates.activeNum === 0;
     activeColors[activeNumber] = color;
+    if (nextColorIsFirstSlot){
+        colorUtilities.colorStates.activeNumber = activeNumber + 1;
+    }
+    else {
+        colorUtilities.colorStates.activeNumber = activeNumber - 1;
+    }
 
-    colorUtilities.colorStates.activeNumber = nextColorIsFirstSlot ? activeNumber + 1 : activeNumber - 1;    
-}
+    if (colorUtilities.onNewActiveColor){
+        colorUtilities.onNewActiveColor(colorUtilities.colorStates.activeNumber);
+    }
+    return colorUtilities.colorStates.activeNumber;
+};
+
+colorUtilities.setFullNextBlockColor = (fullBlock) => {
+    const pickups = colorUtilities.colorStates.spawnedPickups;
+    const actives = colorUtilities.colorStates.activeColors;
+    const types   = Object.keys(config.default.colors);
+    const colorOptions = pickups.concat(actives);
+
+    
+    const colorOptions = types.map((option) => {
+        for (let c in pickups){
+            if (pickups[c] === option)
+        };
+    });
+    const colorOptions = [];
+
+
+    
+
+};
 
 colorUtilities.getColorCombo = (color1, color2) => {
     const colorsAreTheSame = color1 === color2;

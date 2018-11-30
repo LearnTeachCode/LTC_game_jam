@@ -257,7 +257,8 @@ config.default.colors = {
 config.default.colorStates = {
     activeColors: ["color1", "color2"],
     spawnedPickups: [],
-    blockColors:  []
+    blockColors:  [],
+    activeNumber
 };
 
 config.default.mapUtilities = {
