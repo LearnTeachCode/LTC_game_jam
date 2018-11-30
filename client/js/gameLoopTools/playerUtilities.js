@@ -22,7 +22,7 @@ playerUtilities.update = (player) => {
 
 /**
  * Determines the device the user is on and moves character accordingly
- * @param {Object} player 
+ * @param {Object} player - object representing the character
  * @param {Number} type - defines whether play is using a keyboard, mouse or phone
  * @returns {Number} - the type of device the user is playing on       
  */
