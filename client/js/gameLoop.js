@@ -24,11 +24,13 @@ gameLoop = {
         
         mapController.init();
         neutralMap.init();
+        objectSpawner.init();
     },
 
     create: () => {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         neutralMap.create();    // setup neutral map sprites
+        objectSpawner.create();
         blockUtilities.init();
         //setup player object
         let playerStartData = [

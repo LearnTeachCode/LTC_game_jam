@@ -57,7 +57,7 @@ mapController.update = () => {
     for (i = mapController.mapObjects.length - 1; i >= 0; i--) {    // Backwards iteration since items could be removed from the array
         let object = mapController.mapObjects[i];
 
-        if (object.y == null) { // This is in case the mapController is not destroyed upon game state change
+        if (object.y == null || object.enabled === false) { // This is in case the mapController is not destroyed upon game state change, or the object is explicitly disabled
             mapController.mapObjects.splice(i, 1);
             continue;
         }

@@ -104,14 +104,6 @@ const config = {
             quarter: {}
         }
     },
-    neutralMap:{
-        //velocity: 120,
-        //mapsCount: 2,
-        xRegion: 0.5,
-        zOrder: -1,
-        imgKey: "neutralMap",
-        imgSrc: "assets/img/floorBgAsset.png"
-    },
     gameOverState: {
         gameOverLabel: {
             xRegion: 0.5,
@@ -147,7 +139,7 @@ const config = {
         }
     }
 };
-//Settings should be initated 1st out of all defaults
+//Settings should be initiated 1st out of all defaults
 config.default.settings = {
     tileHeight: 58,
     tileWidth:  74,
@@ -172,11 +164,11 @@ config.default.player = {
 };
 
 config.default.blocks = {
-   full: {
-       score: 25,
-       src: "assets/img/fullBlock.png",
-       key: "fullBlock"
-   },
+    full: {
+        score: 25,
+        src: "assets/img/fullBlock.png",
+        key: "fullBlock"
+    },
     half: {
         score: 50,
         src: "assets/img/halfBlock.png",
@@ -187,7 +179,12 @@ config.default.blocks = {
         src: "assets/img/quarterBlock.png",
         key: "quarterBlock"
     }
-}
+};
+
+config.default.colorPickup = {
+    src: "assets/img/pickupAsset.png",
+    key: "colorPickup"
+};
 
 config.default.score = {
     amount: 0,
@@ -263,8 +260,7 @@ config.default.debug = {
 };
 
 config.default.neutralMap = {
-    mapsCount: 2,
-    mapScale : 0,
+    xRegion: 0.5,
     key: "neutralMap",
     src: "assets/img/floorBgAsset.png"
 };
@@ -332,6 +328,12 @@ config.default.colors = {
         amount: 0
     }
 };
+
+config.default.colorPickupColorOptions = [
+    config.default.colors.red,
+    config.default.colors.yellow,
+    config.default.colors.blue
+];
 
 config.default.colorStates = {
     activeColors: ["color1", "color2"],
