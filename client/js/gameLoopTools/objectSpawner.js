@@ -59,7 +59,7 @@ objectSpawner.spawnColorPickup = () => {
         colorPickup.sprite = objectSpawner.inactiveObjectPool.pop();
     }
     game.physics.enable(colorPickup.sprite, Phaser.Physics.ARCADE);
-    //colorPickup.sprite.enableBody = true;
+    colorPickup.sprite.enableBody = true;
     let minX = colorPickup.sprite.width * colorPickup.sprite.anchor.x;
     let maxX = objectSpawner.width - colorPickup.sprite.width * (1 - colorPickup.sprite.anchor.x);
     colorPickup.sprite._spawnParent = colorPickup;

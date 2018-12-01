@@ -6,6 +6,7 @@ playerUtilities.create = (player) => {
       player.controlType = config.default.controls.mouse;
     });
     game.physics.enable(player.sprite, Phaser.Physics.ARCADE);
+    player.sprite.enableBody = true;
     player.sprite.body.collideWorldBounds  = true;
     const spriteCenter = [0.5, 0.5];
     player.sprite.anchor.setTo(...spriteCenter);
@@ -29,7 +30,7 @@ playerUtilities.collisionInit = (item) => {
 };
 
 playerUtilities.colorCollision = (player, color) => {
-    game.physics.arcade.overlap(player, color, (spr1, spr2) => {
+    game.physics.arcade.collide(player, color, (spr1, spr2) => {
         console.log("arg is:", spr1);
     });
 }
@@ -65,10 +66,10 @@ playerUtilities.mouseMovement = (player, playerSpeed) => {
             movementVector.x *= playerSpeed;
             movementVector.y *= playerSpeed;
         }
-        // player.sprite.x += movementVector.x;
-        // player.sprite.y += movementVector.y;
-        player.sprite.body.velocity.x   = movementVector.x;
-        player.sprite.body.velocity.y   = movementVector.y;
+        player.sprite.x += movementVector.x;
+        player.sprite.y += movementVector.y;
+        // player.sprite.body.velocity.x   = movementVector.x;
+        // player.sprite.body.velocity.y   = movementVector.y;
     }
 };
 
