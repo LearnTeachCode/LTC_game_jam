@@ -42,13 +42,8 @@ gameLoop = {
         game.input.onDown.add(() => { gameLoop.player.controlType = config.default.controls.mouse; });
 
         //setup score UI
-        let gameScoreData = [
-            gameLoop.score.x,
-            gameLoop.score.y,
-            gameLoop.score.text,
-            gameLoop.score.style
-        ];
-        gameLoop.score.interface = game.add.text(...gameScoreData);
+        scoreUtilities.create(gameLoop.score);
+
         if (gameLoop.debugMode === true) {
             gameLoop.debug.controls  = game.input.keyboard;
         };
@@ -60,10 +55,8 @@ gameLoop = {
         mapController.update();
         playerUtilities.update(gameLoop.player);
 
-        //gameLoop.score.amount += gameLoop.score.bonus1;
-
-        // update score and text
-        gameLoop.score.interface.setText(gameLoop.score.text + gameLoop.score.amount);
+        // update score
+        scoreUtilities.setText(gameLoop.score, gameLoop.score.amount + gameLoop.score.bonus);
 
         if(gameLoop.debugMode){
             //let upScrollCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.OPEN_BRACKET);
