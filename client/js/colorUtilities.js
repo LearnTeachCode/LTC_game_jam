@@ -69,23 +69,33 @@ colorUtilities.setNextActiveColor = (color) => {
     return colorUtilities.colorStates.activeNumber;
 };
 
-colorUtilities.setFullNextBlockColor = (fullBlock) => {
+colorUtilities.setNextFullBlockColor = (fullBlock) => {
     const pickups = colorUtilities.colorStates.spawnedPickups;
     const actives = colorUtilities.colorStates.activeColors;
-    const types   = Object.keys(config.default.colors);
-    const colorOptions = pickups.concat(actives);
-
-    const colorOptions = {};
-    
-    const colorOptions = types.map((option) => {
-        for (let c in pickups){
-            if (pickups[c] === option){
-
-            }
-        };
+    const colorModel = config.default.colors;
+    //const types   = Object.keys(config.default.colors);
+    let colorOptions = pickups.concat(actives);
+    let availible = [];
+   
+    //decide add up total a
+    colorOptions.forEach( (option) => {
+        if (colorModel[option]){
+            colorModel[option].amount += 1;
+        };   
     });
-    const colorOptions = [];
+    
+    for (let c in colorModel){
+        let choiceColor = colorModel[c];
+
+        if (choiceColor.amount > 0){
+            availible.push[c];
+        }
+    }
 };
+
+colorUtiliites.matchPrimaryColor = (
+
+)
 
 colorUtilities.getColorCombo = (color1, color2) => {
     const colorsAreTheSame = color1 === color2;
