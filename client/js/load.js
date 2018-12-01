@@ -144,6 +144,19 @@ loadState = {
 
         // Game over loads
         game.load.image(config.gameOverState.restartButton.key, config.gameOverState.restartButton.src);
+
+        // score texts
+        game.load.image(config.default.score.sprites.scoreText.key, config.default.score.sprites.scoreText.src);
+        game.load.image(config.default.score.sprites.textNum0.key, config.default.score.sprites.textNum0.src);
+        game.load.image(config.default.score.sprites.textNum1.key, config.default.score.sprites.textNum1.src);
+        game.load.image(config.default.score.sprites.textNum2.key, config.default.score.sprites.textNum2.src);
+        game.load.image(config.default.score.sprites.textNum3.key, config.default.score.sprites.textNum3.src);
+        game.load.image(config.default.score.sprites.textNum4.key, config.default.score.sprites.textNum4.src);
+        game.load.image(config.default.score.sprites.textNum5.key, config.default.score.sprites.textNum5.src);
+        game.load.image(config.default.score.sprites.textNum6.key, config.default.score.sprites.textNum6.src);
+        game.load.image(config.default.score.sprites.textNum7.key, config.default.score.sprites.textNum7.src);
+        game.load.image(config.default.score.sprites.textNum8.key, config.default.score.sprites.textNum8.src);
+        game.load.image(config.default.score.sprites.textNum9.key, config.default.score.sprites.textNum9.src);
     },
 
     /**
