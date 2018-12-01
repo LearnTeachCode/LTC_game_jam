@@ -2,6 +2,8 @@
 
 let gameLoop = {};
 gameLoop = {
+    // phaser default methods (subStates) -------------------------
+
     init: (data) => {
         data = typeof data === "undefined" ? {} : data;
         gameLoop.player  = data.player   || config.default.player;
@@ -19,8 +21,10 @@ gameLoop = {
         else {
             gameLoop.debugMode = false;
         }
+        
+        mapController.init();
+        neutralMap.init();
     },
-    // phaser default methods (subStates) -------------------------
 
     create: () => {
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -49,11 +53,11 @@ gameLoop = {
             gameLoop.debug.controls  = game.input.keyboard;
         };
 
-        gameLoop.difficultyIncrease = gameLoop.manageDifficulty();
+        //gameLoop.difficultyIncrease = gameLoop.manageDifficulty();    // idk what this does lol
     },
     
     update: () => {
-        neutralMap.updateMap();    // update neutral map states[]
+        mapController.update();
         playerUtilities.update(gameLoop.player);
 
         //gameLoop.score.amount += gameLoop.score.bonus1;
@@ -62,12 +66,12 @@ gameLoop = {
         gameLoop.score.interface.setText(gameLoop.score.text + gameLoop.score.amount);
 
         if(gameLoop.debugMode){
-            let upScrollCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.OPEN_BRACKET);
-            let downScrollCheat = gameLoop.debug.controls.isDown(Phaser.KeyCode.CLOSED_BRACKET);
+            //let upScrollCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.OPEN_BRACKET);
+            //let downScrollCheat = gameLoop.debug.controls.isDown(Phaser.KeyCode.CLOSED_BRACKET);
             let gameOverCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.SPACEBAR);
 
-            upScrollCheat   ? neutralMap.setMapSpeed(-gameLoop.difficulty) : -1;
-            downScrollCheat ? neutralMap.setMapSpeed(gameLoop.difficulty)  : -1;
+            //upScrollCheat   ? neutralMap.setMapSpeed(-gameLoop.difficulty) : -1;
+            //downScrollCheat ? neutralMap.setMapSpeed(gameLoop.difficulty)  : -1;
             gameOverCheat   ? game.state.start("end") : -1;
         }
 
@@ -83,8 +87,8 @@ gameLoop = {
                 return;
             };
 
-            gameLoop.velocity *= data.velocityIncrease;
-            neutralMap.setMapSpeed(gameLoop.velocity);
+            //gameLoop.velocity *= data.velocityIncrease;
+            //neutralMap.setMapSpeed(gameLoop.velocity);
             //blockUtilities.setVelocity(gameLoop.velocity);
 
         };
