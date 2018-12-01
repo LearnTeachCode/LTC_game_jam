@@ -280,7 +280,8 @@ config.default.colorStates = {
     activeColors: ["color1", "color2"],
     spawnedPickups: [],
     blockColors:  [],
-    activeNumber: 0
+    activeNumber: 0,
+    activeColorSIMPLE: "color"
 };
 
 config.default.mapUtilities = {
@@ -293,10 +294,11 @@ config.default.mapUtilities = {
         pickup: 6,
         colorBeam: 5
     }
-
 };
 
 config.default.gameInformation = {
     title: "PathLight",
+    htmlID: "gameContainer",
+    hackable: true,
     devModeSimple: true
 };
