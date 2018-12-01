@@ -75,17 +75,16 @@ colorUtilities.setFullNextBlockColor = (fullBlock) => {
     const types   = Object.keys(config.default.colors);
     const colorOptions = pickups.concat(actives);
 
+    const colorOptions = {};
     
     const colorOptions = types.map((option) => {
         for (let c in pickups){
-            if (pickups[c] === option)
+            if (pickups[c] === option){
+
+            }
         };
     });
     const colorOptions = [];
-
-
-    
-
 };
 
 colorUtilities.getColorCombo = (color1, color2) => {
