@@ -79,7 +79,8 @@ gameLoop = {
 
     },
     render:() => {
-        game.debug.body(gameLoop.player.sprite);
+        // game.debug.body(gameLoop.player.sprite);
+        // mapController.render();
         //game.debug.body(sprite2);
     },
     //This will eventually be an isolated module

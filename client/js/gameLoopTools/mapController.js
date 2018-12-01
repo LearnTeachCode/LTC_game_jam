@@ -103,6 +103,12 @@ mapController.update = () => {
     }
 };
 
+mapController.render = () => {
+    mapController.mapObjects.forEach( (spr) => {
+        game.debug.body(spr);
+    });
+}
+
 mapController.destroy = () => {
     mapController.mapObjects = [];
 };
