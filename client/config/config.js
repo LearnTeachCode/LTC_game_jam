@@ -190,16 +190,71 @@ config.default.blocks = {
 }
 
 config.default.score = {
-    style : {
-        font: "bold 30px Courier",
-        color: "#fff",
-    },
-    interface: {},
     amount: 0,
-    bonus1: 1,
+    bonus: 1,
     text: "SCORE:",
-    x: 0,
-    y: 5
+    x: config.default.settings.tileWidth,
+    y: 5,
+    numOffsetX: 17,     // score value, number of spaces
+    sprites:{
+        scoreText:{
+            src: "assets/img/scoreTexts/scoreTextAsset.png",
+            key: "scoreText"
+        },
+        textNum0:{
+            src: "assets/img/scoreTexts/textNum0.png",
+            key: "textNum0"
+        },
+        textNum1:{
+            src: "assets/img/scoreTexts/textNum1.png",
+            key: "textNum1"
+        },
+        textNum2:{
+            src: "assets/img/scoreTexts/textNum2.png",
+            key: "textNum2"
+        },
+        textNum3:{
+            src: "assets/img/scoreTexts/textNum3.png",
+            key: "textNum3"
+        },
+        textNum4:{
+            src: "assets/img/scoreTexts/textNum4.png",
+            key: "textNum4"
+        },
+        textNum5:{
+            src: "assets/img/scoreTexts/textNum5.png",
+            key: "textNum5"
+        },
+        textNum6:{
+            src: "assets/img/scoreTexts/textNum6.png",
+            key: "textNum6"
+        },
+        textNum7:{
+            src: "assets/img/scoreTexts/textNum7.png",
+            key: "textNum7"
+        },
+        textNum8:{
+            src: "assets/img/scoreTexts/textNum8.png",
+            key: "textNum8"
+        },
+        textNum9:{
+            src: "assets/img/scoreTexts/textNum9.png",
+            key: "textNum9"
+        }
+    },
+};
+
+config.default.score.spriteMap = {
+    "0": config.default.score.sprites.textNum0.key,
+    "1": config.default.score.sprites.textNum1.key,
+    "2": config.default.score.sprites.textNum2.key,
+    "3": config.default.score.sprites.textNum3.key,
+    "4": config.default.score.sprites.textNum4.key,
+    "5": config.default.score.sprites.textNum5.key,
+    "6": config.default.score.sprites.textNum6.key,
+    "7": config.default.score.sprites.textNum7.key,
+    "8": config.default.score.sprites.textNum8.key,
+    "9": config.default.score.sprites.textNum9.key
 };
 
 config.default.debug = {
@@ -304,3 +359,4 @@ config.default.gameInformation = {
     hackable: true,
     devModeSimple: true
 };
+
