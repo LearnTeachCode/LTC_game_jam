@@ -169,6 +169,11 @@ config.default.player = {
     src: "../spriteLocation.png"
 };
 
+config.default.fog = {
+    key: "fog",
+    src: "assets/img/fogLayer.png"
+}
+
 config.default.blocks = {
    full: {
        score: 25,
@@ -190,7 +195,7 @@ config.default.blocks = {
 config.default.score = {
     style : {
         font: "bold 30px Courier",
-        color: "#fff",
+        fill: "#fff",
     },
     interface: {},
     amount: 0,

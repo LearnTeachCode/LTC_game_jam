@@ -34,6 +34,7 @@ gameLoop = {
         ];
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
         playerUtilities.create(gameLoop.player);
+        fogUtilities.create(gameLoop.player);
         // clicking the mouse during this state will change the control type to mouse
         game.input.onDown.add(() => { gameLoop.player.controlType = config.default.controls.mouse; });
 
