@@ -1,4 +1,10 @@
 const playerUtilities = {};
+
+/**
+ * Creates player avatar
+ * @param {Object} player - classless object
+ * @return {Object} - returns object with character classes
+ */
 playerUtilities.create = (player) => {
     game.physics.enable(player.sprite, Phaser.Physics.ARCADE);
     player.sprite.body.collideWorldBounds  = true;
@@ -6,10 +12,20 @@ playerUtilities.create = (player) => {
     player.sprite.anchor.setTo(...spriteCenter);
 };
 
+/**
+ * 
+ * @param {Object} player 
+ */
 playerUtilities.update = (player) => {
     playerUtilities.move(player, player.controlType);
 };
 
+/**
+ * Determines the device the user is on and moves character accordingly
+ * @param {Object} player - object representing the character
+ * @param {Number} type - defines whether play is using a keyboard, mouse or phone
+ * @returns {Number} - the type of device the user is playing on       
+ */
 playerUtilities.move = (player, type) => {
     let mouseType    = type === 0;
     let keyboardType = type === 1;
@@ -23,6 +39,12 @@ playerUtilities.move = (player, type) => {
 
     return type;
 };
+
+/**
+* Moves the player in the direction of keyboard press.
+* @param {Object} player - The player object.
+* @param {Number} playerSpeed - The current speed of the player.
+*/
 playerUtilities.mouseMovement = (player, playerSpeed) => {
     let movementVector = {
         x: game.input.x - player.sprite.x,
