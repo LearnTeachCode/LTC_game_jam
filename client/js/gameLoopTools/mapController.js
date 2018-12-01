@@ -65,10 +65,17 @@ mapController.update = () => {
             continue;
         }
 
-        object.y += mapController.speed;
+        if (object.body != null) {
+            object.body.velocity.y = mapController.speed;
+        }
+
+        if (object._mapType){
+            object.y += mapController.speed;
+        }
+
 
         let objectTop = transformUtilities.getTopPosition(object.y, object.height, object.anchor.y);
-        
+
         if (object.fullyOnMap === false) {
             if (mapController.top <= objectTop) {
                 if (typeof (object.onFullyOnMap) === "function") {

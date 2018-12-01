@@ -144,7 +144,7 @@ config.default.settings = {
     tileHeight: 58,
     tileWidth:  74,
     wrapOffset: -1,
-    mapVelocity: 10,
+    mapVelocity: 50,
     maxMapVelocity: 150,
     difficultyInterval: 10000, //10 seconds
     difficulty: "easy"
@@ -332,10 +332,10 @@ config.default.colorPickup = {
     ],
     pickupScore: 0,
     tilesBetweenSpawns: {
-        min: 1,
-        max: 4
+        min: 25,
+        max: 100
     },
-    src: "assets/img/pickupAsset.png",
+    src: "assets/img/pickUpAsset.png",
     key: "colorPickup"
 };
 
@@ -365,4 +365,3 @@ config.default.gameInformation = {
     hackable: true,
     devModeSimple: true
 };
-

@@ -53,9 +53,9 @@ blockUtilities.initMarkers = () => {
 }
 
 blockUtilities.init = (data) => {
-    let markers = blockUtilities.initMarkers();
-    blockUtilities.startMarker = markers[0];
-    blockUtilities.endMarker   = markers[1];
+    //let markers = blockUtilities.initMarkers();
+    // blockUtilities.startMarker = markers[0];
+    // blockUtilities.endMarker   = markers[1];
     blockUtilities.collection = game.add.group();
     blockUtilities.collection.enableBody = true;
     blockUtilities.collection.physicsBodyType = Phaser.Physics.ARCADE;
@@ -84,5 +84,5 @@ blockUtilities.create = (controller, data) => {
     return block;
 };
 blockUtilities.update = (data) => {
-    
+
 };
