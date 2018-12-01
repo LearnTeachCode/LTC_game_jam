@@ -44,12 +44,7 @@ var colorUtilities = {
     }
 };
 
-colorUtilities.colorStates = {
-       activeColors: [], //array of 2
-       activeNumber: 0,
-       spawnedPickups: [],
-       blockColors: []
-};
+colorUtilities.colorStates = config.default.colorStates;
 
 colorUtilities.setNextActiveColor = (color) => {
     let activeNumber = colorUtilities.colorStates.activeNumber;
@@ -67,6 +62,15 @@ colorUtilities.setNextActiveColor = (color) => {
         colorUtilities.onNewActiveColor(colorUtilities.colorStates.activeNumber);
     }
     return colorUtilities.colorStates.activeNumber;
+};
+
+colorUtiliites.setActiveColorSIMPLE = (color) => {
+    colorUtiliites.colorStates.activeColorSIMPLE = color;
+
+    if (colorUtilities.onNewActiveColor){
+        colorUtilities.onNewActiveColor(colorUtilities.colorStates.activeNumber);
+    }
+    return color;
 };
 
 colorUtilities.setNextFullBlockColor = (fullBlock) => {

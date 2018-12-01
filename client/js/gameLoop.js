@@ -21,7 +21,7 @@ gameLoop = {
         else {
             gameLoop.debugMode = false;
         }
-        
+
         mapController.init();
         neutralMap.init();
         objectSpawner.init();
@@ -40,8 +40,7 @@ gameLoop = {
         ];
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
         playerUtilities.create(gameLoop.player);
-        // clicking the mouse during this state will change the control type to mouse
-        game.input.onDown.add(() => { gameLoop.player.controlType = config.default.controls.mouse; });
+
 
         //setup score UI
         scoreUtilities.create(gameLoop.score);
@@ -52,10 +51,10 @@ gameLoop = {
 
         //gameLoop.difficultyIncrease = gameLoop.manageDifficulty();    // idk what this does lol
     },
-    
+
     update: () => {
         mapController.update();
-        playerUtilities.update(gameLoop.player);
+        playerUtilities.update(gameLoop.player, gameLoop.player.controlType);
 
         // update score
         scoreUtilities.setText(gameLoop.score, gameLoop.score.amount + gameLoop.score.bonus);
