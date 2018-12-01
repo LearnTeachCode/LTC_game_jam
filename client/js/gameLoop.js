@@ -49,7 +49,7 @@ gameLoop = {
         scoreUtilities.create(gameLoop.score);
 
         if (gameLoop.debugMode === true) {
-            gameLoop.debug.controls  = game.input.keyboard;
+            gameLoop.debug.controls = game.input.keyboard;
         };
 
         //gameLoop.difficultyIncrease = gameLoop.manageDifficulty();    // idk what this does lol
@@ -74,7 +74,10 @@ gameLoop = {
         }
 
     },
-
+    render:() => {
+        game.debug.body(gameLoop.player.sprite);
+        //game.debug.body(sprite2);
+    },
     //This will eventually be an isolated module
     manageDifficulty: () => {
         let data = config.default.difficultyModifiers[gameLoop.difficulty];

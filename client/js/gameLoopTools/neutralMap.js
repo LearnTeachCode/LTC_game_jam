@@ -21,6 +21,9 @@ neutralMap.createMaps = () => {
             neutralMap.mapData.key
         ];
         latestMapSprite = game.add.sprite(...mapSpriteData);
+        latestMapSprite.alpha = 0.35;
+        //latestMapSprite._mapType = true;
+        //game.physics.enable(latestMapSprite);
         latestMapSprite.anchor.setTo(...neutralMap.graphicCenter);
         latestMapSprite.scale.x = latestMapSprite.scale.y =
             transformUtilities.getScaleValueToEnvelopeRect(latestMapSprite.width, latestMapSprite.height, neutralMap.width, neutralMap.height);

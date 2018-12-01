@@ -1,6 +1,7 @@
 const objectSpawner = {};
 
 objectSpawner.inactiveObjectPool;
+objectSpawner.activeObjectPool = {};
 objectSpawner.distanceUntilNextColorPickupSpawn;
 
 objectSpawner.init = (data) => {
@@ -9,6 +10,7 @@ objectSpawner.init = (data) => {
     objectSpawner.tiles = data.settings || config.default.settings;
     objectSpawner.width = data.screenWidth || config.init.screenWidth;
 
+    objectSpawner.id = 0;
     objectSpawner.inactiveObjectPool = [];
     objectSpawner.graphicCenter = [0.5, 0.5];
 };
@@ -39,7 +41,8 @@ objectSpawner.assignNextDistanceUntilColorPickupSpawn = () => {
 objectSpawner.spawnColorPickup = () => {
     let colorPickup = {
         type: "color",
-        color: objectSpawner.colorPickup.colorOptions[randomUtilities.randomInt(0, objectSpawner.colorPickup.colorOptions.length)]
+        color: objectSpawner.colorPickup.colorOptions[randomUtilities.randomInt(0, objectSpawner.colorPickup.colorOptions.length)],
+        id: objectSpawner.id++
     };
 
     const theresNoItemsToDeploy = objectSpawner.inactiveObjectPool.length === 0;
@@ -56,8 +59,11 @@ objectSpawner.spawnColorPickup = () => {
         colorPickup.sprite = objectSpawner.inactiveObjectPool.pop();
     }
     game.physics.enable(colorPickup.sprite, Phaser.Physics.ARCADE);
+    colorPickup.sprite.enableBody = true;
     let minX = colorPickup.sprite.width * colorPickup.sprite.anchor.x;
     let maxX = objectSpawner.width - colorPickup.sprite.width * (1 - colorPickup.sprite.anchor.x);
+    colorPickup.sprite._spawnParent = colorPickup;
+    objectSpawner.activeObjectPool[colorPickup.id] = colorPickup;
     colorPickup.sprite.x = randomUtilities.randomRange(minX, maxX);
     colorPickup.sprite.tint = colorPickup.color.value;
     colorPickup.sprite.onFullyLeftMap = objectSpawner.disableObject;
@@ -70,6 +76,8 @@ objectSpawner.spawnColorPickup = () => {
 objectSpawner.disableObject = (object) => {
 
     object.enabled = false;
+    object.enableBody = false;
+    delete objectSpawner.activeObjectPool[object._spawnParent.id];
     objectSpawner.inactiveObjectPool.push(object);
 };
 
