@@ -1,3 +1,4 @@
+
 //initiliaze gameLoop 1st so it functions as a namespace
 
 let gameLoop = {};

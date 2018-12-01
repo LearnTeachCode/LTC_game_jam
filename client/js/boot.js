@@ -67,7 +67,6 @@ bootState.updateBootText = () => {
 }
 
 bootState.startState = () => {
-
     //Initial Load State
     game.state.start('load');
 }
