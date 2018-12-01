@@ -24,7 +24,7 @@ neutralMap.getMapSpeed = () => {
 
 neutralMap.setMapSpeed = (deltaSpeed) => {
     neutralMap.velocity += deltaSpeed;
-    if (DEBUG){
+    if (config.default.debug.isOn === true){
         console.log("Map Speed Changed! Current speed: " + neutralMap.velocity)
     }
 }
