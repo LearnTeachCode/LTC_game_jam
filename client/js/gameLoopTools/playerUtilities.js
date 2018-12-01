@@ -1,5 +1,9 @@
 const playerUtilities = {};
-playerUtilities.create = (player) => {
+playerUtilities.create = (player, controlType) => {
+  // clicking the mouse during this state will change the control type to mouse
+    game.input.onDown.add( () => {
+         controlType = config.default.controls.mouse; 
+    });
     game.physics.enable(player.sprite, Phaser.Physics.ARCADE);
     player.sprite.body.collideWorldBounds  = true;
     const spriteCenter = [0.5, 0.5];
@@ -13,7 +17,7 @@ playerUtilities.update = (player) => {
 playerUtilities.move = (player, type) => {
     let mouseType    = type === 0;
     let keyboardType = type === 1;
-    
+
     if (mouseType) {
         playerUtilities.mouseMovement(player, player.speed);
     }
