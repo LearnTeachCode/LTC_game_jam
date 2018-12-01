@@ -105,8 +105,10 @@ const config = {
         }
     },
     neutralMap:{
-        velocity: 120,
-        mapsCount: 2,
+        //velocity: 120,
+        //mapsCount: 2,
+        xRegion: 0.5,
+        zOrder: -1,
         imgKey: "neutralMap",
         imgSrc: "assets/img/floorBgAsset.png"
     },
@@ -150,14 +152,20 @@ config.default.settings = {
     tileHeight: 58,
     tileWidth:  74,
     wrapOffset: -1,
-    mapVelocity: 25,
+    mapVelocity: 10,
     maxMapVelocity: 150,
     difficultyInterval: 10000, //10 seconds
     difficulty: "easy"
 };
 
+config.default.controls = {
+    mouse: 0,
+    keyboard: 1
+};
+
 config.default.player = {
     speed: 4,
+    controlType: config.default.controls.mouse,
     color:  0xFFFFFF,
     key: "player",
     src: "../spriteLocation.png"
@@ -182,7 +190,6 @@ config.default.blocks = {
 }
 
 config.default.score = {
-    interface: {},
     amount: 0,
     bonus: 1,
     text: "SCORE:",
@@ -293,21 +300,57 @@ config.default.gameMap = {
     hardSpeed: 2
 };
 
-config.default.controls = {
-    mouse: 0,
-    keyboard: 1
+config.default.colors = {
+    white: {
+        value: 0xFFFFFF,
+        amount: 0
+    },
+    // primaries
+    red: {
+        value: 0xFF0000,
+        amount: 0
+    },
+    yellow: {
+        value: 0xFFFF00,
+        amount: 0
+    },
+    blue: {
+        value: 0x0000FF,
+        amount: 0
+    },
+    // secondaries
+    orange: {
+        value: 0xFF8000,
+        amount: 0
+    },
+    purple: {
+        value: 0x800080,
+        amount: 0
+    },
+    green: {
+        value: 0x00FF00,
+        amount: 0
+    }
 };
 
-config.default.colors = {
-    white: 0xFFFFFF,
-    // primaries
-    red: 0xFF0000,
-    yellow: 0xFFFF00,
-    blue: 0x0000FF,
-    // secondaries
-    orange: 0xFF8000,
-    purple: 0x800080,
-    green: 0x00FF00
+config.default.colorStates = {
+    activeColors: ["color1", "color2"],
+    spawnedPickups: [],
+    blockColors:  [],
+    activeNumber: 0
+};
+
+config.default.mapUtilities = {
+    rowSize: 14,
+    columnSize: 4,
+    icons : {
+        full: 9,
+        half: 8,
+        quarter: 7,
+        pickup: 6,
+        colorBeam: 5
+    }
+
 };
 
 config.default.gameInformation = {

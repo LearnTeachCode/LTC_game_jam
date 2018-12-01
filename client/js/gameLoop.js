@@ -2,16 +2,18 @@
 
 let gameLoop = {};
 gameLoop = {
+    // phaser default methods (subStates) -------------------------
+
     init: (data) => {
         data = typeof data === "undefined" ? {} : data;
         gameLoop.player  = data.player   || config.default.player;
+        gameLoop.score   = data.score    || config.default.score;
         gameLoop.width   = data.width    || config.init.screenWidth;
         gameLoop.height  = data.height   || config.init.screenHeight;
         gameLoop.xStartRegion = data.xStartRegion || config.gameLoop.xStartRegion;
         gameLoop.yStartRegion = data.yStartRegion || config.gameLoop.yStartRegion;
         gameLoop.difficulty   = data.difficulty   || config.default.settings.difficulty;
         gameLoop.velocity     = data.velocity     || config.default.settings.mapVelocity;
-        gameLoop.player.controlType  = data.controlType || config.default.controls.mouse;
         if (data.debug && data.debug.isOn === true){
             gameLoop.debugMode = data.debug.isOn;
             gameLoop.debug = data.debug;
@@ -19,8 +21,10 @@ gameLoop = {
         else {
             gameLoop.debugMode = false;
         }
+        
+        mapController.init();
+        neutralMap.init();
     },
-    // phaser default methods (subStates) -------------------------
 
     create: () => {
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -34,32 +38,33 @@ gameLoop = {
         ];
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
         playerUtilities.create(gameLoop.player);
+        // clicking the mouse during this state will change the control type to mouse
+        game.input.onDown.add(() => { gameLoop.player.controlType = config.default.controls.mouse; });
 
         //setup score UI
-        gameScore.init();
-        gameScore.create();
+        scoreUtilities.create(gameLoop.score);
 
         if (gameLoop.debugMode === true) {
             gameLoop.debug.controls  = game.input.keyboard;
         };
 
-        gameLoop.difficultyIncrease = gameLoop.manageDifficulty();
+        //gameLoop.difficultyIncrease = gameLoop.manageDifficulty();    // idk what this does lol
     },
     
     update: () => {
-        neutralMap.updateMap();    // update neutral map states[]
+        mapController.update();
         playerUtilities.update(gameLoop.player);
 
         // update score
-        gameScore.setText(gameScore.amount + gameScore.bonus);
+        scoreUtilities.setText(gameLoop.score, gameLoop.score.amount + gameLoop.score.bonus);
 
         if(gameLoop.debugMode){
-            let upScrollCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.OPEN_BRACKET);
-            let downScrollCheat = gameLoop.debug.controls.isDown(Phaser.KeyCode.CLOSED_BRACKET);
+            //let upScrollCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.OPEN_BRACKET);
+            //let downScrollCheat = gameLoop.debug.controls.isDown(Phaser.KeyCode.CLOSED_BRACKET);
             let gameOverCheat   = gameLoop.debug.controls.isDown(Phaser.KeyCode.SPACEBAR);
 
-            upScrollCheat   ? neutralMap.setMapSpeed(-gameLoop.difficulty) : -1;
-            downScrollCheat ? neutralMap.setMapSpeed(gameLoop.difficulty)  : -1;
+            //upScrollCheat   ? neutralMap.setMapSpeed(-gameLoop.difficulty) : -1;
+            //downScrollCheat ? neutralMap.setMapSpeed(gameLoop.difficulty)  : -1;
             gameOverCheat   ? game.state.start("end") : -1;
         }
 
@@ -75,8 +80,8 @@ gameLoop = {
                 return;
             };
 
-            gameLoop.velocity *= data.velocityIncrease;
-            neutralMap.setMapSpeed(gameLoop.velocity);
+            //gameLoop.velocity *= data.velocityIncrease;
+            //neutralMap.setMapSpeed(gameLoop.velocity);
             //blockUtilities.setVelocity(gameLoop.velocity);
 
         };
