@@ -12,15 +12,6 @@ menuState = {
         menuState.startButtonDots = data.menuState.startButtonDots || config.menuState.startButtonDots;
     },
 
-    getScaleValueToEnvelopeRect: (childWidth, childHeight, parentWidth, parentHeight) => {
-        let xScale = parentWidth / childWidth;
-        let yScale = parentHeight / childHeight;
-        if (childHeight * xScale >= parentHeight)
-            return xScale;
-        else
-            return yScale;
-    },
-
     startGame: function() {
         //game.state.start("gameLoop", data);   // data is currently undefined
         game.state.start("gameLoop");
@@ -39,7 +30,7 @@ menuState = {
         menuState.background.sprite.anchor.setTo(...graphicCenter);
         menuState.background.sprite.scale.x =
             menuState.background.sprite.scale.y =
-            menuState.getScaleValueToEnvelopeRect(menuState.background.sprite.width, menuState.background.sprite.height, menuState.width, menuState.height);
+            transformUtilities.getScaleValueToEnvelopeRect(menuState.background.sprite.width, menuState.background.sprite.height, menuState.width, menuState.height);
 
         let menuBackground2Data = [
             menuState.width * menuState.background2.xRegion,
@@ -50,7 +41,7 @@ menuState = {
         menuState.background2.sprite.anchor.setTo(...graphicCenter);
         menuState.background2.sprite.scale.x =
             menuState.background2.sprite.scale.y =
-            menuState.getScaleValueToEnvelopeRect(menuState.background2.sprite.width, menuState.background2.sprite.height, menuState.width, menuState.height);
+            transformUtilities.getScaleValueToEnvelopeRect(menuState.background2.sprite.width, menuState.background2.sprite.height, menuState.width, menuState.height);
 
         let menuTitleData = [
             menuState.width * menuState.title.xRegion,
