@@ -178,7 +178,7 @@ config.default.darkness = {
 
 config.default.particles = {
     key: "particles",
-    src: "assets/img/bubble.png",
+    src: "assets/img/whiteParticle.png",
     emitter: {},
     offsetX: 0,
     offsetY: 0

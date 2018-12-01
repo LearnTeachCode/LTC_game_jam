@@ -64,8 +64,8 @@ colorUtilities.setNextActiveColor = (color) => {
     return colorUtilities.colorStates.activeNumber;
 };
 
-colorUtiliites.setActiveColorSIMPLE = (color) => {
-    colorUtiliites.colorStates.activeColorSIMPLE = color;
+colorUtilities.setActiveColorSIMPLE = (color) => {
+    colorUtilities.colorStates.activeColorSIMPLE = color;
 
     if (colorUtilities.onNewActiveColor){
         colorUtilities.onNewActiveColor(colorUtilities.colorStates.activeNumber);
