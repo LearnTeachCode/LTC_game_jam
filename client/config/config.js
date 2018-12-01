@@ -297,5 +297,6 @@ config.default.mapUtilities = {
 };
 
 config.default.gameInformation = {
-    title: "PathLight"
+    title: "PathLight",
+    devModeSimple: true
 };
