@@ -43,3 +43,62 @@ var colorUtilities = {
         return r + g + b;
     }
 };
+
+colorUtilities.colorStates = {
+       activeColors: [], //array of 2
+       activeNumber: 0,
+       spawnedPickups: [],
+       blockColors: []
+};
+
+colorUtilities.setNextActiveColor = (color) => {
+    let activeNumber = colorUtilities.colorStates.activeNumber;
+    let activeColors = colorUtilities.colorStates.activeColors;
+    let nextColorIsFirstSlot = colorUtilities.colorStates.activeNum === 0;
+    activeColors[activeNumber] = color;
+    if (nextColorIsFirstSlot){
+        colorUtilities.colorStates.activeNumber = activeNumber + 1;
+    }
+    else {
+        colorUtilities.colorStates.activeNumber = activeNumber - 1;
+    }
+
+    if (colorUtilities.onNewActiveColor){
+        colorUtilities.onNewActiveColor(colorUtilities.colorStates.activeNumber);
+    }
+    return colorUtilities.colorStates.activeNumber;
+};
+
+colorUtilities.setNextFullBlockColor = (fullBlock) => {
+    const pickups = colorUtilities.colorStates.spawnedPickups;
+    const actives = colorUtilities.colorStates.activeColors;
+    const colorModel = config.default.colors;
+    //const types   = Object.keys(config.default.colors);
+    let colorOptions = pickups.concat(actives);
+    let availible = [];
+
+    //decide add up total a
+    colorOptions.forEach( (option) => {
+        if (colorModel[option]){
+            colorModel[option].amount += 1;
+        };
+    });
+
+    for (let c in colorModel){
+        let choiceColor = colorModel[c];
+
+        if (choiceColor.amount > 0){
+            availible.push[c];
+        }
+    }
+};
+
+// colorUtiliites.matchPrimaryColor = (
+//
+// )
+
+colorUtilities.getColorCombo = (color1, color2) => {
+    const colorsAreTheSame = color1 === color2;
+    let results = colorsAreTheSame ? color1 : colorUtilities.mixColors(color1, color2);
+    return results
+};

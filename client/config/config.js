@@ -244,15 +244,56 @@ config.default.gameMap = {
 };
 
 config.default.colors = {
-    white: 0xFFFFFF,
+    white: {
+        value: 0xFFFFFF,
+        amount: 0
+    },
     // primaries
-    red: 0xFF0000,
-    yellow: 0xFFFF00,
-    blue: 0x0000FF,
+    red: {
+        value: 0xFF0000,
+        amount: 0
+    },
+    yellow: {
+        value: 0xFFFF00,
+        amount: 0
+    },
+    blue: {
+        value: 0x0000FF,
+        amount: 0
+    },
     // secondaries
-    orange: 0xFF8000,
-    purple: 0x800080,
-    green: 0x00FF00
+    orange: {
+        value: 0xFF8000,
+        amount: 0
+    },
+    purple: {
+        value: 0x800080,
+        amount: 0
+    },
+    green: {
+        value: 0x00FF00,
+        amount: 0
+    }
+};
+
+config.default.colorStates = {
+    activeColors: ["color1", "color2"],
+    spawnedPickups: [],
+    blockColors:  [],
+    activeNumber: 0
+};
+
+config.default.mapUtilities = {
+    rowSize: 14,
+    columnSize: 4,
+    icons : {
+        full: 9,
+        half: 8,
+        quarter: 7,
+        pickup: 6,
+        colorBeam: 5
+    }
+
 };
 
 config.default.gameInformation = {
