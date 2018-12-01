@@ -181,11 +181,6 @@ config.default.blocks = {
     }
 };
 
-config.default.colorPickup = {
-    src: "assets/img/pickupAsset.png",
-    key: "colorPickup"
-};
-
 config.default.score = {
     amount: 0,
     bonus: 1,
@@ -329,11 +324,20 @@ config.default.colors = {
     }
 };
 
-config.default.colorPickupColorOptions = [
-    config.default.colors.red,
-    config.default.colors.yellow,
-    config.default.colors.blue
-];
+config.default.colorPickup = {
+    colorOptions: [
+        config.default.colors.red,
+        config.default.colors.yellow,
+        config.default.colors.blue
+    ],
+    pickupScore: 0,
+    tilesBetweenSpawns: {
+        min: 1,
+        max: 4
+    },
+    src: "assets/img/pickupAsset.png",
+    key: "colorPickup"
+};
 
 config.default.colorStates = {
     activeColors: ["color1", "color2"],

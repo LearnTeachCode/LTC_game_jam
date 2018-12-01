@@ -54,6 +54,7 @@ gameLoop = {
 
     update: () => {
         mapController.update();
+        objectSpawner.update();
         playerUtilities.update(gameLoop.player, gameLoop.player.controlType);
 
         // update score
