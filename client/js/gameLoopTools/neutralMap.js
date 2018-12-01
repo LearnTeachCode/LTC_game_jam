@@ -26,7 +26,7 @@ neutralMap.createMaps = () => {
             transformUtilities.getScaleValueToEnvelopeRect(latestMapSprite.width, latestMapSprite.height, neutralMap.width, neutralMap.height);
         latestMapSprite.y = nextMapSpriteBottom - latestMapSprite.height * (1 - latestMapSprite.anchor.y);
 
-        latestMapSprite.onFullyOnMap = neutralMap.generateNewMap;
+        latestMapSprite.onFullyOnMap = neutralMap.generateNewMapSprite;
 
         nextMapSpriteBottom = transformUtilities.getTopPosition(latestMapSprite.y, latestMapSprite.height, latestMapSprite.anchor.y);    // next map sprite bottom is latest map sprite top
 
@@ -34,7 +34,7 @@ neutralMap.createMaps = () => {
     } while (nextMapSpriteBottom >= 0);
 };
 
-neutralMap.generateNewMap = (topPosition) => {
+neutralMap.generateNewMapSprite = (topPosition) => {
     let mapSpriteData = [
         neutralMap.width * neutralMap.mapData.xRegion,
         0,  // this will be changed
@@ -46,7 +46,7 @@ neutralMap.generateNewMap = (topPosition) => {
         transformUtilities.getScaleValueToEnvelopeRect(mapSprite.width, mapSprite.height, neutralMap.width, neutralMap.height);
     mapSprite.y = topPosition - mapSprite.height * (1 - mapSprite.anchor.y);
 
-    mapSprite.onFullyOnMap = neutralMap.generateNewMap;
+    mapSprite.onFullyOnMap = neutralMap.generateNewMapSprite;
 
     mapController.addToMap(mapSprite);
 };

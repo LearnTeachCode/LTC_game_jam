@@ -69,6 +69,8 @@ mapController.update = () => {
         if (object.fullyOnMap === false) {
             if (mapController.top <= objectTop) {
                 if (typeof (object.onFullyOnMap) === "function") {
+                    // Since the top of the object might be past y=0 when this is detected, the position of the object top is passed
+                    // as an argument to use for spawning the next object at the correct position
                     object.onFullyOnMap(transformUtilities.getTopPosition(object.y, object.height, object.anchor.y));
                 } 
                 object.fullyOnMap = true;
