@@ -172,8 +172,16 @@ config.default.player = {
 };
 
 config.default.darkness = {
-    key: "fog",
-    src: "assets/img/fogLayer.png"
+    key: "darkness",
+    src: "assets/img/darknessLayer.png"
+}
+
+config.default.particles = {
+    key: "particles",
+    src: "assets/img/bubble.png",
+    emitter: {},
+    offsetX: 0,
+    offsetY: 0
 }
 
 config.default.blocks = {
