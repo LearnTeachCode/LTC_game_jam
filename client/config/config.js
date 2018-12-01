@@ -105,8 +105,10 @@ const config = {
         }
     },
     neutralMap:{
-        velocity: 120,
-        mapsCount: 2,
+        //velocity: 120,
+        //mapsCount: 2,
+        xRegion: 0.5,
+        zOrder: -1,
         imgKey: "neutralMap",
         imgSrc: "assets/img/floorBgAsset.png"
     },
@@ -150,7 +152,7 @@ config.default.settings = {
     tileHeight: 58,
     tileWidth:  74,
     wrapOffset: -1,
-    mapVelocity: 25,
+    mapVelocity: 10,
     maxMapVelocity: 150,
     difficultyInterval: 10000, //10 seconds
     difficulty: "easy"
