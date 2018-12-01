@@ -6,6 +6,7 @@ const mapController = {};
 mapController.bottom;
 mapController.top;
 mapController.speed;
+mapController.traveledDistance;
 mapController.mapObjects;  // Anything in here will move down with the map
 // Anything in mapObjects must have a .height, .anchor, and .y component so that their positions can be defined and manipulated.
 // Anything in mapObjects must also not use its .fullyOnMap property
@@ -20,6 +21,7 @@ mapController.init = (data) => {
     // assign to internal member data
     mapController.top = 0;
     mapController.speed = mapController.settings.mapVelocity;
+    mapController.traveledDistance;
     mapController.mapObjects = [];
 };
 
@@ -54,10 +56,11 @@ mapController.addToTopOfMap = (object) => {
 };
 
 mapController.update = () => {
+    mapController.traveledDistance += mapController.speed;
     for (i = mapController.mapObjects.length - 1; i >= 0; i--) {    // Backwards iteration since items could be removed from the array
         let object = mapController.mapObjects[i];
 
-        if (object.y == null) { // This is in case the mapController is not destroyed upon game state change
+        if (object.y == null || object.enabled === false) { // This is in case the mapController is not destroyed upon game state change, or the object is explicitly disabled
             mapController.mapObjects.splice(i, 1);
             continue;
         }
@@ -83,12 +86,12 @@ mapController.update = () => {
 
         if (mapController.bottom <= objectTop) {
             if (typeof (object.onFullyLeftMap) === "function") {
-                object.onFullyLeftMap();    // This delegate acts as an override to the default auto-destroy behavior
+                object.onFullyLeftMap(object);    // This delegate acts as an override to the default auto-destroy behavior
             }
             else {
                 object.destroy();
-                mapController.mapObjects.splice(i, 1);
             }
+            mapController.mapObjects.splice(i, 1);
         }
     }
 };
