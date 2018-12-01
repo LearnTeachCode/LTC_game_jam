@@ -335,7 +335,7 @@ config.default.colorPickup = {
         min: 1,
         max: 4
     },
-    src: "assets/img/pickupAsset.png",
+    src: "assets/img/pickUpAsset.png",
     key: "colorPickup"
 };
 
@@ -365,4 +365,3 @@ config.default.gameInformation = {
     hackable: true,
     devModeSimple: true
 };
-

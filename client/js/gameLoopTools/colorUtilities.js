@@ -64,7 +64,7 @@ colorUtilities.setNextActiveColor = (color) => {
     return colorUtilities.colorStates.activeNumber;
 };
 
-colorUtiliites.setActiveColorSIMPLE = (color) => {
+colorUtilities.setActiveColorSIMPLE = (color) => {
     colorUtiliites.colorStates.activeColorSIMPLE = color;
 
     if (colorUtilities.onNewActiveColor){
@@ -96,10 +96,6 @@ colorUtilities.setNextFullBlockColor = (fullBlock) => {
         }
     }
 };
-
-// colorUtiliites.matchPrimaryColor = (
-//
-// )
 
 colorUtilities.getColorCombo = (color1, color2) => {
     const colorsAreTheSame = color1 === color2;
