@@ -163,6 +163,19 @@ config.default.player = {
     src: "../spriteLocation.png"
 };
 
+config.default.darkness = {
+    key: "darkness",
+    src: "assets/img/darknessLayer.png"
+}
+
+config.default.particles = {
+    key: "particles",
+    src: "assets/img/whiteParticle.png",
+    emitter: {},
+    offsetX: 0,
+    offsetY: 0
+}
+
 config.default.blocks = {
     full: {
         score: 25,

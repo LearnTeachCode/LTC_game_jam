@@ -6,10 +6,11 @@ gameLoop = {
 
     init: (data) => {
         data = typeof data === "undefined" ? {} : data;
-        gameLoop.player  = data.player   || config.default.player;
-        gameLoop.score   = data.score    || config.default.score;
-        gameLoop.width   = data.width    || config.init.screenWidth;
-        gameLoop.height  = data.height   || config.init.screenHeight;
+        gameLoop.player     = data.player       || config.default.player;
+        gameLoop.score      = data.score        || config.default.score;
+        gameLoop.particles   = data.particles     || config.default.particles;
+        gameLoop.width      = data.width        || config.init.screenWidth;
+        gameLoop.height     = data.height       || config.init.screenHeight;
         gameLoop.xStartRegion = data.xStartRegion || config.gameLoop.xStartRegion;
         gameLoop.yStartRegion = data.yStartRegion || config.gameLoop.yStartRegion;
         gameLoop.difficulty   = data.difficulty   || config.default.settings.difficulty;
@@ -41,6 +42,8 @@ gameLoop = {
         ];
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
         playerUtilities.create(gameLoop.player);
+        darknessUtilities.create(gameLoop.player);
+        particlesUtilities.create(gameLoop.particles, gameLoop.player);
 
         //interface pickups with player using event style callback
         objectSpawner.onSpawn = playerUtilities.collisionInit;
@@ -59,6 +62,7 @@ gameLoop = {
         mapController.update();
         objectSpawner.update();
         playerUtilities.update(gameLoop.player, gameLoop.player.controlType);
+        particlesUtilities.update(gameLoop.particles, gameLoop.player);
 
         // update score
         scoreUtilities.setText(gameLoop.score, gameLoop.score.amount + gameLoop.score.bonus);
