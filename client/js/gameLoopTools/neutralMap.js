@@ -1,5 +1,7 @@
 const neutralMap = {};
 
+neutralMap.mapSprites = [];
+
 neutralMap.init = (data) => {
     data = typeof data === "undefined" ? {} : data;
     neutralMap.mapData = data.neutralMap || config.neutralMap;
@@ -7,11 +9,9 @@ neutralMap.init = (data) => {
     neutralMap.height = data.height || config.init.screenHeight;
 
     neutralMap.graphicCenter = [0.5, 0.5];
-
 };
 
 neutralMap.createMaps = () => {
-
     let nextMapSpriteBottom = neutralMap.height;
     let latestMapSprite;
     do {
@@ -26,29 +26,21 @@ neutralMap.createMaps = () => {
             transformUtilities.getScaleValueToEnvelopeRect(latestMapSprite.width, latestMapSprite.height, neutralMap.width, neutralMap.height);
         latestMapSprite.y = nextMapSpriteBottom - latestMapSprite.height * (1 - latestMapSprite.anchor.y);
 
-        latestMapSprite.onFullyOnMap = neutralMap.generateNewMapSprite;
+        latestMapSprite.onFullyOnMap = neutralMap.reorderBottomSpriteToTop;
+        latestMapSprite.onFullyLeftMap = () => { }; // this acts as an override to the default auto-destroy functionality
 
         nextMapSpriteBottom = transformUtilities.getTopPosition(latestMapSprite.y, latestMapSprite.height, latestMapSprite.anchor.y);    // next map sprite bottom is latest map sprite top
 
+        neutralMap.mapSprites.push(latestMapSprite);
         mapController.addToMap(latestMapSprite);
     } while (nextMapSpriteBottom >= 0);
 };
 
-neutralMap.generateNewMapSprite = (topPosition) => {
-    let mapSpriteData = [
-        neutralMap.width * neutralMap.mapData.xRegion,
-        0,  // this will be changed
-        neutralMap.mapData.imgKey
-    ];
-    let mapSprite = game.add.sprite(...mapSpriteData);
-    mapSprite.anchor.setTo(...neutralMap.graphicCenter);
-    mapSprite.scale.x = mapSprite.scale.y =
-        transformUtilities.getScaleValueToEnvelopeRect(mapSprite.width, mapSprite.height, neutralMap.width, neutralMap.height);
-    mapSprite.y = topPosition - mapSprite.height * (1 - mapSprite.anchor.y);
-
-    mapSprite.onFullyOnMap = neutralMap.generateNewMapSprite;
-
-    mapController.addToMap(mapSprite);
+// This reorder function does visually break if an integer number of sprites do not take up the entire screen height, in which case the do-while loop above just needs to run 1 more time
+neutralMap.reorderBottomSpriteToTop = (topPosition) => {
+    let bottomSprite = neutralMap.mapSprites.shift();
+    bottomSprite.y = topPosition - bottomSprite.height * (1 - bottomSprite.anchor.y);
+    neutralMap.mapSprites.push(bottomSprite);
 };
 
 // setup neutral map

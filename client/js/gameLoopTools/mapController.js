@@ -72,18 +72,23 @@ mapController.update = () => {
                     // Since the top of the object might be past y=0 when this is detected, the position of the object top is passed
                     // as an argument to use for spawning the next object at the correct position
                     object.onFullyOnMap(transformUtilities.getTopPosition(object.y, object.height, object.anchor.y));
-                } 
+                }
                 object.fullyOnMap = true;
             }
         }
+        else {
+            if (mapController.top > objectTop)
+                object.fullyOnMap = false;
+        }
 
         if (mapController.bottom <= objectTop) {
-            if (typeof (object.onFullyLeftMap) === "function")
-                object.onFullyLeftMap();
-            //if (typeof (object.destroy) === "function")   // this should be used if there's some custom destruction method attached to .onFullyLeftMap
-            //    object.destroy();
-            object.destroy();
-            mapController.mapObjects.splice(i, 1);
+            if (typeof (object.onFullyLeftMap) === "function") {
+                object.onFullyLeftMap();    // This delegate acts as an override to the default auto-destroy behavior
+            }
+            else {
+                object.destroy();
+                mapController.mapObjects.splice(i, 1);
+            }
         }
     }
 };

@@ -154,6 +154,9 @@ loadState = {
     create: () => {
         // setup screen image
         game.stage.backgroundColor = loadState.background;
+
+        loadState.changeState();    // skip all this fake loading screen stuff lol
+
         //loadState.getMapSpeed();
         loadState.createScreenImg();
 
