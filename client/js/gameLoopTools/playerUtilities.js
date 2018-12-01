@@ -14,6 +14,18 @@ playerUtilities.update = (player) => {
     playerUtilities.move(player, player.controlType);
 };
 
+playerUtilities.collisionInit = (item) => {
+    switch (item.type){
+        case "color":
+            console.log(item, "is interfacing with player!");
+        break;
+
+        case "fullBlock":
+
+        break;
+    }
+};
+
 playerUtilities.move = (player, type) => {
     let mouseType    = type === 0;
     let keyboardType = type === 1;

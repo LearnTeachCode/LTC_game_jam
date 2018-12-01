@@ -8,7 +8,7 @@ objectSpawner.init = (data) => {
     objectSpawner.colorPickup = data.colorPickup || config.default.colorPickup;
     objectSpawner.tiles = data.settings || config.default.settings;
     objectSpawner.width = data.screenWidth || config.init.screenWidth;
-    
+
     objectSpawner.inactiveObjectPool = [];
     objectSpawner.graphicCenter = [0.5, 0.5];
 };
@@ -21,7 +21,12 @@ objectSpawner.update = () => {
     objectSpawner.distanceUntilNextColorPickupSpawn -= mapController.speed;
     if (objectSpawner.distanceUntilNextColorPickupSpawn <= 0) {
         objectSpawner.assignNextDistanceUntilColorPickupSpawn();
-        objectSpawner.spawnColorPickup();
+        let pickup = objectSpawner.spawnColorPickup();
+
+        let pickupEventInitiated = typeof objectSpawner.onSpawn === "function"
+        if (pickupEventInitiated){
+            objectSpawner.onSpawn(pickup)
+        }
     }
 };
 
@@ -32,29 +37,40 @@ objectSpawner.assignNextDistanceUntilColorPickupSpawn = () => {
 };
 
 objectSpawner.spawnColorPickup = () => {
-    let colorPickup;
-    if (objectSpawner.inactiveObjectPool.length === 0) {
+    let colorPickup = {
+        type: "color",
+        color: objectSpawner.colorPickup.colorOptions[randomUtilities.randomInt(0, objectSpawner.colorPickup.colorOptions.length)]
+    };
+
+    const theresNoItemsToDeploy = objectSpawner.inactiveObjectPool.length === 0;
+    if (theresNoItemsToDeploy) {
         let colorPickupData = [
             0,
             0,
             objectSpawner.colorPickup.key
         ];
-        colorPickup = game.add.sprite(...colorPickupData);
-        colorPickup.anchor.setTo(...objectSpawner.graphicCenter);
+        colorPickup.sprite = game.add.sprite(...colorPickupData);
+        colorPickup.sprite.anchor.setTo(...objectSpawner.graphicCenter);
     }
     else {
-        colorPickup = objectSpawner.inactiveObjectPool.pop();
+        colorPickup.sprite = objectSpawner.inactiveObjectPool.pop();
     }
-    let minX = colorPickup.width * colorPickup.anchor.x;
-    let maxX = objectSpawner.width - colorPickup.width * (1 - colorPickup.anchor.x);
-    colorPickup.x = randomUtilities.randomRange(minX, maxX);
-    colorPickup.tint = objectSpawner.colorPickup.colorOptions[randomUtilities.randomInt(0, objectSpawner.colorPickup.colorOptions.length)].value;
-    colorPickup.onFullyLeftMap = objectSpawner.disableObject;
-    colorPickup.enabled = true;
-    mapController.addToTopOfMap(colorPickup);
+    game.physics.enable(colorPickup.sprite, Phaser.Physics.ARCADE);
+    let minX = colorPickup.sprite.width * colorPickup.sprite.anchor.x;
+    let maxX = objectSpawner.width - colorPickup.sprite.width * (1 - colorPickup.sprite.anchor.x);
+    colorPickup.sprite.x = randomUtilities.randomRange(minX, maxX);
+    colorPickup.sprite.tint = colorPickup.color.value;
+    colorPickup.sprite.onFullyLeftMap = objectSpawner.disableObject;
+    colorPickup.sprite.enabled = true;
+    mapController.addToTopOfMap(colorPickup.sprite);
+
+    return colorPickup;
 };
 
 objectSpawner.disableObject = (object) => {
+
     object.enabled = false;
     objectSpawner.inactiveObjectPool.push(object);
 };
+
+objectSpawner.onSpawn = null;

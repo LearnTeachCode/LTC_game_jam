@@ -32,6 +32,7 @@ gameLoop = {
         neutralMap.create();    // setup neutral map sprites
         objectSpawner.create();
         blockUtilities.init();
+
         //setup player object
         let playerStartData = [
             gameLoop.width  * gameLoop.xStartRegion,
@@ -41,6 +42,8 @@ gameLoop = {
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
         playerUtilities.create(gameLoop.player);
 
+        //interface pickups with player using event style callback
+        objectSpawner.onSpawn = playerUtilities.collisionInit;
 
         //setup score UI
         scoreUtilities.create(gameLoop.score);
