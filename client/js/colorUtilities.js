@@ -76,14 +76,14 @@ colorUtilities.setNextFullBlockColor = (fullBlock) => {
     //const types   = Object.keys(config.default.colors);
     let colorOptions = pickups.concat(actives);
     let availible = [];
-   
+
     //decide add up total a
     colorOptions.forEach( (option) => {
         if (colorModel[option]){
             colorModel[option].amount += 1;
-        };   
+        };
     });
-    
+
     for (let c in colorModel){
         let choiceColor = colorModel[c];
 
@@ -93,15 +93,12 @@ colorUtilities.setNextFullBlockColor = (fullBlock) => {
     }
 };
 
-colorUtiliites.matchPrimaryColor = (
-
-)
+// colorUtiliites.matchPrimaryColor = (
+//
+// )
 
 colorUtilities.getColorCombo = (color1, color2) => {
     const colorsAreTheSame = color1 === color2;
     let results = colorsAreTheSame ? color1 : colorUtilities.mixColors(color1, color2);
     return results
 };
-
-
-

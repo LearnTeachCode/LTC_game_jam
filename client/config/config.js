@@ -279,7 +279,7 @@ config.default.colorStates = {
     activeColors: ["color1", "color2"],
     spawnedPickups: [],
     blockColors:  [],
-    activeNumber
+    activeNumber: 0
 };
 
 config.default.mapUtilities = {
@@ -292,7 +292,7 @@ config.default.mapUtilities = {
         pickup: 6,
         colorBeam: 5
     }
-    
+
 };
 
 config.default.gameInformation = {
