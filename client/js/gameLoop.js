@@ -25,12 +25,15 @@ gameLoop = {
 
         mapController.init();
         neutralMap.init();
+        objectSpawner.init();
     },
 
     create: () => {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         neutralMap.create();    // setup neutral map sprites
+        objectSpawner.create();
         blockUtilities.init();
+
         //setup player object
         let playerStartData = [
             gameLoop.width  * gameLoop.xStartRegion,
@@ -42,11 +45,14 @@ gameLoop = {
         darknessUtilities.create(gameLoop.player);
         particlesUtilities.create(gameLoop.particles, gameLoop.player);
 
+        //interface pickups with player using event style callback
+        objectSpawner.onSpawn = playerUtilities.collisionInit;
+
         //setup score UI
         scoreUtilities.create(gameLoop.score);
 
         if (gameLoop.debugMode === true) {
-            gameLoop.debug.controls  = game.input.keyboard;
+            gameLoop.debug.controls = game.input.keyboard;
         };
 
         //gameLoop.difficultyIncrease = gameLoop.manageDifficulty();    // idk what this does lol
@@ -54,6 +60,7 @@ gameLoop = {
 
     update: () => {
         mapController.update();
+        objectSpawner.update();
         playerUtilities.update(gameLoop.player, gameLoop.player.controlType);
         particlesUtilities.update(gameLoop.particles, gameLoop.player);
 
@@ -71,7 +78,10 @@ gameLoop = {
         }
 
     },
-
+    render:() => {
+        game.debug.body(gameLoop.player.sprite);
+        //game.debug.body(sprite2);
+    },
     //This will eventually be an isolated module
     manageDifficulty: () => {
         let data = config.default.difficultyModifiers[gameLoop.difficulty];

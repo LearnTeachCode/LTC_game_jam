@@ -140,6 +140,7 @@ loadState = {
         game.load.image(config.loader.mapImage.key,    config.loader.mapImage.src);
         game.load.image(config.loader.placeHolder.key, config.loader.placeHolder.src);
         game.load.image(config.default.blocks.quarter.key, config.default.blocks.quarter.src);
+        game.load.image(config.default.colorPickup.key, config.default.colorPickup.src);
         game.load.image(config.default.neutralMap.key, config.default.neutralMap.src);
         game.load.image(config.default.darkness.key, config.default.darkness.src);
         game.load.image(config.default.particles.key, config.default.particles.src);

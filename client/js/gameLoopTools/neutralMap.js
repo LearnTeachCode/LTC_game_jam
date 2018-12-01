@@ -4,7 +4,7 @@ neutralMap.mapSprites = [];
 
 neutralMap.init = (data) => {
     data = typeof data === "undefined" ? {} : data;
-    neutralMap.mapData = data.neutralMap || config.neutralMap;
+    neutralMap.mapData = data.neutralMap || config.default.neutralMap;
     neutralMap.width = data.width || config.init.screenWidth;
     neutralMap.height = data.height || config.init.screenHeight;
 
@@ -18,9 +18,12 @@ neutralMap.createMaps = () => {
         let mapSpriteData = [
             neutralMap.width * neutralMap.mapData.xRegion,
             0,  // this will be changed
-            neutralMap.mapData.imgKey
+            neutralMap.mapData.key
         ];
         latestMapSprite = game.add.sprite(...mapSpriteData);
+        latestMapSprite.alpha = 0.35;
+        //latestMapSprite._mapType = true;
+        //game.physics.enable(latestMapSprite);
         latestMapSprite.anchor.setTo(...neutralMap.graphicCenter);
         latestMapSprite.scale.x = latestMapSprite.scale.y =
             transformUtilities.getScaleValueToEnvelopeRect(latestMapSprite.width, latestMapSprite.height, neutralMap.width, neutralMap.height);

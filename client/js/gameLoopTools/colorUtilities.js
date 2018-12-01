@@ -97,10 +97,6 @@ colorUtilities.setNextFullBlockColor = (fullBlock) => {
     }
 };
 
-// colorUtiliites.matchPrimaryColor = (
-//
-// )
-
 colorUtilities.getColorCombo = (color1, color2) => {
     const colorsAreTheSame = color1 === color2;
     let results = colorsAreTheSame ? color1 : colorUtilities.mixColors(color1, color2);

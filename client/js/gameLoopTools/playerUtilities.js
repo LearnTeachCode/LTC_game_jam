@@ -1,6 +1,7 @@
 const playerUtilities = {};
 playerUtilities.create = (player) => {
   // clicking the mouse during this state will change the control type to mouse
+    playerUtilities.player = player;
     game.input.onDown.add( () => {
       player.controlType = config.default.controls.mouse;
     });
@@ -13,6 +14,25 @@ playerUtilities.create = (player) => {
 playerUtilities.update = (player) => {
     playerUtilities.move(player, player.controlType);
 };
+
+playerUtilities.collisionInit = (item) => {
+    switch (item.type){
+        case "color":
+            playerUtilities.colorCollision(playerUtilities.player.sprite, item.sprite);
+        break;
+
+        case "fullBlock":
+
+        break;
+    }
+};
+
+playerUtilities.colorCollision = (player, color) => {
+    game.physics.arcade.overlap(player, color, (sprite) => {
+        console.log("arg is:", sprite);
+    });
+}
+
 
 playerUtilities.move = (player, type) => {
     let mouseType    = type === 0;
