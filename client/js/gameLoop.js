@@ -37,7 +37,7 @@ gameLoop = {
             gameLoop.player.key
         ];
         gameLoop.player.sprite = game.add.sprite(...playerStartData);
-        playerUtilities.create(gameLoop.player, gameLoop.player.controlType);
+        playerUtilities.create(gameLoop.player);
 
 
         //setup score UI
@@ -52,7 +52,7 @@ gameLoop = {
 
     update: () => {
         mapController.update();
-        playerUtilities.update(gameLoop.player);
+        playerUtilities.update(gameLoop.player, gameLoop.player.controlType);
 
         // update score
         scoreUtilities.setText(gameLoop.score, gameLoop.score.amount + gameLoop.score.bonus);

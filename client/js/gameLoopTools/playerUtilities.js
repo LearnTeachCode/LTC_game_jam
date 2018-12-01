@@ -1,8 +1,8 @@
 const playerUtilities = {};
-playerUtilities.create = (player, controlType) => {
+playerUtilities.create = (player) => {
   // clicking the mouse during this state will change the control type to mouse
     game.input.onDown.add( () => {
-         controlType = config.default.controls.mouse; 
+      player.controlType = config.default.controls.mouse;
     });
     game.physics.enable(player.sprite, Phaser.Physics.ARCADE);
     player.sprite.body.collideWorldBounds  = true;
