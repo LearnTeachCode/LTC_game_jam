@@ -1,7 +1,7 @@
 const playerUtilities = {};
 playerUtilities.create = (player) => {
   // clicking the mouse during this state will change the control type to mouse
-    playerUtilities.player = player;
+
     game.input.onDown.add( () => {
       player.controlType = config.default.controls.mouse;
     });
@@ -9,6 +9,7 @@ playerUtilities.create = (player) => {
     player.sprite.body.collideWorldBounds  = true;
     const spriteCenter = [0.5, 0.5];
     player.sprite.anchor.setTo(...spriteCenter);
+    playerUtilities.player = player;
 };
 
 playerUtilities.update = (player) => {
@@ -28,8 +29,8 @@ playerUtilities.collisionInit = (item) => {
 };
 
 playerUtilities.colorCollision = (player, color) => {
-    game.physics.arcade.overlap(player, color, (sprite) => {
-        console.log("arg is:", sprite);
+    game.physics.arcade.overlap(player, color, (spr1, spr2) => {
+        console.log("arg is:", spr1);
     });
 }
 
@@ -64,8 +65,10 @@ playerUtilities.mouseMovement = (player, playerSpeed) => {
             movementVector.x *= playerSpeed;
             movementVector.y *= playerSpeed;
         }
-        player.sprite.x += movementVector.x;
-        player.sprite.y += movementVector.y;
+        // player.sprite.x += movementVector.x;
+        // player.sprite.y += movementVector.y;
+        player.sprite.body.velocity.x   = movementVector.x;
+        player.sprite.body.velocity.y   = movementVector.y;
     }
 };
 
