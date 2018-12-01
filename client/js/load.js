@@ -141,7 +141,7 @@ loadState = {
         game.load.image(config.loader.placeHolder.key, config.loader.placeHolder.src);
         game.load.image(config.default.blocks.quarter.key, config.default.blocks.quarter.src);
         game.load.image(config.default.neutralMap.key, config.default.neutralMap.src);
-        game.load.image(config.default.fog.key, config.default.fog.src);
+        game.load.image(config.default.darkness.key, config.default.darkness.src);
 
         // Game over loads
         game.load.image(config.gameOverState.restartButton.key, config.gameOverState.restartButton.src);
